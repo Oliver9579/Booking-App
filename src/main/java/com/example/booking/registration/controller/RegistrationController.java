@@ -1,8 +1,8 @@
 package com.example.booking.registration.controller;
 
-import com.example.booking.registration.dtos.RegistrationDTO;
-import com.example.booking.registration.dtos.RegistrationResponseDTO;
-import com.example.booking.registration.service.RegistrationService;
+import com.example.booking.registration.models.RegistrationDTO;
+import com.example.booking.registration.models.RegistrationResponseDTO;
+import com.example.booking.registration.services.RegistrationService;
 import com.example.booking.user.models.User;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;

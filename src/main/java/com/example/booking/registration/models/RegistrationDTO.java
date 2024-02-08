@@ -1,4 +1,4 @@
-package com.example.booking.registration.dtos;
+package com.example.booking.registration.models;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

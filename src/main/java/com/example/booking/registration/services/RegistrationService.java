@@ -1,6 +1,6 @@
-package com.example.booking.registration.service;
+package com.example.booking.registration.services;
 
-import com.example.booking.registration.dtos.RegistrationDTO;
+import com.example.booking.registration.models.RegistrationDTO;
 import com.example.booking.user.models.User;
 
 public interface RegistrationService {

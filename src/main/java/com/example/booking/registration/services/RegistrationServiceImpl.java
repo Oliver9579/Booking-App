@@ -1,11 +1,10 @@
-package com.example.booking.registration.service;
+package com.example.booking.registration.services;
 
 import com.example.booking.exceptions.AlreadyTakenException;
 import com.example.booking.exceptions.UserNotFoundException;
-import com.example.booking.registration.dtos.RegistrationDTO;
+import com.example.booking.registration.models.RegistrationDTO;
 import com.example.booking.security.password.PasswordService;
 import com.example.booking.user.models.User;
-import com.example.booking.user.repositories.UserRepository;
 import com.example.booking.user.services.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

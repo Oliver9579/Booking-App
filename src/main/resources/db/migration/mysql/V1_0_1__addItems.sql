@@ -40,10 +40,3 @@ VALUES
     ('Ford', 'Mustang', 'Chicago', '2023-11-20', '2023-11-25', 400, UNIX_TIMESTAMP()),
     ('Chevrolet', 'Impala', 'Los Angeles', '2023-11-25', '2023-11-30', 350, UNIX_TIMESTAMP()),
     ('Honda', 'Accord', 'San Francisco', '2023-12-01', '2023-12-05', 380, UNIX_TIMESTAMP());
-
-
-
-insert into users(first_name, last_name, username,  email, password, phone_number)
-VALUES
-    ('DWAD', 'DAWAWD', 'dwada', 'DWADA', 'DWDW', 'DAWDW'),
-    ('Olivér', 'Szabó-Temple', 'Olivér Szabó-Temple', 'szabo.oliver', 'jelszo', '123456');

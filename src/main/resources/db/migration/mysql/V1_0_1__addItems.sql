@@ -43,3 +43,7 @@ VALUES
 
 
 
+insert into users(first_name, last_name, username,  email, password, phone_number)
+VALUES
+    ('DWAD', 'DAWAWD', 'dwada', 'DWADA', 'DWDW', 'DAWDW'),
+    ('Olivér', 'Szabó-Temple', 'Olivér Szabó-Temple', 'szabo.oliver', 'jelszo', '123456');

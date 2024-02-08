@@ -18,6 +18,11 @@ public class RegistrationServiceImpl implements RegistrationService {
 
   public void validateRegistration(RegistrationDTO rdto) {
     try {
+      userService.getByUsername(rdto.getUserName());
+      throw new AlreadyTakenException("This username is already registered!");
+    } catch (UserNotFoundException e) {
+    }
+    try {
       userService.getByEmail(rdto.getEmail());
       throw new AlreadyTakenException("This email is already registered!");
     } catch (UserNotFoundException e) {
@@ -31,7 +36,7 @@ public class RegistrationServiceImpl implements RegistrationService {
 
   public User register(RegistrationDTO rdto) {
     validateRegistration(rdto);
-    return userService.save(new User(rdto.getFirstName(), rdto.getLastName(), rdto.getEmail(),
+    return userService.save(new User(rdto.getFirstName(), rdto.getLastName(), rdto.getUserName(), rdto.getEmail(),
             passwordService.passwordEncoding(rdto.getPassword()), rdto.getPhoneNumber()));
   }
 }

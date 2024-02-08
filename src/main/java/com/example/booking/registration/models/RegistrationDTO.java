@@ -16,6 +16,8 @@ public class RegistrationDTO {
   @NotBlank
   private String lastName;
   @NotBlank
+  private String userName;
+  @NotBlank
   @Email(message = "Please provide a valid email address.", regexp = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")
   private String email;
   @NotBlank
@@ -24,12 +26,12 @@ public class RegistrationDTO {
   @NotBlank
   private String phoneNumber;
 
-  public RegistrationDTO(String firstName, String lastName, String email, String password, String phoneNumber) {
+  public RegistrationDTO(String firstName, String lastName, String userName, String email, String password, String phoneNumber) {
     this.firstName = firstName;
     this.lastName = lastName;
+    this.userName = userName;
     this.email = email;
     this.password = password;
     this.phoneNumber = phoneNumber;
   }
-
 }

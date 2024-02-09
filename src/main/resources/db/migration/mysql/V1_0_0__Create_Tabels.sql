@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS flights (
                          airline VARCHAR(255) NOT NULL,
                          origin VARCHAR(255) NOT NULL,
                          destination VARCHAR(255) NOT NULL,
-                         departure_date DATE NOT NULL,
+                         departure_date DATETIME NOT NULL,
                          duration INT NOT NULL,
                          created_at BIGINT NOT NULL
 );

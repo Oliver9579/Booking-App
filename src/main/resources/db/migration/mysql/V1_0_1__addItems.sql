@@ -1,9 +1,9 @@
 INSERT INTO flights (airline, origin, destination, departure_date, duration, created_at)
 VALUES
-    ('Delta Airlines', 'New York', 'Los Angeles', '2023-11-15', 360, UNIX_TIMESTAMP()),
-    ('American Airlines', 'Chicago', 'Miami', '2023-11-20', 180, UNIX_TIMESTAMP()),
-    ('United Airlines', 'San Francisco', 'Seattle', '2023-11-25', 120, UNIX_TIMESTAMP()),
-    ('British Airways', 'London', 'Paris', '2023-12-01', 90, UNIX_TIMESTAMP());
+    ('Delta Airlines', 'New York', 'Los Angeles', '2023-11-15 16:30:00', 360, UNIX_TIMESTAMP()),
+    ('American Airlines', 'Chicago', 'Miami', '2023-11-20 11:00:00', 180, UNIX_TIMESTAMP()),
+    ('United Airlines', 'San Francisco', 'Seattle', '2023-11-25 13:55:00', 120, UNIX_TIMESTAMP()),
+    ('British Airways', 'London', 'Paris', '2023-12-01 08:20:00', 90, UNIX_TIMESTAMP());
 
 INSERT INTO seats (seat_number, seat_type, price, availability, flight_id)
 VALUES

@@ -87,7 +87,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
   private boolean isAuthenticatedRequest(HttpServletRequest request) {
     String path = request.getServletPath();
-    return (path.startsWith("/booking"));
+    return (path.startsWith("/api"));
   }
 
 }

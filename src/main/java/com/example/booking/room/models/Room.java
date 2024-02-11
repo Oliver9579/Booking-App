@@ -1,6 +1,6 @@
 package com.example.booking.room.models;
 
-import com.example.booking.flight.models.Hotel;
+import com.example.booking.hotel.models.Hotel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

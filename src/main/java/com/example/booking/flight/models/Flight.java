@@ -58,6 +58,7 @@ public class Flight {
     this.destination = destination;
     this.departureDate = departureDate;
     this.duration = duration;
+    this.createdAt = System.currentTimeMillis() / 1000;
   }
 
 }

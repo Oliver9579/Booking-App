@@ -32,8 +32,6 @@ CREATE TABLE IF NOT EXISTS hotels (
                         id INT PRIMARY KEY AUTO_INCREMENT,
                         name VARCHAR(255) NOT NULL,
                         location VARCHAR(255) NOT NULL,
-                        check_in_date BIGINT NOT NULL,
-                        check_out_date BIGINT NOT NULL,
                         created_at BIGINT NOT NULL
 );
 

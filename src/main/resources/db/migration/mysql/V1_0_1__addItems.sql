@@ -17,12 +17,12 @@ VALUES
     ('D2', 'Business', 220, TRUE, 2);
 
 
-INSERT INTO hotels (name, location, check_in_date, check_out_date, created_at)
+INSERT INTO hotels (name, location, created_at)
 VALUES
-    ('Hilton', 'New York', UNIX_TIMESTAMP('2023-11-15'), UNIX_TIMESTAMP('2023-11-20'), UNIX_TIMESTAMP()),
-    ('Marriott', 'Chicago', UNIX_TIMESTAMP('2023-11-20'), UNIX_TIMESTAMP('2023-11-25'), UNIX_TIMESTAMP()),
-    ('Sheraton', 'Los Angeles', UNIX_TIMESTAMP('2023-11-25'), UNIX_TIMESTAMP('2023-11-30'), UNIX_TIMESTAMP()),
-    ('Radisson', 'San Francisco', UNIX_TIMESTAMP('2023-12-01'), UNIX_TIMESTAMP('2023-12-05'), UNIX_TIMESTAMP());
+    ('Hilton', 'New York', UNIX_TIMESTAMP()),
+    ('Marriott', 'Chicago', UNIX_TIMESTAMP()),
+    ('Sheraton', 'Los Angeles', UNIX_TIMESTAMP()),
+    ('Radisson', 'San Francisco', UNIX_TIMESTAMP());
 
 
 INSERT INTO rooms (room_type, capacity, price_per_night, availability, hotel_id)

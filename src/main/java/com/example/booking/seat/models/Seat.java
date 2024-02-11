@@ -28,7 +28,8 @@ public class Seat {
 
   @NotNull
   @Column(name = "seat_type")
-  private String seatType;
+  @Enumerated(EnumType.STRING)
+  private SeatType seatType;
 
   @NotNull
   @Column(name = "price")
@@ -43,7 +44,7 @@ public class Seat {
   @JoinColumn(name = "flight_id", nullable = false)
   private Flight flight;
 
-  public Seat(String seatNumber, String seatType, int price, Boolean availability) {
+  public Seat(String seatNumber, SeatType seatType, int price, Boolean availability) {
     this.seatNumber = seatNumber;
     this.seatType = seatType;
     this.price = price;

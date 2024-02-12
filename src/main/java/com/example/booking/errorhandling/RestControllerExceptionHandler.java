@@ -1,9 +1,6 @@
 package com.example.booking.errorhandling;
 
-import com.example.booking.exceptions.AlreadyTakenException;
-import com.example.booking.exceptions.IdNotFoundException;
-import com.example.booking.exceptions.MissingInputException;
-import com.example.booking.exceptions.UserNotFoundException;
+import com.example.booking.exceptions.*;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -52,6 +49,11 @@ public class RestControllerExceptionHandler {
   @ExceptionHandler(IdNotFoundException.class)
   public ResponseEntity<ErrorMessage> handleIdNotFound() {
     return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorMessage(IdNotFoundException.MESSAGE));
+  }
+
+  @ExceptionHandler(NoFlightException.class)
+  public ResponseEntity<ErrorMessage> handleNoFlightAtTheSpecifiedTime() {
+    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorMessage(NoFlightException.MESSAGE));
   }
 
 }

@@ -2,13 +2,13 @@ package com.example.booking.flight.controllers;
 
 import com.example.booking.flight.DTOs.FlightDTO;
 import com.example.booking.flight.DTOs.FlightListDTO;
+import com.example.booking.flight.DTOs.FlightOneWayDTO;
 import com.example.booking.flight.services.FlightService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/flights")
@@ -25,6 +25,11 @@ public class FlightController {
   @GetMapping("/{id}")
   public ResponseEntity<FlightDTO> getFlightById(@PathVariable Integer id) {
     return ResponseEntity.ok().body(flightService.getFlightById(id));
+  }
+
+  @GetMapping("/oneWay")
+  public ResponseEntity<FlightListDTO> getFlightsBetweenToDirectionJustOneWay(@Valid @RequestBody FlightOneWayDTO flightOneWay) {
+    return ResponseEntity.ok().body(flightService.getFlightsJustOneWay(flightOneWay));
   }
 
 }

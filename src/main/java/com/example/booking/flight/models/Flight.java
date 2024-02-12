@@ -2,6 +2,7 @@ package com.example.booking.flight.models;
 
 import com.example.booking.seat.models.Seat;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -50,6 +51,7 @@ public class Flight {
   private Long createdAt;
 
   @OneToMany(mappedBy = "flight", cascade = CascadeType.ALL)
+  @JsonIgnore
   private List<Seat> seats = new ArrayList<>();
 
   public Flight(String airline, String origin, String destination, Date departureDate, int duration) {

@@ -7,14 +7,14 @@ VALUES
 
 INSERT INTO seats (seat_number, seat_type, price, availability, flight_id)
 VALUES
-    ('A1', 'Economy', 100, TRUE, 1),
-    ('A2', 'Economy', 100, TRUE, 1),
-    ('B1', 'Business', 200, TRUE, 1),
-    ('B2', 'Business', 200, TRUE, 1),
-    ('C1', 'Economy', 120, TRUE, 2),
-    ('C2', 'Economy', 120, TRUE, 2),
-    ('D1', 'Business', 220, TRUE, 2),
-    ('D2', 'Business', 220, TRUE, 2);
+    ('A1', 'ECONOMY', 100, TRUE, 1),
+    ('A2', 'ECONOMY', 100, TRUE, 1),
+    ('B1', 'BUSINESS', 200, TRUE, 1),
+    ('B2', 'BUSINESS', 200, TRUE, 1),
+    ('C1', 'ECONOMY', 120, TRUE, 2),
+    ('C2', 'ECONOMY', 120, TRUE, 2),
+    ('D1', 'BUSINESS', 220, TRUE, 2),
+    ('D2', 'BUSINESS', 220, TRUE, 2);
 
 
 INSERT INTO hotels (name, location, created_at)

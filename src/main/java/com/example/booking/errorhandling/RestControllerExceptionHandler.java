@@ -1,6 +1,7 @@
 package com.example.booking.errorhandling;
 
 import com.example.booking.exceptions.AlreadyTakenException;
+import com.example.booking.exceptions.IdNotFoundException;
 import com.example.booking.exceptions.MissingInputException;
 import com.example.booking.exceptions.UserNotFoundException;
 import lombok.AllArgsConstructor;
@@ -47,4 +48,10 @@ public class RestControllerExceptionHandler {
   public ResponseEntity<ErrorMessage> handleWhenARequestDataIsMissing(MissingInputException e) {
     return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorMessage(e.getMessage()));
   }
+
+  @ExceptionHandler(IdNotFoundException.class)
+  public ResponseEntity<ErrorMessage> handleIdNotFound() {
+    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorMessage(IdNotFoundException.MESSAGE));
+  }
+
 }

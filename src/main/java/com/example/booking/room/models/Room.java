@@ -36,19 +36,19 @@ public class Room {
   private int pricePerNight;
 
   @NotNull
-  @Column(name = "availability")
-  private Boolean availability;
+  @Column(name = "unavailable")
+  private String unavailable;
 
   @JsonIgnore
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "hotel_id", nullable = false)
   private Hotel hotel;
 
-  public Room(RoomType room, int capacity, int pricePerNight, Boolean availability) {
+  public Room(RoomType room, int capacity, int pricePerNight, String unavailable) {
     this.room = room;
     this.capacity = capacity;
     this.pricePerNight = pricePerNight;
-    this.availability = availability;
+    this.unavailable = unavailable;
   }
 
 }

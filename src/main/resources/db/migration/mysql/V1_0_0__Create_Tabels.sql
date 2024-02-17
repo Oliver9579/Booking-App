@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS rooms (
                        room_type VARCHAR(50),
                        capacity INT,
                        price_per_night INT NOT NULL,
-                       availability BOOLEAN,
+                       unavailable VARCHAR(20000),
                         hotel_id INT,
                        FOREIGN KEY (hotel_id) REFERENCES hotels(id)
 );

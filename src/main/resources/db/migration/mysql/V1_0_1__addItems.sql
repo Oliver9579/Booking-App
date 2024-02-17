@@ -3,7 +3,9 @@ VALUES
     ('Delta Airlines', 'New York', 'Los Angeles', '2023-11-15 16:30:00', 360, UNIX_TIMESTAMP()),
     ('American Airlines', 'Chicago', 'Miami', '2023-11-20 11:00:00', 180, UNIX_TIMESTAMP()),
     ('United Airlines', 'San Francisco', 'Seattle', '2023-11-25 13:55:00', 120, UNIX_TIMESTAMP()),
-    ('British Airways', 'London', 'Paris', '2023-12-01 08:20:00', 90, UNIX_TIMESTAMP());
+    ('British Airways', 'London', 'Paris', '2023-12-01 08:20:00', 90, UNIX_TIMESTAMP()),
+    ('American Airlines', 'Miami', 'Chicago', '2023-11-28 20:00:00', 185, UNIX_TIMESTAMP()),
+    ('American Airlines', 'Miami', 'Chicago', '2023-11-28 11:30:00', 185, UNIX_TIMESTAMP());
 
 INSERT INTO seats (seat_number, seat_type, price, availability, flight_id)
 VALUES
@@ -25,14 +27,14 @@ VALUES
     ('Radisson', 'San Francisco', UNIX_TIMESTAMP());
 
 
-INSERT INTO rooms (room_type, capacity, price_per_night, availability, hotel_id)
+INSERT INTO rooms (room_type, capacity, price_per_night, unavailable, hotel_id)
 VALUES
-    ('Single', 1, 100, TRUE, 1),
-    ('Double', 2, 150, TRUE, 1),
-    ('Suite', 4, 250, TRUE, 1),
-    ('Single', 1, 90, TRUE, 2),
-    ('Double', 2, 130, TRUE, 2),
-    ('Suite', 4, 220, TRUE, 2);
+    ('Single', 1, 100,'2023-11-15,2023-11-20,2023-12-10,2023-12-15', 1),
+    ('Double', 2, 150, '2023-11-15,2023-11-20,2023-12-10,2023-12-15', 1),
+    ('Suite', 4, 250, '2023-11-15,2023-11-20,2023-12-10,2023-12-15', 1),
+    ('Single', 1, 90, '2023-11-15,2023-11-20,2023-12-10,2023-12-15', 2),
+    ('Double', 2, 130, '2023-11-15,2023-11-20,2023-12-10,2023-12-15', 2),
+    ('Suite', 4, 220, '2023-11-15,2023-11-20,2023-12-10,2023-12-15', 2);
 
 INSERT INTO rental_cars (brand, model, location, pickup_date, return_date, total_price, created_at)
 VALUES

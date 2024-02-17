@@ -51,8 +51,8 @@ CREATE TABLE IF NOT EXISTS rental_cars (
                              brand VARCHAR(255) NOT NULL,
                              model VARCHAR(255) NOT NULL,
                              location VARCHAR(255) NOT NULL,
-                             pickup_date DATE NOT NULL,
-                             return_date DATE NOT NULL,
+                             pickup_date DATETIME NOT NULL,
+                             return_date DATETIME NOT NULL,
                              total_price INT NOT NULL,
                              created_at BIGINT NOT NULL
     );

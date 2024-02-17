@@ -1,9 +1,6 @@
 package com.example.booking.flight.controllers;
 
-import com.example.booking.flight.DTOs.FlightDTO;
-import com.example.booking.flight.DTOs.FlightListDTO;
-import com.example.booking.flight.DTOs.FlightOneWayRequestDTO;
-import com.example.booking.flight.DTOs.FlightRoundTripRequestDTO;
+import com.example.booking.flight.DTOs.*;
 import com.example.booking.flight.services.FlightService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -34,7 +31,7 @@ public class FlightController {
   }
 
   @GetMapping("/return")
-  public ResponseEntity<?> getFlightsBetweenToDirectionJustOneWay(@Valid @RequestBody FlightRoundTripRequestDTO flightRoundTripRequest) {
+  public ResponseEntity<FlightRoundTripList> getFlightsBetweenToDirectionJustOneWay(@Valid @RequestBody FlightRoundTripRequestDTO flightRoundTripRequest) {
     return ResponseEntity.ok().body(flightService.getFlightsRoundTrip(flightRoundTripRequest));
   }
 

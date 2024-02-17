@@ -1,8 +1,6 @@
 package com.example.booking.flight.services;
 
-import com.example.booking.flight.DTOs.FlightDTO;
-import com.example.booking.flight.DTOs.FlightListDTO;
-import com.example.booking.flight.DTOs.FlightOneWayDTO;
+import com.example.booking.flight.DTOs.*;
 import com.example.booking.flight.models.Flight;
 
 public interface FlightService {
@@ -13,6 +11,8 @@ public interface FlightService {
 
   FlightDTO convertToFlightDTO(Flight flight);
 
-  FlightListDTO getFlightsJustOneWay(FlightOneWayDTO flightOneWay);
+  FlightListDTO getFlightsJustOneWay(FlightOneWayRequestDTO flightOneWay);
+
+  FlightRoundTripList getFlightsRoundTrip(FlightRoundTripRequestDTO flightRoundTrip);
 
 }

@@ -6,7 +6,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
 @Data
-public class FlightOneWayDTO {
+public class FlightOneWayRequestDTO {
 
   @NotBlank
   private String origin;

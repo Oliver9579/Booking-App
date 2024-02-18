@@ -25,7 +25,7 @@ public class Room {
   @NotNull
   @Column(name = "room_type")
   @Enumerated(EnumType.STRING)
-  private RoomType room;
+  private RoomType roomType;
 
   @NotNull
   @Column(name = "capacity")
@@ -44,8 +44,8 @@ public class Room {
   @JoinColumn(name = "hotel_id", nullable = false)
   private Hotel hotel;
 
-  public Room(RoomType room, int capacity, int pricePerNight, String unavailable) {
-    this.room = room;
+  public Room(RoomType roomType, int capacity, int pricePerNight, String unavailable) {
+    this.roomType = roomType;
     this.capacity = capacity;
     this.pricePerNight = pricePerNight;
     this.unavailable = unavailable;

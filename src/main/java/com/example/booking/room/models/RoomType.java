@@ -4,7 +4,7 @@ public enum RoomType {
   SINGLE,
   DOUBLE,
   MULTI,
-  SUITE,
-  FAMILY
+  FAMILY,
+  TRIPLE
 
 }

@@ -19,22 +19,24 @@ VALUES
     ('D2', 'BUSINESS', 220, TRUE, 2);
 
 
-INSERT INTO hotels (name, location, created_at)
+INSERT INTO hotels (name, location, street, created_at)
 VALUES
-    ('Hilton', 'New York', UNIX_TIMESTAMP()),
-    ('Marriott', 'Chicago', UNIX_TIMESTAMP()),
-    ('Sheraton', 'Los Angeles', UNIX_TIMESTAMP()),
-    ('Radisson', 'San Francisco', UNIX_TIMESTAMP());
+    ('Hilton', 'New York', '1234 Avenue of the Americas', UNIX_TIMESTAMP()),
+    ('Marriott', 'Chicago', '321 North Clark Street', UNIX_TIMESTAMP()),
+    ('Sheraton', 'Los Angeles', '711 South Hope Street', UNIX_TIMESTAMP()),
+    ('Radisson', 'San Francisco', '1015 Market Street', UNIX_TIMESTAMP());
 
 
 INSERT INTO rooms (room_type, capacity, price_per_night, unavailable, hotel_id)
 VALUES
-    ('Single', 1, 100,'2023-11-15,2023-11-20,2023-12-10,2023-12-15', 1),
-    ('Double', 2, 150, '2023-11-15,2023-11-20,2023-12-10,2023-12-15', 1),
-    ('Suite', 4, 250, '2023-11-15,2023-11-20,2023-12-10,2023-12-15', 1),
-    ('Single', 1, 90, '2023-11-15,2023-11-20,2023-12-10,2023-12-15', 2),
-    ('Double', 2, 130, '2023-11-15,2023-11-20,2023-12-10,2023-12-15', 2),
-    ('Suite', 4, 220, '2023-11-15,2023-11-20,2023-12-10,2023-12-15', 2);
+    ('SINGLE', 1, 100,'2023-11-15,2023-11-20,2023-12-10,2023-12-15', 1),
+    ('DOUBLE', 2, 150, '2023-11-15,2023-11-20,2023-12-10,2023-12-15', 1),
+    ('SUITE', 4, 250, '2023-11-15,2023-11-20,2023-12-10,2023-12-15', 1),
+    ('FAMILY', 4, 200, '2023-11-15,2023-11-20,2023-12-10,2023-12-15', 1),
+    ('FAMILY', 4, 200, '2023-11-15,2023-11-20,2023-12-10,2023-12-15', 1),
+    ('SINGLE', 1, 90, '2023-11-15,2023-11-20,2023-12-10,2023-12-15', 2),
+    ('DOUBLE', 2, 130, '2023-11-15,2023-11-20,2023-12-10,2023-12-15', 2),
+    ('SUITE', 4, 220, '2023-11-15,2023-11-20,2023-12-10,2023-12-15', 2);
 
 INSERT INTO rental_cars (brand, model, location, pickup_date, return_date, total_price, created_at)
 VALUES

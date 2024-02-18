@@ -32,6 +32,7 @@ CREATE TABLE IF NOT EXISTS hotels (
                         id INT PRIMARY KEY AUTO_INCREMENT,
                         name VARCHAR(255) NOT NULL,
                         location VARCHAR(255) NOT NULL,
+                        street VARCHAR(255) NOT NULL,
                         created_at BIGINT NOT NULL
 );
 

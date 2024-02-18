@@ -56,4 +56,9 @@ public class RestControllerExceptionHandler {
     return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorMessage(NoFlightException.MESSAGE));
   }
 
+  @ExceptionHandler(NoHotelException.class)
+  public ResponseEntity<ErrorMessage> handleNoHotelAtTheGivenLocation() {
+    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorMessage(NoHotelException.MESSAGE));
+  }
+
 }

@@ -5,8 +5,4 @@ public enum SeatType {
   FIRST_CLASS,
   BUSINESS;
 
-  @Override
-  public String toString() {
-    return this.name();
-  }
 }

@@ -1,5 +1,6 @@
 package com.example.booking.date.models;
 
+import com.example.booking.car.models.Car;
 import com.example.booking.room.models.Room;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
@@ -36,6 +37,13 @@ public class Days {
           joinColumns = @JoinColumn(name = "date_id"),
           inverseJoinColumns = @JoinColumn(name = "room_id"))
   private List<Room> rooms = new ArrayList<>();
+
+  @JsonIgnore
+  @ManyToMany
+  @JoinTable(name = "car_dates",
+          joinColumns = @JoinColumn(name = "date_id"),
+          inverseJoinColumns = @JoinColumn(name = "car_id"))
+  private List<Car> cars = new ArrayList<>();
 
   public String getDate() {
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");

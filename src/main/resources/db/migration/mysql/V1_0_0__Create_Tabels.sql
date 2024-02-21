@@ -56,7 +56,6 @@ CREATE TABLE IF NOT EXISTS cars (
                              pick_up_date DATETIME NOT NULL,
                              drop_off_date DATETIME NOT NULL,
                              price_per_day INT NOT NULL,
-                             unavailable VARCHAR(20000),
                              created_at BIGINT NOT NULL
     );
 

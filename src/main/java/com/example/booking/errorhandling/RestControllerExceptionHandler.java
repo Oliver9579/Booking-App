@@ -75,4 +75,10 @@ public class RestControllerExceptionHandler {
   public ResponseEntity<ErrorMessage> handleWhenTheGivenGuestNumberToMuch() {
     return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorMessage(TooManyGuestsException.MESSAGE));
   }
+
+  @ExceptionHandler(SameDateException.class)
+  public ResponseEntity<ErrorMessage> handleWhenTheCheckInDateIsSameAsTheCheckOutDate(SameDateException e) {
+    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorMessage(e.getMessage()));
+  }
+
 }

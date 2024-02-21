@@ -41,20 +41,22 @@ CREATE TABLE IF NOT EXISTS rooms (
                        room_type VARCHAR(50),
                        capacity INT,
                        price_per_night INT NOT NULL,
-                       unavailable VARCHAR(20000),
-                        hotel_id INT,
+                       hotel_id INT,
                        FOREIGN KEY (hotel_id) REFERENCES hotels(id)
 );
 
 
-CREATE TABLE IF NOT EXISTS rental_cars (
+CREATE TABLE IF NOT EXISTS cars (
                              id INT PRIMARY KEY AUTO_INCREMENT,
                              brand VARCHAR(255) NOT NULL,
                              model VARCHAR(255) NOT NULL,
-                             location VARCHAR(255) NOT NULL,
-                             pickup_date DATETIME NOT NULL,
-                             return_date DATETIME NOT NULL,
-                             total_price INT NOT NULL,
+                             car_type VARCHAR(50),
+                             pick_up_location VARCHAR(255) NOT NULL,
+                             drop_off_location VARCHAR(255) NOT NULL,
+                             pick_up_date DATETIME NOT NULL,
+                             drop_off_date DATETIME NOT NULL,
+                             price_per_day INT NOT NULL,
+                             unavailable VARCHAR(20000),
                              created_at BIGINT NOT NULL
     );
 
@@ -77,4 +79,23 @@ CREATE TABLE IF NOT EXISTS reviews (
                         review_date BIGINT NOT NULL,
                         user_id INT NOT NULL,
                         FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
+CREATE TABLE IF NOT EXISTS dates (
+                        id INT PRIMARY KEY AUTO_INCREMENT,
+                        date DATE NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS room_dates (
+                        room_id INT,
+                        date_id INT,
+                        FOREIGN KEY (room_id) REFERENCES rooms(id),
+                        FOREIGN KEY (date_id) REFERENCES dates(id)
+);
+
+CREATE TABLE IF NOT EXISTS car_dates (
+                        car_id INT,
+                        date_id INT,
+                        FOREIGN KEY (car_id) REFERENCES cars(id),
+                        FOREIGN KEY (date_id) REFERENCES dates(id)
 );

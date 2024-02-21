@@ -27,20 +27,30 @@ VALUES
     ('Radisson', 'San Francisco', '1015 Market Street', UNIX_TIMESTAMP());
 
 
-INSERT INTO rooms (room_type, capacity, price_per_night, unavailable, hotel_id)
+INSERT INTO rooms (room_type, capacity, price_per_night, hotel_id)
 VALUES
-    ('SINGLE', 1, 100,'2023-11-15,2023-11-20,2023-12-10,2023-12-15', 1),
-    ('DOUBLE', 2, 150, '2023-11-15,2023-11-20,2023-12-10,2023-12-15', 1),
-    ('FAMILY', 4, 200, '2023-11-15,2023-11-20,2023-12-10,2023-12-15', 1),
-    ('FAMILY', 4, 200, '2023-11-15,2023-11-20,2023-12-10,2023-12-15', 1),
-    ('TRIPLE', 4, 170, '2023-11-15,2023-11-20,2023-12-10,2023-12-15', 1),
-    ('TRIPLE', 4, 170, '2023-11-15,2023-11-20,2023-12-10,2023-12-15', 1),
-    ('SINGLE', 1, 90, '2023-11-15,2023-11-20,2023-12-10,2023-12-15', 2),
-    ('DOUBLE', 2, 130, '2023-11-15,2023-11-20,2023-12-10,2023-12-15', 2),
+    ('SINGLE', 1, 100, 1),
+    ('DOUBLE', 2, 150, 1),
+    ('FAMILY', 4, 200, 1),
+    ('FAMILY', 4, 200, 1),
+    ('TRIPLE', 4, 170, 1),
+    ('TRIPLE', 4, 170, 1),
+    ('SINGLE', 1, 90, 2),
+    ('DOUBLE', 2, 130, 2);
 
-INSERT INTO rental_cars (brand, model, location, pickup_date, return_date, total_price, created_at)
+INSERT INTO cars (brand, model, car_type, pick_up_location, drop_off_location, pick_up_date, drop_off_date, price_per_day, unavailable, created_at)
 VALUES
-    ('Toyota', 'Camry', 'New York', '2023-11-15', '2023-11-20', 300, UNIX_TIMESTAMP()),
-    ('Ford', 'Mustang', 'Chicago', '2023-11-20', '2023-11-25', 400, UNIX_TIMESTAMP()),
-    ('Chevrolet', 'Impala', 'Los Angeles', '2023-11-25', '2023-11-30', 350, UNIX_TIMESTAMP()),
-    ('Honda', 'Accord', 'San Francisco', '2023-12-01', '2023-12-05', 380, UNIX_TIMESTAMP());
+    ('Toyota', 'Camry', 'MEDIUM', 'New York', 'New York', '2023-11-15', '2023-11-20', 50, '', UNIX_TIMESTAMP()),
+    ('Ford', 'Mustang', 'MEDIUM', 'Chicago', 'Miami', '2023-11-20', '2023-11-25', 100, '', UNIX_TIMESTAMP()),
+    ('Fiat', 'Panda', 'SMALL', 'Los Angeles', 'Las Vegas', '2023-11-25', '2023-11-30', 75, '', UNIX_TIMESTAMP()),
+    ('Volvo', 'XC60', 'LARGE', 'San Francisco', 'San Francisco', '2023-12-01', '2023-12-05', 85, '', UNIX_TIMESTAMP());
+
+INSERT INTO dates (date)
+SELECT DATE_ADD('2024-06-01', INTERVAL (t4 + t2*10 + t1*100) DAY) AS date
+FROM
+    (SELECT 0 AS t1 UNION SELECT 1 UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9) AS tens,
+    (SELECT 0 AS t2 UNION SELECT 1 UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9) AS hundreds,
+    (SELECT 0 AS t4 UNION SELECT 1 UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9) AS thousands
+WHERE
+        DATE_ADD('2024-06-01', INTERVAL (t4 + t2*10 + t1*100) DAY) <= '2025-06-30'
+ORDER BY date;

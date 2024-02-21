@@ -2,6 +2,7 @@ package com.example.booking.hotel.services;
 
 import com.example.booking.exceptions.NoHotelException;
 import com.example.booking.exceptions.NotEnoughRoomAvailableException;
+import com.example.booking.exceptions.SameDateException;
 import com.example.booking.exceptions.TooManyGuestsException;
 import com.example.booking.hotel.DTOs.HotelListDTO;
 import com.example.booking.hotel.DTOs.HotelRequestDTO;
@@ -15,10 +16,9 @@ import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -28,7 +28,6 @@ public class HotelServiceImpl implements HotelService {
   private HotelRepository hotelRepository;
   private RoomService roomService;
 
-  @SneakyThrows
   @Override
   public HotelListDTO getAllByLocation(HotelRequestDTO hotelRequest) {
 
@@ -68,6 +67,7 @@ public class HotelServiceImpl implements HotelService {
                                                            List<RoomType> roomType) {
     List<Hotel> hotels = hotelRepository.findAllByLocation(hotelRequest.getLocation());
     if (hotels.isEmpty()) throw new NoHotelException();
+    if (hotelRequest.getCheckInDate().equals(hotelRequest.getCheckOutDate()))throw new SameDateException();
     for (int i = 0; i < hotels.size(); i++) {
       List<Room> availableRooms = hotels.get(i).getRooms().stream()
               .filter(room -> roomService.isRoomAvailable(room, hotelRequest.getCheckInDate(), hotelRequest.getCheckOutDate()))
@@ -87,6 +87,7 @@ public class HotelServiceImpl implements HotelService {
       List<Room> roomsMoreType = availableRooms.stream()
               .filter(room -> room.getRoomType() == type)
               .collect(Collectors.toList());
+      if (roomsMoreType.isEmpty()) throw new NotEnoughRoomAvailableException();
       rooms.add(roomsMoreType.get(random.nextInt(roomsMoreType.size())));
     }
     return rooms;

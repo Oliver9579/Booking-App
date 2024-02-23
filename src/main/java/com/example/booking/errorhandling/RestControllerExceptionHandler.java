@@ -51,14 +51,14 @@ public class RestControllerExceptionHandler {
     return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorMessage(IdNotFoundException.MESSAGE));
   }
 
-  @ExceptionHandler(NoFlightException.class)
+  @ExceptionHandler(NoFlightFoundException.class)
   public ResponseEntity<ErrorMessage> handleNoFlightAtTheSpecifiedTime() {
-    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorMessage(NoFlightException.MESSAGE));
+    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorMessage(NoFlightFoundException.MESSAGE));
   }
 
-  @ExceptionHandler(NoHotelException.class)
-  public ResponseEntity<ErrorMessage> handleNoHotelAtTheGivenLocation() {
-    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorMessage(NoHotelException.MESSAGE));
+  @ExceptionHandler(NoHotelFoundException.class)
+  public ResponseEntity<ErrorMessage> handleNoHotelAvailableAtTheGivenLocation() {
+    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorMessage(NoHotelFoundException.MESSAGE));
   }
 
   @ExceptionHandler(NoRoomAvailableException.class)
@@ -79,6 +79,16 @@ public class RestControllerExceptionHandler {
   @ExceptionHandler(SameDateException.class)
   public ResponseEntity<ErrorMessage> handleWhenTheCheckInDateIsSameAsTheCheckOutDate(SameDateException e) {
     return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorMessage(e.getMessage()));
+  }
+
+  @ExceptionHandler(NoCarFoundException.class)
+  public ResponseEntity<ErrorMessage> handleNoAutoFoundAtTheGivenLocation() {
+    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorMessage(NoCarFoundException.MESSAGE));
+  }
+
+  @ExceptionHandler(NoAvailableCarException.class)
+  public ResponseEntity<ErrorMessage> handleNoAutoAvailableAtTheGivenTime() {
+    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorMessage(NoAvailableCarException.MESSAGE));
   }
 
 }

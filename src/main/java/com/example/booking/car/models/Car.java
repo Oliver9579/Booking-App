@@ -42,6 +42,11 @@ public class Car {
   private int capacity;
 
   @NotNull
+  @Column(name = "transmission_type")
+  @Enumerated(EnumType.STRING)
+  private TransmissionType transmissionType;
+
+  @NotNull
   @Column(name = "pick_up_location")
   private String pickUpLocation;
 

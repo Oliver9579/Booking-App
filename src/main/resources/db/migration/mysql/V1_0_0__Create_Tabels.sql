@@ -52,6 +52,7 @@ CREATE TABLE IF NOT EXISTS cars (
                              model VARCHAR(255) NOT NULL,
                              car_type VARCHAR(50),
                              capacity INT NOT NULL,
+                             transmission_type VARCHAR(50),
                              pick_up_location VARCHAR(255) NOT NULL,
                              drop_off_location VARCHAR(255) NOT NULL,
                              pick_up_date DATETIME NOT NULL,

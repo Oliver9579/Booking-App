@@ -1,12 +1,11 @@
 package com.example.booking.flight.services;
 
 import com.example.booking.exceptions.IdNotFoundException;
-import com.example.booking.exceptions.NoFlightException;
+import com.example.booking.exceptions.NoFlightFoundException;
 import com.example.booking.flight.DTOs.*;
 import com.example.booking.flight.models.Flight;
 import com.example.booking.flight.reporitories.FlightRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -42,7 +41,7 @@ public class FlightServiceImpl implements FlightService {
   public FlightListDTO getFlightsJustOneWay(FlightOneWayRequestDTO flightOneWay) {
     List<Flight> flights = flightRepository.findAllByOriginDestinationAndDepartureTime(flightOneWay);
     if (flights.isEmpty()) {
-      throw new NoFlightException();
+      throw new NoFlightFoundException();
     } else {
 
       return new FlightListDTO(flights
@@ -56,7 +55,7 @@ public class FlightServiceImpl implements FlightService {
   public FlightRoundTripList getFlightsRoundTrip(FlightRoundTripRequestDTO flightRoundTrip) {
     ArrayList<FlightRoundTripResponseDTO> flights = new ArrayList<>();
     List<List<Object>> flightsId = flightRepository.findByDestination(flightRoundTrip);
-    if (flightsId.isEmpty())throw new NoFlightException();
+    if (flightsId.isEmpty())throw new NoFlightFoundException();
 
     for (int i = 0; i < flightsId.size(); i++) {
       flights.add(new FlightRoundTripResponseDTO(convertToFlightDTO(

@@ -1,6 +1,6 @@
 package com.example.booking.hotel.services;
 
-import com.example.booking.exceptions.NoHotelException;
+import com.example.booking.exceptions.NoHotelFoundException;
 import com.example.booking.exceptions.NotEnoughRoomAvailableException;
 import com.example.booking.exceptions.SameDateException;
 import com.example.booking.exceptions.TooManyGuestsException;
@@ -13,11 +13,8 @@ import com.example.booking.room.models.Room;
 import com.example.booking.room.models.RoomType;
 import com.example.booking.room.services.RoomService;
 import lombok.AllArgsConstructor;
-import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
 
-import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -66,7 +63,7 @@ public class HotelServiceImpl implements HotelService {
   public List<Hotel> getHotelsWithAvailableRoomsByRoomType(HotelRequestDTO hotelRequest,
                                                            List<RoomType> roomType) {
     List<Hotel> hotels = hotelRepository.findAllByLocation(hotelRequest.getLocation());
-    if (hotels.isEmpty()) throw new NoHotelException();
+    if (hotels.isEmpty()) throw new NoHotelFoundException();
     if (hotelRequest.getCheckInDate().equals(hotelRequest.getCheckOutDate()))throw new SameDateException();
     for (int i = 0; i < hotels.size(); i++) {
       List<Room> availableRooms = hotels.get(i).getRooms().stream()

@@ -7,7 +7,8 @@ import com.example.booking.car.models.Car;
 
 public interface CarService {
 
-  CarListDTO getCarsWithSameDropOffLocation(CarSameDropOffRequestDTO carSameDropOffRequest);
+  CarListDTO getCarsWithSameDropOffLocation(CarSameDropOffRequestDTO carSameDropOffRequest,
+                                            String carType, Integer capacity, String transmissionType);
 
   CarListDTO getCarsWithDifferentDropOffLocation(CarDifferentDropOffDTO carDifferentDropOff);
 

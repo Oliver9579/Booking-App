@@ -1,9 +1,6 @@
 package com.example.booking.car.services;
 
-import com.example.booking.car.DTOs.CarDTO;
-import com.example.booking.car.DTOs.CarDifferentDropOffDTO;
-import com.example.booking.car.DTOs.CarListDTO;
-import com.example.booking.car.DTOs.CarSameDropOffRequestDTO;
+import com.example.booking.car.DTOs.*;
 import com.example.booking.car.models.Car;
 import com.example.booking.car.repositories.CarRepository;
 import com.example.booking.date.services.DaysService;
@@ -11,7 +8,6 @@ import com.example.booking.exceptions.NoAvailableCarException;
 import com.example.booking.exceptions.NoCarFoundException;
 import com.example.booking.exceptions.SameDateException;
 import lombok.AllArgsConstructor;
-import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -28,15 +24,11 @@ public class CarServiceImpl implements CarService {
 
 
   @Override
-  public CarListDTO getCarsWithSameDropOffLocation(CarSameDropOffRequestDTO carSameDropOffRequest) {
-    List<Car> cars = carRepository.findSameDropOffLocationCar(carSameDropOffRequest.getPickUpLocation());
-    if (cars.isEmpty()) throw new NoCarFoundException();
-    if (carSameDropOffRequest.getPickUpDate().equals(carSameDropOffRequest.getDropOffDate()))
-      throw new SameDateException();
-    List<Car> availableCars = cars.stream()
-            .filter(car -> isCarAvailable(car,
-            carSameDropOffRequest.getPickUpDate(),
-            carSameDropOffRequest.getDropOffDate())).collect(Collectors.toList());
+  public CarListDTO getCarsWithSameDropOffLocation(CarSameDropOffRequestDTO carSameDropOffRequest,
+                                                   String carType, Integer capacity, String transmissionType) {
+    List<Car> cars = carRepository.findSameDropOffLocationCar(carSameDropOffRequest.getPickUpLocation(),
+            carType, capacity, transmissionType);
+    List<Car> availableCars = getCarsByDates(carSameDropOffRequest, cars);
     if (availableCars.isEmpty()) throw new NoAvailableCarException();
     return convertCarsToCarListDTO(availableCars,
             daysService.getFullTravelDates(carSameDropOffRequest.getPickUpDate(),
@@ -46,7 +38,15 @@ public class CarServiceImpl implements CarService {
 
   @Override
   public CarListDTO getCarsWithDifferentDropOffLocation(CarDifferentDropOffDTO carDifferentDropOff) {
-    return null;
+    List<Car> cars = carRepository.findByPickUpLocationAndDropOffLocation(
+            carDifferentDropOff.getPickUpLocation(), carDifferentDropOff.getDropOffLocation());
+    List<Car> availableCars = getCarsByDates(carDifferentDropOff, cars);
+    if (availableCars.isEmpty()) throw new NoAvailableCarException();
+    return convertCarsToCarListDTO(availableCars,
+            daysService.getFullTravelDates(carDifferentDropOff.getPickUpDate(),
+                    carDifferentDropOff.getDropOffDate()).size(),
+            carDifferentDropOff.getPickUpDate(), carDifferentDropOff.getDropOffDate());
+
   }
 
   @Override
@@ -61,11 +61,19 @@ public class CarServiceImpl implements CarService {
     return isAvailable;
   }
 
+  private List<Car> getCarsByDates(CarRequestDTO carRequest, List<Car> cars) {
+    if (cars.isEmpty()) throw new NoCarFoundException();
+    if (carRequest.getPickUpDate().equals(carRequest.getDropOffDate())) throw new SameDateException();
+    return cars.stream()
+            .filter(car -> isCarAvailable(car,
+                    carRequest.getPickUpDate(),
+                    carRequest.getDropOffDate())).collect(Collectors.toList());
+  }
+
   private CarListDTO convertCarsToCarListDTO(List<Car> cars, int travelLength, String pickUpDate, String dropOffDate) {
     return new CarListDTO(cars.stream().map(car -> convertCarToCarDTO(car, travelLength, pickUpDate, dropOffDate)).collect(Collectors.toList()));
   }
 
-  @SneakyThrows
   private CarDTO convertCarToCarDTO(Car car, int travelLength, String pickUpDate, String dropOffDate) {
     DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     LocalDate parsedPickUpDate = LocalDate.parse(pickUpDate, dateFormatter);

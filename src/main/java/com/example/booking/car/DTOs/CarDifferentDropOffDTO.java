@@ -1,22 +1,19 @@
 package com.example.booking.car.DTOs;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
 
-@Data
-public class CarDifferentDropOffDTO {
+@Getter
+@Setter
+public class CarDifferentDropOffDTO extends CarRequestDTO {
 
-  @NotBlank
-  private String pickUpLocation;
   @NotBlank
   private String dropOffLocation;
-  @NotBlank
-  @Pattern(regexp = "^\\d{4}-\\d{2}-\\d{2}$", message = "Date must be in yyyy-mm-dd format")
-  private String pickUpDate;
-  @NotBlank
-  @Pattern(regexp = "^\\d{4}-\\d{2}-\\d{2}$", message = "Date must be in yyyy-mm-dd format")
-  private String dropOffDate;
 
+  public CarDifferentDropOffDTO(String pickUpLocation, String dropOffLocation, String pickUpDate, String dropOffDate) {
+    super(pickUpLocation, pickUpDate, dropOffDate);
+    this.dropOffLocation = dropOffLocation;
+  }
 }

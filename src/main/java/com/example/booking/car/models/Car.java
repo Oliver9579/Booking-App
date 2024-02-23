@@ -38,6 +38,10 @@ public class Car {
   private CarType carType;
 
   @NotNull
+  @Column(name = "capacity")
+  private int capacity;
+
+  @NotNull
   @Column(name = "pick_up_location")
   private String pickUpLocation;
 

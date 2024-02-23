@@ -55,14 +55,6 @@ public class Car {
   private String dropOffLocation;
 
   @NotNull
-  @Column(name = "pick_up_date")
-  private Date pickUpDate;
-
-  @NotNull
-  @Column(name = "drop_off_date")
-  private Date dropOffDate;
-
-  @NotNull
   @Column(name = "price_per_day")
   private int pricePerDay;
 
@@ -75,14 +67,12 @@ public class Car {
   private List<Days> unavailable;
 
   public Car(String brand, String model, CarType carType, String pickUpLocation,
-             String dropOffLocation, Date pickUpDate, Date dropOffDate, int pricePerDay) {
+             String dropOffLocation, int pricePerDay) {
     this.brand = brand;
     this.model = model;
     this.carType = carType;
     this.pickUpLocation = pickUpLocation;
     this.dropOffLocation = dropOffLocation;
-    this.pickUpDate = pickUpDate;
-    this.dropOffDate = dropOffDate;
     this.pricePerDay = pricePerDay;
     this.createdAt = System.currentTimeMillis() / 1000;
   }

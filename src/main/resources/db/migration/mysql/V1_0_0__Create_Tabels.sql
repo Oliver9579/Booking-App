@@ -55,8 +55,6 @@ CREATE TABLE IF NOT EXISTS cars (
                              transmission_type VARCHAR(50),
                              pick_up_location VARCHAR(255) NOT NULL,
                              drop_off_location VARCHAR(255) NOT NULL,
-                             pick_up_date DATETIME NOT NULL,
-                             drop_off_date DATETIME NOT NULL,
                              price_per_day INT NOT NULL,
                              created_at BIGINT NOT NULL
     );

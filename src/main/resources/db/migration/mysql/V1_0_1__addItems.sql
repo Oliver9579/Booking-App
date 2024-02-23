@@ -38,12 +38,12 @@ VALUES
     ('SINGLE', 1, 90, 2),
     ('DOUBLE', 2, 130, 2);
 
-INSERT INTO cars (brand, model, car_type, capacity, transmission_type, pick_up_location, drop_off_location, pick_up_date, drop_off_date, price_per_day, created_at)
+INSERT INTO cars (brand, model, car_type, capacity, transmission_type, pick_up_location, drop_off_location, price_per_day, created_at)
 VALUES
-    ('Toyota', 'Camry', 'MEDIUM', 5, 'AUTOMATIC', 'New York', 'New York', '2023-11-15', '2023-11-20', 50, UNIX_TIMESTAMP()),
-    ('Ford', 'Mustang', 'MEDIUM', 5, 'MANUAL', 'Chicago', 'Miami', '2023-11-20', '2023-11-25', 100, UNIX_TIMESTAMP()),
-    ('Fiat', '500', 'SMALL', 4, 'AUTOMATIC', 'Los Angeles', 'Las Vegas', '2023-11-25', '2023-11-30', 75, UNIX_TIMESTAMP()),
-    ('Volkswagen', 'Touran', 'LARGE', 7, 'MANUAL', 'San Francisco', 'San Francisco', '2023-12-01', '2023-12-05', 85, UNIX_TIMESTAMP());
+    ('Toyota', 'Camry', 'MEDIUM', 5, 'AUTOMATIC', 'New York', 'New York', 50, UNIX_TIMESTAMP()),
+    ('Ford', 'Mustang', 'MEDIUM', 5, 'MANUAL', 'Chicago', 'Miami', 100, UNIX_TIMESTAMP()),
+    ('Fiat', '500', 'SMALL', 4, 'AUTOMATIC', 'Los Angeles', 'Las Vegas', 75, UNIX_TIMESTAMP()),
+    ('Volkswagen', 'Touran', 'LARGE', 7, 'MANUAL', 'San Francisco', 'San Francisco', 85, UNIX_TIMESTAMP());
 
 INSERT INTO dates (date)
 SELECT DATE_ADD('2024-06-01', INTERVAL (t4 + t2*10 + t1*100) DAY) AS date

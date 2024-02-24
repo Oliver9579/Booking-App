@@ -6,11 +6,16 @@ import com.example.booking.room.models.Room;
 import com.example.booking.room.models.RoomType;
 
 import java.util.List;
+import java.util.Map;
 
 public interface RoomService {
 
   Boolean isRoomAvailable(Room room, String checkInDate, String checkOutDate);
 
-  List<RoomDTO> convertToRoomDTO(List<Room> rooms);
+  List<RoomDTO> convertToRoomDTO(List<Room> rooms, List<Long> availableNumbers, String checkInDate, String checkOutDate);
+
+  List<Room> getRoomsByType(Hotel hotel, RoomType[] roomTypes);
+
+  List<Long> getRoomsCountByType(List<Room> rooms);
 
 }

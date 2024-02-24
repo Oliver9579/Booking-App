@@ -9,12 +9,15 @@ public class RoomDTO {
   private int id;
   private RoomType roomType;
   private int capacity;
-  private int pricePerNight;
+  private int fullPrice;
+  private Long availableNumber;
 
-  public RoomDTO(int id, RoomType roomType, int capacity, int pricePerNight) {
+
+  public RoomDTO(int id, RoomType roomType, int capacity, int fullPrice, Long availableNumber) {
     this.id = id;
     this.roomType = roomType;
     this.capacity = capacity;
-    this.pricePerNight = pricePerNight;
+    this.fullPrice = fullPrice;
+    this.availableNumber = availableNumber;
   }
 }

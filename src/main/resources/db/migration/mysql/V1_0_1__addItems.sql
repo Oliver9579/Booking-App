@@ -33,8 +33,8 @@ VALUES
     ('DOUBLE', 2, 150, 1),
     ('FAMILY', 4, 200, 1),
     ('FAMILY', 4, 200, 1),
-    ('TRIPLE', 4, 170, 1),
-    ('TRIPLE', 4, 170, 1),
+    ('TRIPLE', 3, 170, 1),
+    ('TRIPLE', 3, 170, 1),
     ('SINGLE', 1, 90, 2),
     ('DOUBLE', 2, 130, 2);
 

@@ -12,13 +12,15 @@ public class HotelResponseDTO {
   private String name;
   private String location;
   private String street;
+  private int stars;
   private List<RoomDTO> rooms;
 
-  public HotelResponseDTO(int id, String name, String location, String street, List<RoomDTO> rooms) {
+  public HotelResponseDTO(int id, String name, String location, String street, int stars, List<RoomDTO> rooms) {
     this.id = id;
     this.name = name;
     this.location = location;
     this.street = street;
+    this.stars = stars;
     this.rooms = rooms;
   }
 }

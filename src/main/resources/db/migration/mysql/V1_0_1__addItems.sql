@@ -19,12 +19,12 @@ VALUES
     ('D2', 'BUSINESS', 220, TRUE, 2);
 
 
-INSERT INTO hotels (name, location, street, created_at)
+INSERT INTO hotels (name, location, street, stars, created_at)
 VALUES
-    ('Hilton', 'New York', '1234 Avenue of the Americas', UNIX_TIMESTAMP()),
-    ('Marriott', 'Chicago', '321 North Clark Street', UNIX_TIMESTAMP()),
-    ('Sheraton', 'Los Angeles', '711 South Hope Street', UNIX_TIMESTAMP()),
-    ('Radisson', 'San Francisco', '1015 Market Street', UNIX_TIMESTAMP());
+    ('Hilton', 'New York', '1234 Avenue of the Americas', 5, UNIX_TIMESTAMP()),
+    ('Marriott', 'Chicago', '321 North Clark Street', 5, UNIX_TIMESTAMP()),
+    ('Sheraton', 'Los Angeles', '711 South Hope Street', 4, UNIX_TIMESTAMP()),
+    ('Radisson', 'San Francisco', '1015 Market Street', 3, UNIX_TIMESTAMP());
 
 
 INSERT INTO rooms (room_type, capacity, price_per_night, hotel_id)

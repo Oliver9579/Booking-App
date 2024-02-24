@@ -12,5 +12,6 @@ public class HotelDTO {
   private Integer id;
   private String name;
   private String location;
+  private int stars;
 
 }

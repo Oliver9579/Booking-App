@@ -33,6 +33,7 @@ CREATE TABLE IF NOT EXISTS hotels (
                         name VARCHAR(255) NOT NULL,
                         location VARCHAR(255) NOT NULL,
                         street VARCHAR(255) NOT NULL,
+                        stars INT NOT NULL,
                         created_at BIGINT NOT NULL
 );
 

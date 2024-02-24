@@ -29,8 +29,12 @@ public class CarController {
 
   @GetMapping("/dropOff/different")
   private ResponseEntity<CarListDTO> getCarsWithSameDropOffLocation(
-          @Valid @RequestBody CarDifferentDropOffDTO carDifferentDropOff) {
-    return ResponseEntity.ok().body(carService.getCarsWithDifferentDropOffLocation(carDifferentDropOff));
+          @Valid @RequestBody CarDifferentDropOffDTO carDifferentDropOff,
+          @RequestParam(required = false) String carType,
+          @RequestParam(required = false) Integer capacity,
+          @RequestParam(required = false) String transmissionType) {
+    return ResponseEntity.ok().body(carService.getCarsWithDifferentDropOffLocation(carDifferentDropOff,
+            carType, capacity, transmissionType));
   }
 
 }

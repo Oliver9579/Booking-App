@@ -10,7 +10,8 @@ public interface CarService {
   CarListDTO getCarsWithSameDropOffLocation(CarSameDropOffRequestDTO carSameDropOffRequest,
                                             String carType, Integer capacity, String transmissionType);
 
-  CarListDTO getCarsWithDifferentDropOffLocation(CarDifferentDropOffDTO carDifferentDropOff);
+  CarListDTO getCarsWithDifferentDropOffLocation(CarDifferentDropOffDTO carDifferentDropOff,
+                                                 String carType, Integer capacity, String transmissionType);
 
   Boolean isCarAvailable(Car car, String pickUpDate, String dropOffDate);
 

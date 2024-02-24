@@ -20,6 +20,16 @@ public interface CarRepository extends CrudRepository<Car, Integer> {
                                        @Param("capacity") Integer capacity,
                                        @Param("transmissionType") String transmissionType);
 
-  List<Car> findByPickUpLocationAndDropOffLocation(String pickUpLocation, String dropOffLocation);
+  @Query(value = "SELECT * FROM cars " +
+          "WHERE pick_up_location = :#{#pickUpLocation} " +
+          "AND drop_off_location = :#{#dropOffLocation} " +
+          "AND (:carType is null or car_type = :carType) " +
+          "AND (:capacity is null or capacity = :capacity) " +
+          "AND (:transmissionType is null or transmission_type = :transmissionType)", nativeQuery = true)
+  List<Car> findByPickUpLocationAndDropOffLocation(@Param("pickUpLocation") String pickUpLocation,
+                                                   @Param("dropOffLocation") String dropOffLocation,
+                                                   @Param("carType") String carType,
+                                                   @Param("capacity") Integer capacity,
+                                                   @Param("transmissionType") String transmissionType);
 
 }

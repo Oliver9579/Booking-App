@@ -37,9 +37,11 @@ public class CarServiceImpl implements CarService {
   }
 
   @Override
-  public CarListDTO getCarsWithDifferentDropOffLocation(CarDifferentDropOffDTO carDifferentDropOff) {
+  public CarListDTO getCarsWithDifferentDropOffLocation(CarDifferentDropOffDTO carDifferentDropOff,
+                                                        String carType, Integer capacity, String transmissionType) {
     List<Car> cars = carRepository.findByPickUpLocationAndDropOffLocation(
-            carDifferentDropOff.getPickUpLocation(), carDifferentDropOff.getDropOffLocation());
+            carDifferentDropOff.getPickUpLocation(), carDifferentDropOff.getDropOffLocation(),
+            carType, capacity, transmissionType);
     List<Car> availableCars = getCarsByDates(carDifferentDropOff, cars);
     if (availableCars.isEmpty()) throw new NoAvailableCarException();
     return convertCarsToCarListDTO(availableCars,

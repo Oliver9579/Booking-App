@@ -1,5 +1,6 @@
 package com.example.booking.login.services;
 
+import com.example.booking.exceptions.UnverifiedAccountException;
 import com.example.booking.exceptions.UserNotFoundException;
 import com.example.booking.exceptions.WrongPasswordException;
 import com.example.booking.login.models.LoginDTO;
@@ -33,6 +34,7 @@ public class LoginServiceImpl implements LoginService {
     User user = userService.getByUsername(loginDTO.getUserName());
     if (!passwordService.isPasswordMatch(loginDTO.getPassword(), user.getPassword()))
       throw new WrongPasswordException();
+    if (!user.isEnabled()) throw new UnverifiedAccountException();
     LinkedHashMap<String, Object> claims = new LinkedHashMap<>();
     claims.put("username", user.getUsername());
     claims.put("userId", user.getId());

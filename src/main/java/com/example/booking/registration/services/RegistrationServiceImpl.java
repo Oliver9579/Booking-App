@@ -1,5 +1,7 @@
 package com.example.booking.registration.services;
 
+import com.example.booking.email.models.EmailVerificationToken;
+import com.example.booking.email.services.EmailService;
 import com.example.booking.exceptions.AlreadyTakenException;
 import com.example.booking.exceptions.UserNotFoundException;
 import com.example.booking.registration.models.RegistrationDTO;
@@ -9,12 +11,16 @@ import com.example.booking.user.services.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+
 @Service
 @AllArgsConstructor
 public class RegistrationServiceImpl implements RegistrationService {
 
   private UserService userService;
   private PasswordService passwordService;
+  private EmailService emailService;
 
   public void validateRegistration(RegistrationDTO rdto) {
     try {
@@ -34,9 +40,12 @@ public class RegistrationServiceImpl implements RegistrationService {
     }
   }
 
-  public User register(RegistrationDTO rdto) {
+  public User register(RegistrationDTO rdto) throws MessagingException {
     validateRegistration(rdto);
-    return userService.save(new User(rdto.getFirstName(), rdto.getLastName(), rdto.getUserName(), rdto.getEmail(),
-            passwordService.passwordEncoding(rdto.getPassword()), rdto.getPhoneNumber()));
+    User user = userService.convertRegisterDTOToUser(rdto);
+    user.setVerificationToken(new EmailVerificationToken(user));
+    MimeMessage verificationMessage = emailService.createVerificationMail(user);
+    emailService.sendMail(verificationMessage);
+    return userService.save(user);
   }
 }

@@ -91,4 +91,14 @@ public class RestControllerExceptionHandler {
     return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorMessage(NoAvailableCarException.MESSAGE));
   }
 
+  @ExceptionHandler(UnverifiedAccountException.class)
+  public ResponseEntity<ErrorMessage> handleWhenAnAccountNotVerified() {
+    return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new ErrorMessage(UnverifiedAccountException.MESSAGE));
+  }
+
+  @ExceptionHandler(VerificationTokenNotFoundException.class)
+  public ResponseEntity<ErrorMessage> handleWhenAVerificationTokenNotFound() {
+    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorMessage(VerificationTokenNotFoundException.MESSAGE));
+  }
+
 }

@@ -1,6 +1,9 @@
 package com.example.booking.user.services;
 
+import com.example.booking.email.models.EmailVerificationToken;
 import com.example.booking.exceptions.UserNotFoundException;
+import com.example.booking.registration.models.RegistrationDTO;
+import com.example.booking.security.password.PasswordService;
 import com.example.booking.user.models.User;
 import com.example.booking.user.models.UserDTO;
 import com.example.booking.user.repositories.UserRepository;
@@ -15,6 +18,7 @@ import java.util.stream.Collectors;
 public class UserServiceImpl implements UserService {
 
   private UserRepository userRepository;
+  private PasswordService passwordService;
 
   @Override
   public User getByEmail(String email) throws UserNotFoundException {
@@ -45,6 +49,20 @@ public class UserServiceImpl implements UserService {
   public UserDTO convertUserToDTO(User user) {
     return new UserDTO(user.getId(), user.getFirstName() + " " + user.getLastName(),
             user.getUsername(), user.getEmail(), user.getPhoneNumber());
+  }
+
+  @Override
+  public User convertRegisterDTOToUser(RegistrationDTO rdto) {
+    return new User(rdto.getFirstName(), rdto.getLastName(), rdto.getUserName(), rdto.getEmail(),
+            passwordService.passwordEncoding(rdto.getPassword()), rdto.getPhoneNumber());
+  }
+
+  @Override
+  public User verifyPlayer(EmailVerificationToken token) {
+    if (token == null || token.getUser() == null) return null;
+    User player = token.getUser();
+    player.setEnabled(true);
+    return userRepository.save(player);
   }
 
   @Override

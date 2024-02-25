@@ -1,5 +1,6 @@
 package com.example.booking.user.models;
 
+import com.example.booking.email.models.EmailVerificationToken;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -58,6 +59,11 @@ public class User implements UserDetails {
   @JsonIgnore
   private String phoneNumber;
 
+  private boolean enabled;
+
+  @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+  private EmailVerificationToken verificationToken;
+
 //  @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 //  private List<Booking> booking = new ArrayList<>();
 
@@ -97,6 +103,6 @@ public class User implements UserDetails {
 
   @Override
   public boolean isEnabled() {
-    return true;
+    return enabled;
   }
 }

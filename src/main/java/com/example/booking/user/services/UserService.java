@@ -1,5 +1,7 @@
 package com.example.booking.user.services;
 
+import com.example.booking.email.models.EmailVerificationToken;
+import com.example.booking.registration.models.RegistrationDTO;
 import com.example.booking.user.models.User;
 import com.example.booking.user.models.UserDTO;
 
@@ -19,6 +21,12 @@ public interface UserService {
   User save(User user);
 
   UserDTO convertUserToDTO(User user);
+
+  User convertRegisterDTOToUser(RegistrationDTO rdto);
+
+
+
+  User verifyPlayer(EmailVerificationToken token);
 
   //Boolean isUserIdMatching(Integer userId, Order order);
 

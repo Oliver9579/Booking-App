@@ -58,16 +58,22 @@ CREATE TABLE IF NOT EXISTS cars (
                              drop_off_location VARCHAR(255) NOT NULL,
                              price_per_day INT NOT NULL,
                              created_at BIGINT NOT NULL
-    );
+);
 
 CREATE TABLE IF NOT EXISTS bookings (
-                            id INT PRIMARY KEY AUTO_INCREMENT,
-                            booking_type VARCHAR(255) NOT NULL,
-                            booking_id INT NOT NULL,
+                            id INT AUTO_INCREMENT PRIMARY KEY,
+                            booking_date DATETIME NOT NULL,
+                            start_date DATETIME NOT NULL,
+                            end_date DATETIME NOT NULL,
                             total_price INT NOT NULL,
-                            booking_date BIGINT NOT NULL,
                             user_id INT NOT NULL,
-                            FOREIGN KEY (user_id) REFERENCES users(id)
+                            car_id INT,
+                            flight_id INT,
+                            hotel_id INT,
+                            FOREIGN KEY (user_id) REFERENCES users(id),
+                            FOREIGN KEY (car_id) REFERENCES cars(id),
+                            FOREIGN KEY (flight_id) REFERENCES flights(id),
+                            FOREIGN KEY (hotel_id) REFERENCES hotels(id)
 );
 
 CREATE TABLE IF NOT EXISTS reviews (

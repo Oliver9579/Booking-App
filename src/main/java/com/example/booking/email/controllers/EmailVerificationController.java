@@ -22,7 +22,7 @@ public class EmailVerificationController {
   @GetMapping("/verify")
   public ResponseEntity<?> verify(@RequestParam String token) {
     EmailVerificationToken verificationToken = tokenService.getByTokenValue(token);
-    User user = userService.verifyPlayer(verificationToken);
+    User user = userService.verifyUser(verificationToken);
     return ResponseEntity.status(HttpStatus.OK).body(new EmailVerificationDTO(user.getUsername(), true));
   }
 

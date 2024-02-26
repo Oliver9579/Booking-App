@@ -1,6 +1,8 @@
 package com.example.booking.user.services;
 
+import com.example.booking.booking.models.Booking;
 import com.example.booking.email.models.EmailVerificationToken;
+import com.example.booking.exceptions.ForbiddenActionException;
 import com.example.booking.exceptions.UserNotFoundException;
 import com.example.booking.registration.models.RegistrationDTO;
 import com.example.booking.security.password.PasswordService;
@@ -58,11 +60,17 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public User verifyPlayer(EmailVerificationToken token) {
+  public User verifyUser(EmailVerificationToken token) {
     if (token == null || token.getUser() == null) return null;
-    User player = token.getUser();
-    player.setEnabled(true);
-    return userRepository.save(player);
+    User user = token.getUser();
+    user.setEnabled(true);
+    return userRepository.save(user);
+  }
+
+  @Override
+  public Boolean isUserIdMatching(Integer userId, Booking booking) {
+    if (userId == null || !userId.equals(booking.getUser().getId())) throw new ForbiddenActionException();
+    return true;
   }
 
   @Override

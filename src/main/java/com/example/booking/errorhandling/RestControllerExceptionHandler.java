@@ -101,4 +101,9 @@ public class RestControllerExceptionHandler {
     return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorMessage(VerificationTokenNotFoundException.MESSAGE));
   }
 
+  @ExceptionHandler(ForbiddenActionException.class)
+  public ResponseEntity<ErrorMessage> handleForbiddenAction() {
+    return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new ErrorMessage(ForbiddenActionException.MESSAGE));
+  }
+
 }

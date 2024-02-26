@@ -56,7 +56,7 @@ public class Flight {
   private List<Seat> seats = new ArrayList<>();
 
   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-  private List<Booking> booking = new ArrayList<>();
+  private List<Booking> bookings = new ArrayList<>();
 
   public Flight(String airline, String origin, String destination, Date departureDate, int duration) {
     this.airline = airline;

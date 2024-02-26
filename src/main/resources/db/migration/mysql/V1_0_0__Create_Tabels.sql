@@ -68,11 +68,13 @@ CREATE TABLE IF NOT EXISTS bookings (
                             total_price INT NOT NULL,
                             user_id INT NOT NULL,
                             car_id INT,
-                            flight_id INT,
+                            outbound_flight_id INT,
+                            return_flight_id INT,
                             hotel_id INT,
                             FOREIGN KEY (user_id) REFERENCES users(id),
                             FOREIGN KEY (car_id) REFERENCES cars(id),
-                            FOREIGN KEY (flight_id) REFERENCES flights(id),
+                            FOREIGN KEY (outbound_flight_id) REFERENCES flights(id),
+                            FOREIGN KEY (return_flight_id) REFERENCES flights(id),
                             FOREIGN KEY (hotel_id) REFERENCES hotels(id)
 );
 

@@ -11,6 +11,8 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 @Getter
@@ -27,14 +29,14 @@ public class Booking {
 
   @NotNull
   @Column(name = "booking_date")
-  private Date bookingDate;
+  private LocalDateTime bookingDate;
 
   @NotNull
   @Column(name = "start_date")
-  private Date startDate;
+  private LocalDateTime startDate;
 
   @Column(name = "end_date")
-  private Date endDate;
+  private LocalDateTime endDate;
 
   @NotNull
   @Column(name = "total_price")
@@ -49,16 +51,21 @@ public class Booking {
   private Car car;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "flight_id")
-  private Flight flight;
+  @JoinColumn(name = "outbound_flight_id")
+  private Flight outboundFlight;
+
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "return_flight_id")
+  private Flight returnFlight;
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "hotel_id")
   private Hotel hotel;
 
-  public Booking(User user, Date bookingDate, Date startDate, Date endDate, int totalPrice) {
+  public Booking(User user, LocalDateTime startDate, LocalDateTime endDate, int totalPrice) {
+    DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
     this.user = user;
-    this.bookingDate = bookingDate;
+    this.bookingDate = LocalDateTime.parse(LocalDateTime.now().format(myFormatObj));
     this.startDate = startDate;
     this.endDate = endDate;
     this.totalPrice = totalPrice;

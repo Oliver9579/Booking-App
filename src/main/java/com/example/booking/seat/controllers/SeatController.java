@@ -1,4 +1,4 @@
-package com.example.booking.seat;
+package com.example.booking.seat.controllers;
 
 import com.example.booking.seat.services.SeatService;
 import lombok.AllArgsConstructor;

@@ -33,7 +33,6 @@ public class Booking {
   @Column(name = "start_date")
   private Date startDate;
 
-  @NotNull
   @Column(name = "end_date")
   private Date endDate;
 

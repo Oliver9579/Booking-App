@@ -1,5 +1,6 @@
 package com.example.booking.car.models;
 
+import com.example.booking.booking.models.Booking;
 import com.example.booking.date.models.Days;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
@@ -9,6 +10,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -65,6 +67,9 @@ public class Car {
   @JsonIgnore
   @ManyToMany(mappedBy = "cars", cascade = CascadeType.ALL)
   private List<Days> unavailable;
+
+  @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+  private List<Booking> booking = new ArrayList<>();
 
   public Car(String brand, String model, CarType carType, String pickUpLocation,
              String dropOffLocation, int pricePerDay) {

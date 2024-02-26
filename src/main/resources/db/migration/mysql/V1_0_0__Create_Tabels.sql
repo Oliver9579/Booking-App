@@ -64,7 +64,7 @@ CREATE TABLE IF NOT EXISTS bookings (
                             id INT AUTO_INCREMENT PRIMARY KEY,
                             booking_date DATETIME NOT NULL,
                             start_date DATETIME NOT NULL,
-                            end_date DATETIME NOT NULL,
+                            end_date DATETIME,
                             total_price INT NOT NULL,
                             user_id INT NOT NULL,
                             car_id INT,

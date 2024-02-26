@@ -1,5 +1,6 @@
 package com.example.booking.user.models;
 
+import com.example.booking.booking.models.Booking;
 import com.example.booking.email.models.EmailVerificationToken;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
@@ -14,6 +15,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Getter
@@ -64,8 +66,8 @@ public class User implements UserDetails {
   @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
   private EmailVerificationToken verificationToken;
 
-//  @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-//  private List<Booking> booking = new ArrayList<>();
+  @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+  private List<Booking> booking = new ArrayList<>();
 
   public User(String firstName, String lastName, String userName, String email, String password, String phoneNumber) {
     this.firstName = firstName;

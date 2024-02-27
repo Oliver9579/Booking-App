@@ -2,6 +2,8 @@ package com.example.booking.booking.services;
 
 import com.example.booking.booking.DTOs.bookingFlight.BookingOneWayFlightRequestDTO;
 import com.example.booking.booking.DTOs.bookingFlight.BookingOneWayFlightResponseDTO;
+import com.example.booking.booking.DTOs.bookingFlight.BookingRoundTripFlightRequestDTO;
+import com.example.booking.booking.DTOs.bookingFlight.BookingRoundTripFlightResponseDTO;
 import com.example.booking.booking.models.Booking;
 import com.example.booking.booking.repository.BookingRepository;
 import com.example.booking.car.services.CarService;
@@ -15,6 +17,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 @AllArgsConstructor
@@ -40,5 +43,30 @@ public class BookingServiceImpl implements BookingService {
 
     return new BookingOneWayFlightResponseDTO(booking.getBookingDate(), booking.getStartDate(), booking.getTotalPrice(),
             flightService.convertToFlightDTO(booking.getOutboundFlight()));
+  }
+
+  @Override
+  public BookingRoundTripFlightResponseDTO createRoundTripFlightBooking(
+          User user, BookingRoundTripFlightRequestDTO bookingFlight) {
+    Flight flightToDestination = flightService.getFlightById(bookingFlight.getOutboundFlightId());
+    Flight flightReturn = flightService.getFlightById(bookingFlight.getReturnFlightId());
+
+    flightToDestination.setSeats(seatService.setSeatsAvailabilityFalse(
+            seatService.getSeatsById(bookingFlight.getOutboundFlightSeatsId())));
+
+    flightReturn.setSeats(seatService.setSeatsAvailabilityFalse(
+            seatService.getSeatsById(bookingFlight.getReturnFlightSeatsId())));
+
+
+    Booking booking = bookingRepository.save(new Booking(bookingFlight.getStartDate(), bookingFlight.getEndDate(),
+            bookingFlight.getTotalPrice(), user, flightToDestination, flightReturn,
+            Stream.concat(flightToDestination.getSeats().stream(),
+                    flightReturn.getSeats().stream()).collect(Collectors.toList())
+    ));
+
+    return new BookingRoundTripFlightResponseDTO(
+            booking.getBookingDate(), booking.getStartDate(), booking.getEndDate(), booking.getTotalPrice(),
+            flightService.convertToFlightDTO(booking.getOutboundFlight()),
+            flightService.convertToFlightDTO(booking.getReturnFlight()));
   }
 }

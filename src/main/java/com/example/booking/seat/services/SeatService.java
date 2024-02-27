@@ -12,4 +12,6 @@ public interface SeatService {
 
   Seat save(Seat seat);
 
+  List<Seat> setSeatsAvailabilityFalse(List<Seat> seats);
+
 }

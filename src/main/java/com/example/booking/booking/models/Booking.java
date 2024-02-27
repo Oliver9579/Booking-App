@@ -13,8 +13,6 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -83,7 +81,6 @@ public class Booking {
   private List<Seat> bookedSeats = new ArrayList<>();
 
   public Booking(User user, Date startDate, Date endDate, int totalPrice) {
-    DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
     this.user = user;
     this.bookingDate = new Date();
     this.startDate = startDate;
@@ -93,12 +90,23 @@ public class Booking {
 
   public Booking(Date startDate, int totalPrice, User user,
                  Flight outboundFlight, List<Seat> bookedSeats) {
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
     this.bookingDate = new Date();
     this.startDate = startDate;
     this.totalPrice = totalPrice;
     this.user = user;
     this.outboundFlight = outboundFlight;
+    this.bookedSeats = bookedSeats;
+  }
+
+  public Booking(Date startDate, Date endDate, int totalPrice, User user, Flight outboundFlight,
+                 Flight returnFlight, List<Seat> bookedSeats) {
+    this.bookingDate = new Date();
+    this.startDate = startDate;
+    this.endDate = endDate;
+    this.totalPrice = totalPrice;
+    this.user = user;
+    this.outboundFlight = outboundFlight;
+    this.returnFlight = returnFlight;
     this.bookedSeats = bookedSeats;
   }
 }

@@ -1,6 +1,7 @@
 package com.example.booking.booking.controllers;
 
 import com.example.booking.booking.DTOs.bookingFlight.BookingOneWayFlightRequestDTO;
+import com.example.booking.booking.DTOs.bookingFlight.BookingRoundTripFlightRequestDTO;
 import com.example.booking.booking.services.BookingService;
 import com.example.booking.user.models.User;
 import com.example.booking.user.services.UserService;
@@ -28,6 +29,15 @@ public class BookingController {
     int userId = ((User) auth.getPrincipal()).getId();
     User user = userService.getById(userId);
     return ResponseEntity.ok().body(bookingService.createOneWayFlightBooking(user, bookingFlight));
+
+  }
+
+  @PostMapping("/flights/roundTrip")
+  public ResponseEntity<?> createOneWayNewFlightBooking(UsernamePasswordAuthenticationToken auth,
+                                                        @Valid @RequestBody BookingRoundTripFlightRequestDTO bookingFlight) {
+    int userId = ((User) auth.getPrincipal()).getId();
+    User user = userService.getById(userId);
+    return ResponseEntity.ok().body(bookingService.createRoundTripFlightBooking(user, bookingFlight));
 
   }
 

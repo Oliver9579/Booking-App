@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -27,12 +28,23 @@ public class SeatServiceImpl implements SeatService {
   @Override
   public Seat setAvailabilityFalse(Seat seat) {
     seat.setAvailability(false);
+    seatRepository.save(seat);
     return seat;
   }
 
   @Override
   public Seat save(Seat seat) {
     return seatRepository.save(seat);
+  }
+
+  @Override
+  public List<Seat> setSeatsAvailabilityFalse(List<Seat> seats) {
+    return seats.stream()
+            .map(seat -> {
+              seat.setAvailability(false);
+              seatRepository.save(seat);
+              return seat;
+            }).collect(Collectors.toList());
   }
 
 }

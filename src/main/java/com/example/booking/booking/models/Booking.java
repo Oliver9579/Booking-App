@@ -3,6 +3,8 @@ package com.example.booking.booking.models;
 import com.example.booking.car.models.Car;
 import com.example.booking.flight.models.Flight;
 import com.example.booking.hotel.models.Hotel;
+import com.example.booking.room.models.Room;
+import com.example.booking.seat.models.Seat;
 import com.example.booking.user.models.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,7 +15,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -61,6 +64,22 @@ public class Booking {
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "hotel_id")
   private Hotel hotel;
+
+  @ManyToMany(fetch = FetchType.LAZY)
+  @JoinTable(
+          name = "booking_rooms",
+          joinColumns = @JoinColumn(name = "booking_id"),
+          inverseJoinColumns = @JoinColumn(name = "room_id")
+  )
+  private List<Room> bookedRooms = new ArrayList<>();
+
+  @ManyToMany(fetch = FetchType.LAZY)
+  @JoinTable(
+          name = "booking_seats",
+          joinColumns = @JoinColumn(name = "booking_id"),
+          inverseJoinColumns = @JoinColumn(name = "seat_id")
+  )
+  private List<Seat> bookedSeats = new ArrayList<>();
 
   public Booking(User user, LocalDateTime startDate, LocalDateTime endDate, int totalPrice) {
     DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");

@@ -22,7 +22,7 @@ public class FlightController {
 
   @GetMapping("/{id}")
   public ResponseEntity<FlightDTO> getFlightById(@PathVariable Integer id) {
-    return ResponseEntity.ok().body(flightService.getFlightById(id));
+    return ResponseEntity.ok().body(flightService.convertToFlightDTO(flightService.getFlightById(id)));
   }
 
   @GetMapping("/oneWay")

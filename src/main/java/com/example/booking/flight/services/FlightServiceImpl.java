@@ -27,8 +27,8 @@ public class FlightServiceImpl implements FlightService {
   }
 
   @Override
-  public FlightDTO getFlightById(Integer id) {
-    return convertToFlightDTO(flightRepository.findById(id).orElseThrow(IdNotFoundException::new));
+  public Flight getFlightById(Integer id) {
+    return flightRepository.findById(id).orElseThrow(IdNotFoundException::new);
   }
 
   @Override

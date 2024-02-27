@@ -7,7 +7,7 @@ public interface FlightService {
 
   FlightListDTO getAllFlights();
 
-  FlightDTO getFlightById(Integer id);
+  Flight getFlightById(Integer id);
 
   FlightDTO convertToFlightDTO(Flight flight);
 

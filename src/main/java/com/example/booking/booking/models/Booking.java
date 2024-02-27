@@ -90,4 +90,14 @@ public class Booking {
     this.totalPrice = totalPrice;
   }
 
+  public Booking(LocalDateTime startDate, int totalPrice, User user,
+                 Flight outboundFlight, List<Seat> bookedSeats) {
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    this.bookingDate = LocalDateTime.parse(LocalDateTime.now().format(formatter), formatter);
+    this.startDate = startDate;
+    this.totalPrice = totalPrice;
+    this.user = user;
+    this.outboundFlight = outboundFlight;
+    this.bookedSeats = bookedSeats;
+  }
 }

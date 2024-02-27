@@ -3,17 +3,17 @@ package com.example.booking.booking.DTOs.bookingFlight;
 import com.example.booking.flight.DTOs.FlightDTO;
 import lombok.Data;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 @Data
 public class BookingOneWayFlightResponseDTO {
 
-  private LocalDateTime bookingDate;
-  private LocalDateTime startDate;
+  private Date bookingDate;
+  private Date startDate;
   private int totalPrice;
   private FlightDTO flight;
 
-  public BookingOneWayFlightResponseDTO(LocalDateTime bookingDate, LocalDateTime startDate,
+  public BookingOneWayFlightResponseDTO(Date bookingDate, Date startDate,
                                         int totalPrice, FlightDTO flight) {
     this.bookingDate = bookingDate;
     this.startDate = startDate;

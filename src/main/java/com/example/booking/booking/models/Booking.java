@@ -16,6 +16,7 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -32,14 +33,14 @@ public class Booking {
 
   @NotNull
   @Column(name = "booking_date")
-  private LocalDateTime bookingDate;
+  private Date bookingDate;
 
   @NotNull
   @Column(name = "start_date")
-  private LocalDateTime startDate;
+  private Date startDate;
 
   @Column(name = "end_date")
-  private LocalDateTime endDate;
+  private Date endDate;
 
   @NotNull
   @Column(name = "total_price")
@@ -81,19 +82,19 @@ public class Booking {
   )
   private List<Seat> bookedSeats = new ArrayList<>();
 
-  public Booking(User user, LocalDateTime startDate, LocalDateTime endDate, int totalPrice) {
+  public Booking(User user, Date startDate, Date endDate, int totalPrice) {
     DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
     this.user = user;
-    this.bookingDate = LocalDateTime.parse(LocalDateTime.now().format(myFormatObj));
+    this.bookingDate = new Date();
     this.startDate = startDate;
     this.endDate = endDate;
     this.totalPrice = totalPrice;
   }
 
-  public Booking(LocalDateTime startDate, int totalPrice, User user,
+  public Booking(Date startDate, int totalPrice, User user,
                  Flight outboundFlight, List<Seat> bookedSeats) {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-    this.bookingDate = LocalDateTime.parse(LocalDateTime.now().format(formatter), formatter);
+    this.bookingDate = new Date();
     this.startDate = startDate;
     this.totalPrice = totalPrice;
     this.user = user;

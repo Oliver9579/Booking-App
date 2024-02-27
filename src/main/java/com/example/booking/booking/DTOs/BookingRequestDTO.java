@@ -4,8 +4,9 @@ import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @Data
 public abstract class BookingRequestDTO {
@@ -21,9 +22,15 @@ public abstract class BookingRequestDTO {
     this.totalPrice = totalPrice;
   }
 
-  public LocalDateTime getStartDate() {
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-    return LocalDateTime.parse(startDate, formatter);
+  public Date getStartDate() {
+    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+    Date date = new Date();
+    try {
+      date = formatter.parse(startDate);
+    } catch (ParseException e) {
+      e.printStackTrace();
+    }
+    return date;
   }
 
 }

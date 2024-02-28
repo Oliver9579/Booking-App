@@ -107,17 +107,3 @@ CREATE TABLE IF NOT EXISTS car_dates (
                         FOREIGN KEY (car_id) REFERENCES cars(id),
                         FOREIGN KEY (date_id) REFERENCES dates(id)
 );
-
-CREATE TABLE IF NOT EXISTS booking_rooms (
-                        room_id INT,
-                        booking_id INT,
-                        FOREIGN KEY (room_id) REFERENCES rooms(id),
-                        FOREIGN KEY (booking_id) REFERENCES bookings(id)
-);
-
-CREATE TABLE IF NOT EXISTS booking_seats (
-                        seat_id INT,
-                        booking_id INT,
-                        FOREIGN KEY (seat_id) REFERENCES seats(id),
-                        FOREIGN KEY (booking_id) REFERENCES bookings(id)
-);

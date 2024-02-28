@@ -64,22 +64,6 @@ public class Booking {
   @JoinColumn(name = "hotel_id")
   private Hotel hotel;
 
-  @ManyToMany(fetch = FetchType.LAZY)
-  @JoinTable(
-          name = "booking_rooms",
-          joinColumns = @JoinColumn(name = "booking_id"),
-          inverseJoinColumns = @JoinColumn(name = "room_id")
-  )
-  private List<Room> bookedRooms = new ArrayList<>();
-
-  @ManyToMany(fetch = FetchType.LAZY)
-  @JoinTable(
-          name = "booking_seats",
-          joinColumns = @JoinColumn(name = "booking_id"),
-          inverseJoinColumns = @JoinColumn(name = "seat_id")
-  )
-  private List<Seat> bookedSeats = new ArrayList<>();
-
   public Booking(User user, Date startDate, Date endDate, int totalPrice) {
     this.user = user;
     this.bookingDate = new Date();
@@ -89,17 +73,16 @@ public class Booking {
   }
 
   public Booking(Date startDate, int totalPrice, User user,
-                 Flight outboundFlight, List<Seat> bookedSeats) {
+                 Flight outboundFlight) {
     this.bookingDate = new Date();
     this.startDate = startDate;
     this.totalPrice = totalPrice;
     this.user = user;
     this.outboundFlight = outboundFlight;
-    this.bookedSeats = bookedSeats;
   }
 
   public Booking(Date startDate, Date endDate, int totalPrice, User user, Flight outboundFlight,
-                 Flight returnFlight, List<Seat> bookedSeats) {
+                 Flight returnFlight) {
     this.bookingDate = new Date();
     this.startDate = startDate;
     this.endDate = endDate;
@@ -107,6 +90,5 @@ public class Booking {
     this.user = user;
     this.outboundFlight = outboundFlight;
     this.returnFlight = returnFlight;
-    this.bookedSeats = bookedSeats;
   }
 }

@@ -33,13 +33,10 @@ public class BookingServiceImpl implements BookingService {
   @Override
   public BookingOneWayFlightResponseDTO createOneWayFlightBooking(User user, BookingOneWayFlightRequestDTO bookingFlight) {
     Flight flight = flightService.getFlightById(bookingFlight.getOutboundFlightId());
-    flight.setSeats(seatService.getSeatsById(bookingFlight.getSeatsId()).stream()
-            .map(seat -> seatService.setAvailabilityFalse(seat))
-            .map(seat -> seatService.save(seat))
-            .collect(Collectors.toList()));
+    flight.setSeats(seatService.setSeatsAvailabilityFalse(seatService.getSeatsById(bookingFlight.getSeatsId())));
 
     Booking booking = bookingRepository.save(new Booking(bookingFlight.getStartDate(),
-            bookingFlight.getTotalPrice(), user, flight, flight.getSeats()));
+            bookingFlight.getTotalPrice(), user, flight));
 
     return new BookingOneWayFlightResponseDTO(booking.getBookingDate(), booking.getStartDate(), booking.getTotalPrice(),
             flightService.convertToFlightDTO(booking.getOutboundFlight()));
@@ -59,14 +56,12 @@ public class BookingServiceImpl implements BookingService {
 
 
     Booking booking = bookingRepository.save(new Booking(bookingFlight.getStartDate(), bookingFlight.getEndDate(),
-            bookingFlight.getTotalPrice(), user, flightToDestination, flightReturn,
-            Stream.concat(flightToDestination.getSeats().stream(),
-                    flightReturn.getSeats().stream()).collect(Collectors.toList())
-    ));
+            bookingFlight.getTotalPrice(), user, flightToDestination, flightReturn));
 
     return new BookingRoundTripFlightResponseDTO(
             booking.getBookingDate(), booking.getStartDate(), booking.getEndDate(), booking.getTotalPrice(),
             flightService.convertToFlightDTO(booking.getOutboundFlight()),
             flightService.convertToFlightDTO(booking.getReturnFlight()));
   }
+
 }

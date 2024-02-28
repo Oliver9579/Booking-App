@@ -47,10 +47,6 @@ public class Room {
   @JoinColumn(name = "hotel_id", nullable = false)
   private Hotel hotel;
 
-  @JsonIgnore
-  @ManyToMany(mappedBy = "bookedRooms", cascade = CascadeType.ALL)
-  private List<Booking> bookings;
-
   public Room(RoomType roomType, int capacity, int pricePerNight) {
     this.roomType = roomType;
     this.capacity = capacity;

@@ -1,6 +1,8 @@
 package com.example.booking.room.services;
 
+import com.example.booking.date.models.Days;
 import com.example.booking.date.services.DaysService;
+import com.example.booking.exceptions.IdNotFoundException;
 import com.example.booking.hotel.models.Hotel;
 import com.example.booking.room.DTOs.RoomDTO;
 import com.example.booking.room.models.Room;
@@ -64,6 +66,31 @@ public class RoomServiceImpl implements RoomService {
       }
     }
     return counts;
+  }
+
+  @Override
+  public List<Room> getRoomsById(List<Integer> roomIds) {
+    List<Room> rooms = new ArrayList<>();
+    for (Integer id : roomIds) {
+      rooms.add(roomRepository.findById(id).orElseThrow(IdNotFoundException::new));
+    }
+    return rooms;
+  }
+
+  @Override
+  public List<Room> setUnavailableDates(List<Room> rooms, List<Days> days) {
+    for (Room room : rooms) {
+      List<Days> unavailableDates = room.getUnavailable();
+      unavailableDates.addAll(days);
+      room.setUnavailable(unavailableDates);
+      roomRepository.save(room);
+    }
+    return rooms;
+  }
+
+  @Override
+  public Room save(Room room) {
+    return roomRepository.save(room);
   }
 
 }

@@ -1,5 +1,6 @@
 package com.example.booking.room.services;
 
+import com.example.booking.date.models.Days;
 import com.example.booking.hotel.models.Hotel;
 import com.example.booking.room.DTOs.RoomDTO;
 import com.example.booking.room.models.Room;
@@ -17,5 +18,11 @@ public interface RoomService {
   List<Room> getRoomsByType(Hotel hotel, RoomType[] roomTypes);
 
   List<Long> getRoomsCountByType(List<Room> rooms);
+
+  List<Room> getRoomsById(List<Integer> roomIds);
+
+  List<Room> setUnavailableDates(List<Room> rooms, List<Days> days);
+
+  Room save(Room room);
 
 }

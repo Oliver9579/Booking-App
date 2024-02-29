@@ -4,20 +4,27 @@ import com.example.booking.booking.DTOs.bookingFlight.BookingOneWayFlightRequest
 import com.example.booking.booking.DTOs.bookingFlight.BookingOneWayFlightResponseDTO;
 import com.example.booking.booking.DTOs.bookingFlight.BookingRoundTripFlightRequestDTO;
 import com.example.booking.booking.DTOs.bookingFlight.BookingRoundTripFlightResponseDTO;
+import com.example.booking.booking.DTOs.bookingHotel.BookingHotelRequestDTO;
+import com.example.booking.booking.DTOs.bookingHotel.BookingHotelResponseDTO;
 import com.example.booking.booking.models.Booking;
 import com.example.booking.booking.repository.BookingRepository;
 import com.example.booking.car.services.CarService;
+import com.example.booking.date.models.Days;
+import com.example.booking.date.services.DaysService;
 import com.example.booking.flight.models.Flight;
 import com.example.booking.flight.services.FlightService;
+import com.example.booking.hotel.models.Hotel;
 import com.example.booking.hotel.services.HotelService;
+import com.example.booking.room.models.Room;
+import com.example.booking.room.services.RoomService;
 import com.example.booking.seat.services.SeatService;
 import com.example.booking.user.models.User;
 import com.example.booking.user.services.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Service
 @AllArgsConstructor
@@ -29,6 +36,8 @@ public class BookingServiceImpl implements BookingService {
   private FlightService flightService;
   private CarService carService;
   private SeatService seatService;
+  private RoomService roomService;
+  private DaysService daysService;
 
   @Override
   public BookingOneWayFlightResponseDTO createOneWayFlightBooking(User user, BookingOneWayFlightRequestDTO bookingFlight) {
@@ -62,6 +71,22 @@ public class BookingServiceImpl implements BookingService {
             booking.getBookingDate(), booking.getStartDate(), booking.getEndDate(), booking.getTotalPrice(),
             flightService.convertToFlightDTO(booking.getOutboundFlight()),
             flightService.convertToFlightDTO(booking.getReturnFlight()));
+  }
+
+  @Override
+  public BookingHotelResponseDTO createHotelBooking(User user, BookingHotelRequestDTO bookingHotel) {
+    Hotel hotel = hotelService.getHotelById(bookingHotel.getHotelId());
+    List<Days> days = daysService.getFullTravelDates(bookingHotel.getStartDate(), bookingHotel.getEndDate()).stream()
+            .map(date -> daysService.getByDate(date)).collect(Collectors.toList());
+    List<Room> rooms = roomService.getRoomsById(bookingHotel.getRoomsId());
+
+    hotel.setRooms(roomService.setUnavailableDates(rooms, days));
+
+    Booking booking = bookingRepository.save(new Booking(bookingHotel.getStartDate(), bookingHotel.getEndDate(),
+            bookingHotel.getTotalPrice(), user, hotel));
+
+    return new BookingHotelResponseDTO(booking.getBookingDate(), booking.getStartDate(), booking.getEndDate(),
+            booking.getTotalPrice(), hotelService.convertToResponseDTO(hotel));
   }
 
 }

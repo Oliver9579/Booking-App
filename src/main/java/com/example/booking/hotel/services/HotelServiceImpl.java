@@ -1,19 +1,23 @@
 package com.example.booking.hotel.services;
 
+import com.example.booking.exceptions.IdNotFoundException;
 import com.example.booking.exceptions.NoHotelFoundException;
 import com.example.booking.exceptions.SameDateException;
+import com.example.booking.hotel.DTOs.HotelBookingResponseDTO;
 import com.example.booking.hotel.DTOs.HotelListDTO;
 import com.example.booking.hotel.DTOs.HotelRequestDTO;
 import com.example.booking.hotel.DTOs.HotelResponseDTO;
 import com.example.booking.hotel.models.Hotel;
 import com.example.booking.hotel.repositories.HotelRepository;
 import com.example.booking.room.models.Room;
+import com.example.booking.room.models.RoomBookingDTO;
 import com.example.booking.room.models.RoomType;
 import com.example.booking.room.services.RoomService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -37,6 +41,19 @@ public class HotelServiceImpl implements HotelService {
     }
     return convertHotelsToHotelListDTO(hotels, hotelRequest.getCheckInDate(), hotelRequest.getCheckOutDate());
   }
+
+  @Override
+  public Hotel getHotelById(Integer id) {
+    return hotelRepository.findById(id).orElseThrow(IdNotFoundException::new);
+  }
+
+  @Override
+  public HotelBookingResponseDTO convertToResponseDTO(Hotel hotel) {
+    return new HotelBookingResponseDTO(hotel.getId(), hotel.getName(), hotel.getLocation(), hotel.getStreet(),
+            hotel.getStars(), hotel.getRooms().stream().map(room -> new RoomBookingDTO(room.getId(), room.getRoomType(),
+            room.getCapacity(), room.getPricePerNight())).collect(Collectors.toList()));
+  }
+
 
   private HotelListDTO convertHotelsToHotelListDTO(List<Hotel> hotels, String checkInDate, String checkOutDate) {
     return new HotelListDTO(hotels.stream()

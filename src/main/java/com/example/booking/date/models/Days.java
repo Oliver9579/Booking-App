@@ -32,17 +32,11 @@ public class Days {
   private Date date;
 
   @JsonIgnore
-  @ManyToMany
-  @JoinTable(name = "room_dates",
-          joinColumns = @JoinColumn(name = "date_id"),
-          inverseJoinColumns = @JoinColumn(name = "room_id"))
+  @ManyToMany(mappedBy = "unavailable", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
   private List<Room> rooms = new ArrayList<>();
 
   @JsonIgnore
-  @ManyToMany
-  @JoinTable(name = "car_dates",
-          joinColumns = @JoinColumn(name = "date_id"),
-          inverseJoinColumns = @JoinColumn(name = "car_id"))
+  @ManyToMany(mappedBy = "unavailable", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
   private List<Car> cars = new ArrayList<>();
 
   public String getDate() {

@@ -1,6 +1,5 @@
 package com.example.booking.room.models;
 
-import com.example.booking.booking.models.Booking;
 import com.example.booking.date.models.Days;
 import com.example.booking.hotel.models.Hotel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -11,6 +10,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.List;
 
 @Setter
@@ -39,8 +39,11 @@ public class Room {
   private int pricePerNight;
 
   @JsonIgnore
-  @ManyToMany(mappedBy = "rooms", cascade = CascadeType.ALL)
-  private List<Days> unavailable;
+  @ManyToMany
+  @JoinTable(name = "room_dates",
+          joinColumns = @JoinColumn(name = "room_id"),
+          inverseJoinColumns = @JoinColumn(name = "date_id"))
+  private List<Days> unavailable = new ArrayList<>();
 
   @JsonIgnore
   @ManyToOne(fetch = FetchType.LAZY)

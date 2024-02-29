@@ -11,7 +11,6 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -65,8 +64,11 @@ public class Car {
   private Long createdAt;
 
   @JsonIgnore
-  @ManyToMany(mappedBy = "cars", cascade = CascadeType.ALL)
-  private List<Days> unavailable;
+  @ManyToMany
+  @JoinTable(name = "car_dates",
+          joinColumns = @JoinColumn(name = "car_id"),
+          inverseJoinColumns = @JoinColumn(name = "date_id"))
+  private List<Days> unavailable = new ArrayList<>();
 
   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
   private List<Booking> booking = new ArrayList<>();

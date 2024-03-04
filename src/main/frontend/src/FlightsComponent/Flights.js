@@ -1,0 +1,68 @@
+import React, {useState, useEffect} from 'react';
+import axios from 'axios';
+import FlightsList from "./FlightsList";
+import FlightSearchBar from "./FlightSearchBar";
+
+const Flights = () => {
+    const [flights, setFlights] = useState([]);
+
+    useEffect(() => {
+        fetchFlights();
+    }, []);
+
+    const fetchFlights = () => {
+        const token = localStorage.getItem("token");
+        axios.get('http://localhost:3000/api/flights', {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
+            .then((response) => {
+                setFlights(response.data.flights); // Update flights state with fetched data
+            })
+            .catch((error) => {
+                console.error('Error fetching flights:', error);
+            });
+    };
+
+    const searchFlights = (searchData) => {
+        const token = localStorage.getItem("token");
+        let url = 'http://localhost:3000/api/flights';
+        if (searchData.flightType === 'oneWay') {
+            url += '/oneWay';
+        } else {
+            url += '/return';
+        }
+
+        axios.get(url, {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+            },
+            params: searchData
+        })
+            .then((response) => {
+                setFlights(response.data.flights); // Update flights state with search results
+            })
+            .catch((error) => {
+                if (error.response && error.response.status === 404) {
+                    setFlights([]);
+                } else {
+                    alert(error.response.data.message);
+                }
+
+            });
+    };
+
+    return (
+        <div style={{width: '60%', marginTop: '5%'}}>
+            <div className="form-outline mb-4 mw-100">
+                <FlightSearchBar onSearch={searchFlights}/>
+            </div>
+            <div>
+                <FlightsList flights={flights}/>
+            </div>
+        </div>
+    );
+};
+
+export default Flights;

@@ -1,0 +1,23 @@
+.login-form {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.login-success {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.error-message {
+    color: red;
+    margin-top: 10px;
+}
+
+button {
+    cursor: pointer;
+}
+
+

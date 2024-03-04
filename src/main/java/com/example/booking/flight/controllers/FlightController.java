@@ -4,9 +4,11 @@ import com.example.booking.flight.DTOs.*;
 import com.example.booking.flight.services.FlightService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
 
 @RestController
 @RequestMapping("/api/flights")
@@ -26,7 +28,10 @@ public class FlightController {
   }
 
   @GetMapping("/oneWay")
-  public ResponseEntity<FlightListDTO> getFlightsBetweenToDirectionJustOneWay(@Valid @RequestBody FlightOneWayRequestDTO flightOneWay) {
+  public ResponseEntity<FlightListDTO> getFlightsBetweenToDirectionJustOneWay(@RequestParam String origin,
+                                                                              @RequestParam String destination,
+                                                                              @RequestParam String departureDate) {
+    FlightOneWayRequestDTO flightOneWay = FlightOneWayRequestDTO.convertOneWayDTO(origin, destination, departureDate);
     return ResponseEntity.ok().body(flightService.getFlightsJustOneWay(flightOneWay));
   }
 

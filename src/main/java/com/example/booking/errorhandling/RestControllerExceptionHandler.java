@@ -36,6 +36,11 @@ public class RestControllerExceptionHandler {
     return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ErrorMessage(UserNotFoundException.MESSAGE));
   }
 
+  @ExceptionHandler(WrongPasswordException.class)
+  public ResponseEntity<ErrorMessage> handleLoginOrRegistrationIncorrect() {
+    return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ErrorMessage(WrongPasswordException.MESSAGE));
+  }
+
   @ExceptionHandler(AlreadyTakenException.class)
   public ResponseEntity<ErrorMessage> handleWhenAUniqueDataIsAlreadyTaken(AlreadyTakenException e) {
     return ResponseEntity.status(HttpStatus.CONFLICT).body(new ErrorMessage(e.getMessage()));
@@ -43,6 +48,11 @@ public class RestControllerExceptionHandler {
 
   @ExceptionHandler(MissingInputException.class)
   public ResponseEntity<ErrorMessage> handleWhenARequestDataIsMissing(MissingInputException e) {
+    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorMessage(e.getMessage()));
+  }
+
+  @ExceptionHandler(FormInputIsEmpty.class)
+  public ResponseEntity<ErrorMessage> handleWhenARequestParamIsNull(FormInputIsEmpty e) {
     return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorMessage(e.getMessage()));
   }
 

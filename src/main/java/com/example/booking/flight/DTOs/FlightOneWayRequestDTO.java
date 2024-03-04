@@ -1,19 +1,30 @@
 package com.example.booking.flight.DTOs;
 
+import com.example.booking.exceptions.FormInputIsEmpty;
 import lombok.Data;
-
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
 
 @Data
 public class FlightOneWayRequestDTO {
 
-  @NotBlank
   private String origin;
-  @NotBlank
   private String destination;
-  @NotBlank
-  @Pattern(regexp = "^\\d{4}-\\d{2}-\\d{2}$", message = "Date must be in yyyy-mm-dd format")
   private String departureDate;
+
+  public FlightOneWayRequestDTO(String origin, String destination, String departureDate) {
+    this.origin = origin;
+    this.destination = destination;
+    this.departureDate = departureDate;
+  }
+
+  public static FlightOneWayRequestDTO convertOneWayDTO(String origin, String destination, String departureDate) {
+    validate(origin, destination, departureDate);
+    return new FlightOneWayRequestDTO(origin, destination, departureDate);
+  }
+
+  private static void validate(String origin, String destination, String departureDate) {
+    if (origin.isBlank() || destination.isBlank() || departureDate.isBlank()) {
+      throw new FormInputIsEmpty();
+    }
+  }
 
 }

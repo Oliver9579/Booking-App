@@ -43,7 +43,6 @@ public class FlightServiceImpl implements FlightService {
     if (flights.isEmpty()) {
       throw new NoFlightFoundException();
     } else {
-
       return new FlightListDTO(flights
               .stream()
               .map(this::convertToFlightDTO)

@@ -4,11 +4,7 @@ import com.example.booking.flight.DTOs.*;
 import com.example.booking.flight.services.FlightService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
 
 @RestController
 @RequestMapping("/api/flights")
@@ -36,7 +32,12 @@ public class FlightController {
   }
 
   @GetMapping("/return")
-  public ResponseEntity<FlightRoundTripList> getFlightsBetweenToDirectionJustOneWay(@Valid @RequestBody FlightRoundTripRequestDTO flightRoundTripRequest) {
+  public ResponseEntity<FlightRoundTripList> getFlightsBetweenToDirectionJustOneWay(@RequestParam String origin,
+                                                                                    @RequestParam String destination,
+                                                                                    @RequestParam String departureDate,
+                                                                                    @RequestParam String returnDate) {
+    FlightRoundTripRequestDTO flightRoundTripRequest = FlightRoundTripRequestDTO.convertReturnDTO(origin, destination,
+            departureDate, returnDate);
     return ResponseEntity.ok().body(flightService.getFlightsRoundTrip(flightRoundTripRequest));
   }
 

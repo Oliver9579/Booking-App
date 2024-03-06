@@ -13,6 +13,6 @@ public interface FlightService {
 
   FlightListDTO getFlightsJustOneWay(FlightOneWayRequestDTO flightOneWay);
 
-  FlightRoundTripList getFlightsRoundTrip(FlightRoundTripRequestDTO flightRoundTrip);
+  FlightListDTO getFlightsRoundTrip(FlightRoundTripRequestDTO flightRoundTrip);
 
 }

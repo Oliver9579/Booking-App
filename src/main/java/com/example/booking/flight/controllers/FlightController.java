@@ -32,7 +32,7 @@ public class FlightController {
   }
 
   @GetMapping("/return")
-  public ResponseEntity<FlightRoundTripList> getFlightsBetweenToDirectionJustOneWay(@RequestParam String origin,
+  public ResponseEntity</*FlightRoundTripList*/FlightListDTO> getFlightsBetweenToDirectionJustOneWay(@RequestParam String origin,
                                                                                     @RequestParam String destination,
                                                                                     @RequestParam String departureDate,
                                                                                     @RequestParam String returnDate) {

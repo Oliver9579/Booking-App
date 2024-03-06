@@ -51,18 +51,18 @@ public class FlightServiceImpl implements FlightService {
   }
 
   @Override
-  public FlightRoundTripList getFlightsRoundTrip(FlightRoundTripRequestDTO flightRoundTrip) {
-    ArrayList<FlightRoundTripResponseDTO> flights = new ArrayList<>();
+  public FlightListDTO getFlightsRoundTrip(FlightRoundTripRequestDTO flightRoundTrip) {
+    ArrayList<FlightDTO> flights = new ArrayList<>();
     List<List<Object>> flightsId = flightRepository.findByDestination(flightRoundTrip);
     if (flightsId.isEmpty())throw new NoFlightFoundException();
 
     for (int i = 0; i < flightsId.size(); i++) {
-      flights.add(new FlightRoundTripResponseDTO(convertToFlightDTO(
-              flightRepository.findById((Integer) flightsId.get(i).get(0)).get()),
-              convertToFlightDTO(flightRepository.findById((Integer) flightsId.get(i).get(1)).get())
-              ));
+      flights.add(convertToFlightDTO(
+              flightRepository.findById((Integer) flightsId.get(i).get(0)).get()));
+      flights.add(convertToFlightDTO(
+              flightRepository.findById((Integer) flightsId.get(i).get(1)).get()));
     }
-    return new FlightRoundTripList(flights);
+    return new FlightListDTO(flights);
   }
 
 }

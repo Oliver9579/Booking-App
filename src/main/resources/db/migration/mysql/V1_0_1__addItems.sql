@@ -1,11 +1,12 @@
 INSERT INTO flights (airline, origin, destination, departure_date, duration, created_at)
 VALUES
-    ('Delta Airlines', 'New York', 'Los Angeles', '2023-11-15 16:30:00', 360, UNIX_TIMESTAMP()),
-    ('American Airlines', 'Chicago', 'Miami', '2023-11-20 11:00:00', 180, UNIX_TIMESTAMP()),
-    ('United Airlines', 'San Francisco', 'Seattle', '2023-11-25 13:55:00', 120, UNIX_TIMESTAMP()),
-    ('British Airways', 'London', 'Paris', '2023-12-01 08:20:00', 90, UNIX_TIMESTAMP()),
-    ('American Airlines', 'Miami', 'Chicago', '2023-11-28 20:00:00', 185, UNIX_TIMESTAMP()),
-    ('American Airlines', 'Miami', 'Chicago', '2023-11-28 11:30:00', 185, UNIX_TIMESTAMP());
+    ('Delta Airlines', 'New York', 'Los Angeles', '2024-03-15 16:30:00', 360, UNIX_TIMESTAMP()),
+    ('American Airlines', 'Chicago', 'Miami', '2024-03-20 00:00:00', 180, UNIX_TIMESTAMP()),
+    ('United Airlines', 'San Francisco', 'Seattle', '2024-03-25 13:55:00', 120, UNIX_TIMESTAMP()),
+    ('British Airways', 'London', 'Paris', '2024-04-01 08:20:00', 90, UNIX_TIMESTAMP()),
+    ('American Airlines', 'Miami', 'Chicago', '2024-03-28 20:00:00', 185, UNIX_TIMESTAMP()),
+    ('American Airlines', 'Miami', 'Chicago', '2024-03-28 11:30:00', 185, UNIX_TIMESTAMP()),
+    ('WizzAir', 'Chicago', 'Miami', '2024-03-20 11:00:00', 180, UNIX_TIMESTAMP());
 
 INSERT INTO seats (seat_number, seat_type, price, availability, flight_id)
 VALUES
@@ -19,12 +20,12 @@ VALUES
     ('D2', 'BUSINESS', 220, TRUE, 2);
 
 
-INSERT INTO hotels (name, location, street, stars, created_at)
+INSERT INTO hotels (name, location, street, stars, img, created_at)
 VALUES
-    ('Hilton', 'New York', '1234 Avenue of the Americas', 5, UNIX_TIMESTAMP()),
-    ('Marriott', 'Chicago', '321 North Clark Street', 5, UNIX_TIMESTAMP()),
-    ('Sheraton', 'Los Angeles', '711 South Hope Street', 4, UNIX_TIMESTAMP()),
-    ('Radisson', 'San Francisco', '1015 Market Street', 3, UNIX_TIMESTAMP());
+    ('Hilton', 'New York', '1234 Avenue of the Americas', 5, 'hilton.png', UNIX_TIMESTAMP()),
+    ('Marriott', 'Chicago', '321 North Clark Street', 5, 'mariott.png', UNIX_TIMESTAMP()),
+    ('Sheraton', 'Los Angeles', '711 South Hope Street', 4, 'Sheraton.png', UNIX_TIMESTAMP()),
+    ('Radisson', 'San Francisco', '1015 Market Street', 3, 'Radisson.png', UNIX_TIMESTAMP());
 
 
 INSERT INTO rooms (room_type, capacity, price_per_night, hotel_id)

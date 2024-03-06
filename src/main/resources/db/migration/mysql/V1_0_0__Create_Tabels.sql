@@ -34,6 +34,7 @@ CREATE TABLE IF NOT EXISTS hotels (
                         location VARCHAR(255) NOT NULL,
                         street VARCHAR(255) NOT NULL,
                         stars INT NOT NULL,
+                        img VARCHAR(255),
                         created_at BIGINT NOT NULL
 );
 

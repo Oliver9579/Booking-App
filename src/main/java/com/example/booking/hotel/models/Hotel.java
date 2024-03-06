@@ -41,6 +41,9 @@ public class Hotel {
   @Column(name = "stars")
   private int stars;
 
+  @Column(name = "img")
+  private String img;
+
   @NotNull
   @Column(name = "created_at")
   private Long createdAt;

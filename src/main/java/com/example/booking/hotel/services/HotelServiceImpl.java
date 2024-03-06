@@ -3,10 +3,7 @@ package com.example.booking.hotel.services;
 import com.example.booking.exceptions.IdNotFoundException;
 import com.example.booking.exceptions.NoHotelFoundException;
 import com.example.booking.exceptions.SameDateException;
-import com.example.booking.hotel.DTOs.HotelBookingResponseDTO;
-import com.example.booking.hotel.DTOs.HotelListDTO;
-import com.example.booking.hotel.DTOs.HotelRequestDTO;
-import com.example.booking.hotel.DTOs.HotelResponseDTO;
+import com.example.booking.hotel.DTOs.*;
 import com.example.booking.hotel.models.Hotel;
 import com.example.booking.hotel.repositories.HotelRepository;
 import com.example.booking.room.models.Room;
@@ -17,7 +14,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -43,6 +39,14 @@ public class HotelServiceImpl implements HotelService {
   }
 
   @Override
+  public List<AllHotelDTO> getAllHotel() {
+    List<Hotel> hotels = hotelRepository.findAll();
+    return (hotels.stream().map(hotel -> new AllHotelDTO(
+            hotel.getId(), hotel.getName(), hotel.getLocation(), hotel.getStreet(), hotel.getStars(),
+            hotel.getImg()))).collect(Collectors.toList());
+  }
+
+  @Override
   public Hotel getHotelById(Integer id) {
     return hotelRepository.findById(id).orElseThrow(IdNotFoundException::new);
   }
@@ -63,7 +67,7 @@ public class HotelServiceImpl implements HotelService {
 
   private HotelResponseDTO convertHotelToResponseDTO(Hotel hotel, String checkInDate, String checkOutDate) {
     return new HotelResponseDTO(hotel.getId(), hotel.getName(), hotel.getLocation(),
-            hotel.getStreet(), hotel.getStars(),
+            hotel.getStreet(), hotel.getStars(), hotel.getImg(),
             roomService.convertToRoomDTO(roomService.getRoomsByType(hotel, RoomType.values()),
                     roomService.getRoomsCountByType(hotel.getRooms()),
                     checkInDate, checkOutDate));

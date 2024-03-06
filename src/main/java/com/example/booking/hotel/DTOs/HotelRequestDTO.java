@@ -1,23 +1,34 @@
 package com.example.booking.hotel.DTOs;
 
+import com.example.booking.exceptions.FormInputIsEmpty;
 import lombok.Data;
-
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 
 @Data
 public class HotelRequestDTO {
 
-  @NotBlank
   private String location;
-  @Pattern(regexp = "^\\d{4}-\\d{2}-\\d{2}$", message = "Date must be in yyyy-mm-dd format")
   private String checkInDate;
-  @Pattern(regexp = "^\\d{4}-\\d{2}-\\d{2}$", message = "Date must be in yyyy-mm-dd format")
   private String checkOutDate;
-  @NotNull
-  @Min(value = 1, message = "Please give at least one guest!")
   private Integer guests;
+
+  public HotelRequestDTO(String location, String checkInDate, String checkOutDate, Integer guests) {
+    this.location = location;
+    this.checkInDate = checkInDate;
+    this.checkOutDate = checkOutDate;
+    this.guests = guests;
+  }
+
+  public static HotelRequestDTO convertHotelRequestDTO(String location, String checkInDate,
+                                                       String checkOutDate, Integer guests) {
+    validate(location, checkInDate, checkOutDate, guests);
+    return new HotelRequestDTO(location, checkInDate, checkOutDate, guests);
+  }
+
+  private static void validate(String location, String checkInDate,
+                               String checkOutDate, Integer guests) {
+    if (location.isBlank() || checkInDate.isBlank() || checkOutDate.isBlank() || guests == null) {
+      throw new FormInputIsEmpty();
+    }
+  }
 
 }

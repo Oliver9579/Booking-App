@@ -6,6 +6,7 @@ import Dashboard from "./DashboardComponent/Dashboard";
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Flights from "./FlightsComponent/Flights";
+import Hotels from "./HotelsComponent/Hotels";
 
 
 const App = () => {
@@ -17,6 +18,7 @@ const App = () => {
                     <Route path="/" element={<RegistrationForm />} />
                     <Route path="/dashboard" element={<Dashboard />} />
                     <Route path="/flights" element={<Flights />} />
+                    <Route path="/hotels" element={<Hotels />} />
                 </Routes>
             </div>
         </Router>

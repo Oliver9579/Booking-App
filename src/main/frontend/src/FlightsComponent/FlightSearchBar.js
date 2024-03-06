@@ -1,5 +1,3 @@
-// FlightSearchBar.js
-
 import React, {useState} from 'react';
 import "./FlightSearchBar.css"
 

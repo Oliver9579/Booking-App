@@ -1,0 +1,44 @@
+import React from 'react';
+import "./FlightOneWayCard.css"
+
+const FlightOneWayCard = ({flight}) => {
+    const departureTime = new Date(flight.departureDate);
+    const landingTime = new Date(departureTime.getTime() + flight.duration * 60 * 1000); // Convert duration to milliseconds
+
+    const hours = Math.floor(flight.duration / 60);
+    const minutes = flight.duration % 60;
+    const formattedDuration = `${hours}h ${minutes}m`;
+
+    const formattedDepartureDate = departureTime.toLocaleDateString();
+    const formattedDepartureTime = departureTime.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'});
+    const formattedLandingDate = landingTime.toLocaleDateString();
+    const formattedLandingTime = landingTime.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'});
+
+    return (
+        <div>
+            <div className="flight-card">
+                <div style={{textAlign: "center"}}>
+                    <div className="p-2 d-inline">{flight.airline}</div>
+                    <div className="p-2 d-inline">Id: {flight.id}</div>
+                </div>
+                <div style={{textAlign: "center"}}>
+                    <div className="p-2 d-inline">{flight.origin} to {flight.destination}</div>
+                </div>
+                <div style={{textAlign: "center"}}>
+                    <div className="p-2 d-inline">Departure
+                        Time: {formattedDepartureDate} {formattedDepartureTime}</div>
+                    <div className="p-2 d-inline">Landing Time: {formattedLandingDate} {formattedLandingTime}</div>
+                </div>
+                <div style={{textAlign: "center"}}>
+                    <div className="p-2 d-inline">Duration: {formattedDuration}</div>
+                </div>
+                <div style={{textAlign: "right"}}>
+                    <button className="btn btn-primary " type="submit"><span></span>Select</button>
+                </div>
+            </div>
+            <br/>
+        </div>
+    );
+};
+
+export default FlightOneWayCard;

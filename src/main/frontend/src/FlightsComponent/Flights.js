@@ -5,6 +5,7 @@ import FlightSearchBar from "./FlightSearchBar";
 
 const Flights = () => {
     const [flights, setFlights] = useState([]);
+    const [flightType, setFlightType] = useState("");
 
     useEffect(() => {
         fetchFlights();
@@ -28,6 +29,7 @@ const Flights = () => {
     const searchFlights = (searchData) => {
         const token = localStorage.getItem("token");
         let url = 'http://localhost:3000/api/flights';
+        setFlightType(searchData.flightType);
         if (searchData.flightType === 'oneWay') {
             url += '/oneWay';
         } else {
@@ -41,7 +43,7 @@ const Flights = () => {
             params: searchData
         })
             .then((response) => {
-                setFlights(response.data.flights); // Update flights state with search results
+                setFlights(response.data.flights);
             })
             .catch((error) => {
                 if (error.response && error.response.status === 404) {
@@ -49,7 +51,6 @@ const Flights = () => {
                 } else {
                     alert(error.response.data.message);
                 }
-
             });
     };
 
@@ -59,7 +60,7 @@ const Flights = () => {
                 <FlightSearchBar onSearch={searchFlights}/>
             </div>
             <div>
-                <FlightsList flights={flights}/>
+                <FlightsList flights={flights} flightType={flightType}/>
             </div>
         </div>
     );

@@ -1,7 +1,7 @@
 import React from 'react';
 import "./FlightOneWayCard.css"
 
-const FlightOneWayCard = ({flight}) => {
+const FlightOneWayCard = ({flight, searchData, isAll}) => {
     const departureTime = new Date(flight.departureDate);
     const landingTime = new Date(departureTime.getTime() + flight.duration * 60 * 1000); // Convert duration to milliseconds
 
@@ -32,9 +32,11 @@ const FlightOneWayCard = ({flight}) => {
                 <div style={{textAlign: "center"}}>
                     <div className="p-2 d-inline">Duration: {formattedDuration}</div>
                 </div>
-                <div style={{textAlign: "right"}}>
-                    <button className="btn btn-primary " type="submit"><span></span>Select</button>
-                </div>
+                {!isAll && (
+                    <div style={{textAlign: "right"}}>
+                        <button className="btn btn-primary " type="submit"><span></span>Select</button>
+                    </div>
+                )}
             </div>
             <br/>
         </div>

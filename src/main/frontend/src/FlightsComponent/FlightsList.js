@@ -4,7 +4,7 @@ import FlightRoundTripCard from './FlightRoundTripCard';
 
 class FlightsList extends Component {
     render() {
-        const {flights, flightType} = this.props;
+        const {flights, searchData, isAll} = this.props;
 
 
         if (flights.length === 0) {
@@ -15,7 +15,7 @@ class FlightsList extends Component {
             );
         }
 
-        if (flightType === 'return') {
+        if (searchData.flightType === 'return') {
             const flightCards = [];
             for (let i = 0; i < flights.length - 1; i++) {
                 flightCards.push(
@@ -38,7 +38,7 @@ class FlightsList extends Component {
                 <div>
                     <h2>Flight List</h2>
                     {flights.map((flight, index) => (
-                        <FlightOneWayCard key={index} flight={flight}/>
+                        <FlightOneWayCard key={index} flight={flight} searchData={searchData} isAll={isAll}/>
                     ))}
                 </div>
             );

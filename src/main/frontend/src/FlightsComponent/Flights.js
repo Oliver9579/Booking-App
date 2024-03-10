@@ -6,7 +6,8 @@ import Navbar from "../NavBarComponent/Navbar";
 
 const Flights = () => {
     const [flights, setFlights] = useState([]);
-    const [flightType, setFlightType] = useState("");
+    const [searchData, setSearchData] = useState({});
+    const [isAll, setIsAll] = useState(true);
 
     useEffect(() => {
         fetchFlights();
@@ -30,7 +31,7 @@ const Flights = () => {
     const searchFlights = (searchData) => {
         const token = localStorage.getItem("token");
         let url = 'http://localhost:3000/api/flights';
-        setFlightType(searchData.flightType);
+        setSearchData(searchData);
         if (searchData.flightType === 'oneWay') {
             url += '/oneWay';
         } else {
@@ -45,6 +46,7 @@ const Flights = () => {
         })
             .then((response) => {
                 setFlights(response.data.flights);
+                setIsAll(false);
             })
             .catch((error) => {
                 if (error.response && error.response.status === 404) {
@@ -65,7 +67,7 @@ const Flights = () => {
                     <FlightSearchBar onSearch={searchFlights}/>
                 </div>
                 <div>
-                    <FlightsList flights={flights} flightType={flightType}/>
+                    <FlightsList flights={flights} searchData={searchData} isAll={isAll}/>
                 </div>
             </div>
         </div>

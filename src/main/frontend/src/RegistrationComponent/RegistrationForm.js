@@ -90,7 +90,7 @@ const RegistrationForm = () => {
                                            placeholder="Phone Number" value={formData.phoneNumber}
                                            onChange={handleChange} ></input>
                                 </div>
-                                <div className="d-grid col-12 mx-auto">
+                                <div className="d-grid mx-auto" style={{textAlign: "center"}}>
                                     <button className="btn btn-primary " type="submit"><span></span> Sign up</button>
                                 </div>
                                 {error && <p className="error-message text-center mt-3">{error}</p>}

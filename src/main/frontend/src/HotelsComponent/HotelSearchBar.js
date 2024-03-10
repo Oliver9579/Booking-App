@@ -33,7 +33,7 @@ const HotelSearchBar = ({onSearch}) => {
                 />
             </div>
 
-            <div className="form-group col-2">
+            <div className="form-group col-3">
                 <input className="form-control"
                        type="date"
                        placeholder="Check In"
@@ -44,7 +44,7 @@ const HotelSearchBar = ({onSearch}) => {
                 />
             </div>
 
-            <div className="form-group col-2">
+            <div className="form-group col-3">
                 <input className="form-control"
                        type="date"
                        placeholder="Check Out"

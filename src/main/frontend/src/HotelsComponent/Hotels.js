@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import HotelsSearchBar from "../HotelsComponent/HotelSearchBar";
 import HotelsList from "../HotelsComponent/HotelsList";
+import Navbar from "../NavBarComponent/Navbar";
 
 
 const Hotels = () => {
@@ -51,12 +52,17 @@ const Hotels = () => {
     };
 
     return (
-        <div style={{width: '60%', marginTop: '5%'}}>
-            <div className="form-outline mb-4 mw-100">
-                <HotelsSearchBar onSearch={searchHotels}/>
+        <div style={{width: '60%'}}>
+            <div style={{marginBottom: '5%'}}>
+                <Navbar/>
             </div>
             <div>
-                <HotelsList hotels={hotels} isAll={isAll}/>
+                <div className="form-outline mb-4 mw-100">
+                    <HotelsSearchBar onSearch={searchHotels}/>
+                </div>
+                <div>
+                    <HotelsList hotels={hotels} isAll={isAll}/>
+                </div>
             </div>
         </div>
     );

@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import FlightsList from "./FlightsList";
 import FlightSearchBar from "./FlightSearchBar";
+import Navbar from "../NavBarComponent/Navbar";
 
 const Flights = () => {
     const [flights, setFlights] = useState([]);
@@ -55,12 +56,17 @@ const Flights = () => {
     };
 
     return (
-        <div style={{width: '60%', marginTop: '5%'}}>
-            <div className="form-outline mb-4 mw-100">
-                <FlightSearchBar onSearch={searchFlights}/>
+        <div style={{width: '60%'}}>
+            <div style={{marginBottom: '5%'}}>
+                <Navbar />
             </div>
             <div>
-                <FlightsList flights={flights} flightType={flightType}/>
+                <div className="form-outline mb-4 mw-100">
+                    <FlightSearchBar onSearch={searchFlights}/>
+                </div>
+                <div>
+                    <FlightsList flights={flights} flightType={flightType}/>
+                </div>
             </div>
         </div>
     );

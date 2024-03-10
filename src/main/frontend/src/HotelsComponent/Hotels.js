@@ -24,7 +24,12 @@ const Hotels = () => {
                 setHotels(response.data);
             })
             .catch((error) => {
-                console.error('Error fetching hotels:', error);
+                if (error.response && error.response.status === 403) {
+                    setHotels([]);
+                    alert("Your session is expired. Please Log In");
+                } else {
+                    alert('Error fetching hotels');
+                }
             });
     };
 
@@ -45,6 +50,9 @@ const Hotels = () => {
             .catch((error) => {
                 if (error.response && error.response.status === 404) {
                     setHotels([]);
+                } else if (error.response && error.response.status === 403) {
+                    setHotels([]);
+                    alert("Your session is expired. Please Log In");
                 } else {
                     alert(error.response.data.message);
                 }

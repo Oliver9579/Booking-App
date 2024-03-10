@@ -24,7 +24,12 @@ const Flights = () => {
                 setFlights(response.data.flights); // Update flights state with fetched data
             })
             .catch((error) => {
-                console.error('Error fetching flights:', error);
+                if (error.response && error.response.status === 403) {
+                    setFlights([]);
+                    alert("Your session is expired. Please Log In");
+                }else {
+                    alert('Error fetching flights:');
+                }
             });
     };
 
@@ -51,6 +56,9 @@ const Flights = () => {
             .catch((error) => {
                 if (error.response && error.response.status === 404) {
                     setFlights([]);
+                } else if (error.response && error.response.status === 403) {
+                    setFlights([]);
+                    alert("Your session is expired. Please Log In");
                 } else {
                     alert(error.response.data.message);
                 }

@@ -14,10 +14,14 @@ VALUES
     ('A2', 'ECONOMY', 100, FALSE, 1),
     ('B1', 'BUSINESS', 200, TRUE, 1),
     ('B2', 'BUSINESS', 200, TRUE, 1),
-    ('C1', 'ECONOMY', 120, TRUE, 2),
-    ('C2', 'ECONOMY', 120, TRUE, 2),
-    ('D1', 'BUSINESS', 220, TRUE, 2),
-    ('D2', 'BUSINESS', 220, TRUE, 2);
+    ('C1', 'ECONOMY', 100, TRUE, 1),
+    ('C2', 'ECONOMY', 100, FALSE, 1),
+    ('D1', 'BUSINESS', 200, TRUE, 1),
+    ('D2', 'BUSINESS', 200, TRUE, 1),
+    ('E1', 'ECONOMY', 120, TRUE, 2),
+    ('E2', 'ECONOMY', 120, TRUE, 2),
+    ('F1', 'BUSINESS', 220, TRUE, 2),
+    ('F2', 'BUSINESS', 220, TRUE, 2);
 
 
 INSERT INTO hotels (name, location, street, stars, img, created_at)

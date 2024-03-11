@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import RegistrationForm from './RegistrationComponent/RegistrationForm';
 import LoginForm from './LoginComponent/LoginForm';
 import Dashboard from "./DashboardComponent/Dashboard";
@@ -7,6 +7,7 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Flights from "./FlightsComponent/Flights";
 import Hotels from "./HotelsComponent/Hotels";
+import BookingSeats from "./BookingComponent/Flights/BookingSeats";
 
 
 const App = () => {
@@ -14,11 +15,12 @@ const App = () => {
         <Router>
             <div className="App">
                 <Routes>
-                    <Route path="/login" element={<LoginForm />} />
-                    <Route path="/" element={<RegistrationForm />} />
-                    <Route path="/dashboard" element={<Dashboard />} />
-                    <Route path="/flights" element={<Flights />} />
-                    <Route path="/hotels" element={<Hotels />} />
+                    <Route path="/login" element={<LoginForm/>}/>
+                    <Route path="/" element={<RegistrationForm/>}/>
+                    <Route path="/dashboard" element={<Dashboard/>}/>
+                    <Route path="/flights" element={<Flights/>}/>
+                    <Route path="/hotels" element={<Hotels/>}/>
+                    <Route path="/booking/flights" element={<BookingSeats/>}/>
                 </Routes>
             </div>
         </Router>

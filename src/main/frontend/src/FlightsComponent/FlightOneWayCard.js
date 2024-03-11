@@ -1,7 +1,15 @@
 import React from 'react';
 import "./FlightOneWayCard.css"
+import {useNavigate} from 'react-router-dom';
 
-const FlightOneWayCard = ({flight, searchData, isAll}) => {
+const FlightOneWayCard = ({flight, isAll}) => {
+
+    const navigate = useNavigate();
+
+    const handleSelect = () => {
+        navigate('/booking/flights', {state: {flight}});
+    };
+
     const departureTime = new Date(flight.departureDate);
     const landingTime = new Date(departureTime.getTime() + flight.duration * 60 * 1000); // Convert duration to milliseconds
 
@@ -16,7 +24,7 @@ const FlightOneWayCard = ({flight, searchData, isAll}) => {
 
     return (
         <div>
-            <div className="flight-card">
+            <div className="flight-card" style={{maxWidth: '100%'}}>
                 <div style={{textAlign: "center"}}>
                     <div className="p-2 d-inline">{flight.airline}</div>
                     <div className="p-2 d-inline">Id: {flight.id}</div>
@@ -34,7 +42,8 @@ const FlightOneWayCard = ({flight, searchData, isAll}) => {
                 </div>
                 {!isAll && (
                     <div style={{textAlign: "right"}}>
-                        <button className="btn btn-primary " type="submit"><span></span>Select</button>
+                        <button className="btn btn-primary " onClick={handleSelect} type="submit"><span></span>Select
+                        </button>
                     </div>
                 )}
             </div>

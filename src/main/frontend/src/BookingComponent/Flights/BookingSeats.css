@@ -1,0 +1,16 @@
+.booking-success {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.availableSeat {
+    background-color: lightblue;
+}
+
+.availableSeat:hover {
+    background-color: lightgreen;
+}
+
+.unavailableSeat {
+    background-color: orangered;
+}

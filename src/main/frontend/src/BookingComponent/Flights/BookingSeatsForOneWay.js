@@ -5,7 +5,7 @@ import axios from "axios";
 import Seat from "./Seat";
 import FlightOneWayCard from "../../FlightsComponent/FlightOneWayCard";
 
-const BookingSeats = () => {
+const BookingSeatsForOneWay = () => {
 
     const location = useLocation();
 
@@ -17,13 +17,14 @@ const BookingSeats = () => {
 
     const handleSeatClick = (seatId) => {
         const updatedSeats = seats.map((seat) =>
-            seat.id === seatId ? {...seat, clicked: true} : seat
+            seat.id === seatId ? { ...seat, clicked: !seat.clicked } : seat
         );
         setSeats(updatedSeats);
     };
 
     const handleBooking = async () => {
         const totalPrice = seats.filter((seat) => seat.clicked).reduce((sum, seat) => sum + seat.price, 0);
+        console.error(seats.filter((seat) => seat.clicked).map((seat) => seat.id));
         const requestBody = {
             startDate: flight.departureDate, // Use the appropriate field from your searchData
             totalPrice,
@@ -57,7 +58,7 @@ const BookingSeats = () => {
         for (let i = 0; i < flight.seats.length; i += 6) {
             seatGroups.push(
                 <div className="row" key={i}>
-                    {flight.seats.slice(i + 0, 6 + i).map((seat, index) => (
+                    {flight.seats.slice(i, 6 + i).map((seat, index) => (
                         <div key={index} className={'col-2'}
                              style={{paddingBottom: '7%', textAlign: "center"}}>
                             <Seat seat={seat} handleSeatClick={handleSeatClick}/>
@@ -88,10 +89,13 @@ const BookingSeats = () => {
                 {renderSeats()}
             </div>
             <div>
-                <button className="btn btn-primary " onClick={handleBooking}>Book</button>
+                <button
+                    className="btn btn-primary"
+                    onClick={handleBooking}
+                    disabled={!seats.some((seat) => seat.clicked)}>Book</button>
             </div>
         </div>
     )
 }
 
-export default BookingSeats;
+export default BookingSeatsForOneWay;

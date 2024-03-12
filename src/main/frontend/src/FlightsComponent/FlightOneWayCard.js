@@ -7,7 +7,7 @@ const FlightOneWayCard = ({flight, isAll}) => {
     const navigate = useNavigate();
 
     const handleSelect = () => {
-        navigate('/booking/flights', {state: {flight}});
+        navigate('/booking/flights/oneWay', {state: {flight}});
     };
 
     const departureTime = new Date(flight.departureDate);

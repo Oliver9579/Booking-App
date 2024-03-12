@@ -1,7 +1,15 @@
 import React from 'react';
 import "./FlightOneWayCard.css"
+import {useNavigate} from "react-router-dom";
 
 const FlightRoundTripCard = ({flightToDestination, flightReturn}) => {
+
+    const navigate = useNavigate();
+
+    const handleSelect = () => {
+        navigate('/booking/flights/roundTrip', {state: {flightToDestination, flightReturn}});
+    };
+
     //firstFlight
     const flightToDestinationDepartureTime = new Date(flightToDestination.departureDate);
     const flightToDestinationLandingTime = new Date(flightToDestinationDepartureTime.getTime() + flightToDestination.duration * 60 * 1000); // Convert duration to milliseconds
@@ -11,9 +19,15 @@ const FlightRoundTripCard = ({flightToDestination, flightReturn}) => {
     const flightToDestinationFormattedDuration = `${flightToDestinationHours}h ${flightToDestinationMinutes}m`;
 
     const flightToDestinationFormattedDepartureDate = flightToDestinationDepartureTime.toLocaleDateString();
-    const flightToDestinationFormattedDepartureTime = flightToDestinationDepartureTime.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'});
+    const flightToDestinationFormattedDepartureTime = flightToDestinationDepartureTime.toLocaleTimeString([], {
+        hour: '2-digit',
+        minute: '2-digit'
+    });
     const flightToDestinationFormattedLandingDate = flightToDestinationLandingTime.toLocaleDateString();
-    const flightToDestinationFormattedLandingTime = flightToDestinationLandingTime.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'});
+    const flightToDestinationFormattedLandingTime = flightToDestinationLandingTime.toLocaleTimeString([], {
+        hour: '2-digit',
+        minute: '2-digit'
+    });
 
     //secondFlight
 
@@ -25,9 +39,15 @@ const FlightRoundTripCard = ({flightToDestination, flightReturn}) => {
     const flightReturnFormattedDuration = `${flightReturnHours}h ${flightReturnMinutes}m`;
 
     const flightReturnFormattedDepartureDate = flightReturnDepartureTime.toLocaleDateString();
-    const flightReturnFormattedDepartureTime = flightReturnDepartureTime.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'});
+    const flightReturnFormattedDepartureTime = flightReturnDepartureTime.toLocaleTimeString([], {
+        hour: '2-digit',
+        minute: '2-digit'
+    });
     const flightReturnFormattedLandingDate = flightReturnLandingTime.toLocaleDateString();
-    const flightReturnFormattedLandingTime = flightReturnLandingTime.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'});
+    const flightReturnFormattedLandingTime = flightReturnLandingTime.toLocaleTimeString([], {
+        hour: '2-digit',
+        minute: '2-digit'
+    });
 
     return (
         <div>
@@ -37,12 +57,14 @@ const FlightRoundTripCard = ({flightToDestination, flightReturn}) => {
                     <div className="p-2 d-inline">Id: {flightToDestination.id}</div>
                 </div>
                 <div style={{textAlign: "center"}}>
-                    <div className="p-2 d-inline">{flightToDestination.origin} to {flightToDestination.destination}</div>
+                    <div
+                        className="p-2 d-inline">{flightToDestination.origin} to {flightToDestination.destination}</div>
                 </div>
                 <div style={{textAlign: "center"}}>
                     <div className="p-2 d-inline">Departure
                         Time: {flightToDestinationFormattedDepartureDate} {flightToDestinationFormattedDepartureTime}</div>
-                    <div className="p-2 d-inline">Landing Time: {flightToDestinationFormattedLandingDate} {flightToDestinationFormattedLandingTime}</div>
+                    <div className="p-2 d-inline">Landing
+                        Time: {flightToDestinationFormattedLandingDate} {flightToDestinationFormattedLandingTime}</div>
                 </div>
                 <div style={{textAlign: "center"}}>
                     <div className="p-2 d-inline">Duration: {flightToDestinationFormattedDuration}</div>
@@ -62,7 +84,8 @@ const FlightRoundTripCard = ({flightToDestination, flightReturn}) => {
                 <div style={{textAlign: "center"}}>
                     <div className="p-2 d-inline">Departure
                         Time: {flightReturnFormattedDepartureDate} {flightReturnFormattedDepartureTime}</div>
-                    <div className="p-2 d-inline">Landing Time: {flightReturnFormattedLandingDate} {flightReturnFormattedLandingTime}</div>
+                    <div className="p-2 d-inline">Landing
+                        Time: {flightReturnFormattedLandingDate} {flightReturnFormattedLandingTime}</div>
                 </div>
                 <div style={{textAlign: "center"}}>
                     <div className="p-2 d-inline">Duration: {flightReturnFormattedDuration}</div>
@@ -70,7 +93,8 @@ const FlightRoundTripCard = ({flightToDestination, flightReturn}) => {
 
 
                 <div style={{textAlign: "right"}}>
-                    <button className="btn btn-primary " type="submit"><span></span>Select</button>
+                    <button className="btn btn-primary " onClick={handleSelect} type="submit"><span></span>Select
+                    </button>
                 </div>
             </div>
             <br/>

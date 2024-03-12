@@ -7,7 +7,8 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Flights from "./FlightsComponent/Flights";
 import Hotels from "./HotelsComponent/Hotels";
-import BookingSeats from "./BookingComponent/Flights/BookingSeats";
+import BookingSeatsForOneWay from "./BookingComponent/Flights/BookingSeatsForOneWay";
+import BookingSeatsForRoundTrip from "./BookingComponent/Flights/BookingSeatsForRoundTrip";
 
 
 const App = () => {
@@ -20,7 +21,8 @@ const App = () => {
                     <Route path="/dashboard" element={<Dashboard/>}/>
                     <Route path="/flights" element={<Flights/>}/>
                     <Route path="/hotels" element={<Hotels/>}/>
-                    <Route path="/booking/flights" element={<BookingSeats/>}/>
+                    <Route path="/booking/flights/oneWay" element={<BookingSeatsForOneWay/>}/>
+                    <Route path="/booking/flights/roundTrip" element={<BookingSeatsForRoundTrip/>}/>
                 </Routes>
             </div>
         </Router>

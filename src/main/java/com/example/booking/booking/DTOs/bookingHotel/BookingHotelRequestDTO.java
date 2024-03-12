@@ -20,19 +20,19 @@ public class BookingHotelRequestDTO extends BookingRequestDTO {
   @NotNull
   private int hotelId;
   @NotNull
-  private List<Integer> roomsId;
+  private List<BookingRoomDTO> rooms;
 
 
-  public BookingHotelRequestDTO(String startDate, int totalPrice, String endDate, int hotelId, List<Integer> roomsId) {
+  public BookingHotelRequestDTO(String startDate, int totalPrice, String endDate, int hotelId, List<BookingRoomDTO> rooms) {
     super(startDate, totalPrice);
     this.endDate = endDate;
     this.hotelId = hotelId;
-    this.roomsId = roomsId;
+    this.rooms = rooms;
   }
 
   @Override
   public Date getStartDate() {
-    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
     Date date = new Date();
     try {
       date = formatter.parse(formatter.format(super.getStartDate()));
@@ -43,7 +43,7 @@ public class BookingHotelRequestDTO extends BookingRequestDTO {
   }
 
   public Date getEndDate() {
-    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
     Date date = new Date();
     try {
       date = formatter.parse(endDate);
@@ -51,6 +51,10 @@ public class BookingHotelRequestDTO extends BookingRequestDTO {
       e.printStackTrace();
     }
     return date;
+  }
+
+  public String getEndDateInString() {
+    return endDate;
   }
 
 }

@@ -1,5 +1,6 @@
 package com.example.booking.room.services;
 
+import com.example.booking.booking.DTOs.bookingHotel.BookingRoomDTO;
 import com.example.booking.date.models.Days;
 import com.example.booking.date.services.DaysService;
 import com.example.booking.exceptions.IdNotFoundException;
@@ -84,6 +85,21 @@ public class RoomServiceImpl implements RoomService {
       unavailableDates.addAll(days);
       room.setUnavailable(unavailableDates);
       roomRepository.save(room);
+    }
+    return rooms;
+  }
+
+  @Override
+  public List<Room> getOneRoomForEachGivenType(List<Room> availableRooms, List<BookingRoomDTO> roomTypesWithNumber) {
+    List<Room> rooms = new ArrayList<>();
+    for (int i = 0; i < roomTypesWithNumber.size(); i++) {
+      for (int j = 0; j < roomTypesWithNumber.get(i).getRoomCount(); j++) {
+        int index = i;
+        Room room = availableRooms.stream().filter(
+                room1 -> room1.getRoomType() == roomTypesWithNumber.get(index).getRoomType()).findFirst().get();
+        rooms.add(room);
+        availableRooms.remove(room);
+      }
     }
     return rooms;
   }

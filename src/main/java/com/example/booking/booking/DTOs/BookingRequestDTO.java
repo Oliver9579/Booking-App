@@ -33,4 +33,8 @@ public abstract class BookingRequestDTO {
     return date;
   }
 
+  public String getStartDateInString() {
+    return startDate;
+  }
+
 }

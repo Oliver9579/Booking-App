@@ -76,11 +76,16 @@ public class BookingServiceImpl implements BookingService {
   @Override
   public BookingHotelResponseDTO createHotelBooking(User user, BookingHotelRequestDTO bookingHotel) {
     Hotel hotel = hotelService.getHotelById(bookingHotel.getHotelId());
-    List<Days> days = daysService.getFullTravelDates(bookingHotel.getStartDate(), bookingHotel.getEndDate()).stream()
+    List<Days> days = daysService.getFullTravelDates(bookingHotel.getStartDateInString(), bookingHotel.getEndDateInString()).stream()
             .map(date -> daysService.getByDate(date)).collect(Collectors.toList());
-    List<Room> rooms = roomService.getRoomsById(bookingHotel.getRoomsId());
 
-    hotel.setRooms(roomService.setUnavailableDates(rooms, days));
+    List<Room> availableRooms = hotel.getRooms().stream()
+            .filter(room -> roomService.isRoomAvailable(room, bookingHotel.getStartDateInString(), bookingHotel.getEndDateInString()))
+            .collect(Collectors.toList());
+
+    List<Room> oneRoomForEachRequestType = roomService.getOneRoomForEachGivenType(availableRooms, bookingHotel.getRooms());
+
+    hotel.setRooms(roomService.setUnavailableDates(oneRoomForEachRequestType, days));
 
     Booking booking = bookingRepository.save(new Booking(bookingHotel.getStartDate(), bookingHotel.getEndDate(),
             bookingHotel.getTotalPrice(), user, hotel));

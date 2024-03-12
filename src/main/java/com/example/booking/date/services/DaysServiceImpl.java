@@ -24,8 +24,8 @@ public class DaysServiceImpl implements DaysService {
   @Override
   public List<String> getFullTravelDates(String startDate, String endDate) {
     DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    LocalDate firstDate = LocalDate.parse(startDate, dateFormat);
-    LocalDate lastDate = LocalDate.parse(endDate, dateFormat);
+    LocalDate firstDate = LocalDate.parse(startDate.substring(0, 10), dateFormat);
+    LocalDate lastDate = LocalDate.parse(endDate.substring(0, 10), dateFormat);
     long travelLength = ChronoUnit.DAYS.between(firstDate, lastDate);
     List<String> dates = new ArrayList<>();
     for (int i = 0; i <= travelLength; i++) {

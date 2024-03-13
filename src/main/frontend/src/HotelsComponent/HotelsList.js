@@ -9,7 +9,7 @@ class HotelList extends Component {
         if (hotels.length === 0) {
             return (
                 <div>
-                    <strong style={{fontSize: '30px'}}>There is no hotel at the specified location</strong>
+                    <strong style={{fontSize: '30px'}}>There is no hotel at the specified location and time!</strong>
                 </div>
             );
         }

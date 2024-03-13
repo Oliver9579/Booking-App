@@ -45,6 +45,7 @@ const FlightSearchBar = ({onSearch}) => {
                        value={origin}
                        onChange={(e) => setOrigin(e.target.value)}
                        style={{width: '100%'}}
+                       required
                 />
             </div>
 
@@ -55,6 +56,7 @@ const FlightSearchBar = ({onSearch}) => {
                        value={destination}
                        onChange={(e) => setDestination(e.target.value)}
                        style={{width: '100%'}}
+                       required
                 />
             </div>
 
@@ -64,8 +66,9 @@ const FlightSearchBar = ({onSearch}) => {
                        placeholder="Departure Date"
                        value={departureDate}
                        onChange={(e) => setDepartureDate(e.target.value)}
-                       min={new Date().toISOString().split('T')[0]} // Restrict to today or later
+                       min={new Date().toISOString().split('T')[0]}
                        style={{width: '100%', padding: '0px', textAlign: "center"}}
+                       required
                 />
             </div>
             {flightType === 'return' && (
@@ -75,8 +78,9 @@ const FlightSearchBar = ({onSearch}) => {
                            placeholder="Return Date"
                            value={returnDate}
                            onChange={(e) => setReturnDate(e.target.value)}
-                           min={new Date().toISOString().split('T')[0]} // Restrict to after today
+                           min={departureDate}
                            style={{width: '100%', padding: '0px', textAlign: "center"}}
+                           required
                     />
                 </div>
             )}

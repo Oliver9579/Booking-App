@@ -30,6 +30,7 @@ const HotelSearchBar = ({onSearch}) => {
                        value={location}
                        onChange={(e) => setLocation(e.target.value)}
                        style={{width: '100%'}}
+                       required
                 />
             </div>
 
@@ -41,6 +42,7 @@ const HotelSearchBar = ({onSearch}) => {
                        onChange={(e) => setCheckInDate(e.target.value)}
                        min={new Date().toISOString().split('T')[0]} // Restrict to today or later
                        style={{width: '100%', padding: '0px', textAlign: "center"}}
+                       required
                 />
             </div>
 
@@ -50,8 +52,9 @@ const HotelSearchBar = ({onSearch}) => {
                        placeholder="Check Out"
                        value={checkOutDate}
                        onChange={(e) => setCheckOutDate(e.target.value)}
-                       min={new Date().toISOString().split('T')[0]} // Restrict to today or later
+                       min={checkInDate} // Restrict to today or later
                        style={{width: '100%', padding: '0px', textAlign: "center"}}
+                       required
                 />
             </div>
             <div className="form-group col-2">
@@ -61,6 +64,7 @@ const HotelSearchBar = ({onSearch}) => {
                        value={guests}
                        onChange={(e) => setGuests(parseInt(e.target.value))}
                        style={{width: '100%'}}
+                       required
                 />
             </div>
 

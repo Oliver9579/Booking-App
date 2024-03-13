@@ -33,7 +33,12 @@ public class HotelServiceImpl implements HotelService {
       List<Room> availableRooms = hotels.get(i).getRooms().stream()
               .filter(room -> roomService.isRoomAvailable(room, hotelRequest.getCheckInDate(), hotelRequest.getCheckOutDate()))
               .collect(Collectors.toList());
-      hotels.get(i).setRooms(availableRooms);
+      if (availableRooms.isEmpty()) {
+        hotels.remove(i);
+        i--;
+      }else {
+        hotels.get(i).setRooms(availableRooms);
+      }
     }
     return convertHotelsToHotelListDTO(hotels, hotelRequest.getCheckInDate(), hotelRequest.getCheckOutDate());
   }

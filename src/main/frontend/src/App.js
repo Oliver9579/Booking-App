@@ -9,6 +9,7 @@ import Flights from "./FlightsComponent/Flights";
 import Hotels from "./HotelsComponent/Hotels";
 import BookingSeatsForOneWay from "./BookingComponent/Flights/BookingSeatsForOneWay";
 import BookingSeatsForRoundTrip from "./BookingComponent/Flights/BookingSeatsForRoundTrip";
+import BookingRooms from "./BookingComponent/Hotels/BookingRooms";
 
 
 const App = () => {
@@ -23,6 +24,7 @@ const App = () => {
                     <Route path="/hotels" element={<Hotels/>}/>
                     <Route path="/booking/flights/oneWay" element={<BookingSeatsForOneWay/>}/>
                     <Route path="/booking/flights/roundTrip" element={<BookingSeatsForRoundTrip/>}/>
+                    <Route path="/booking/hotels" element={<BookingRooms/>}/>
                 </Routes>
             </div>
         </Router>

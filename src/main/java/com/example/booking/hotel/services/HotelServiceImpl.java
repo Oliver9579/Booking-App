@@ -1,5 +1,6 @@
 package com.example.booking.hotel.services;
 
+import com.example.booking.date.services.DaysService;
 import com.example.booking.exceptions.IdNotFoundException;
 import com.example.booking.exceptions.NoHotelFoundException;
 import com.example.booking.exceptions.SameDateException;
@@ -22,6 +23,7 @@ public class HotelServiceImpl implements HotelService {
 
   private HotelRepository hotelRepository;
   private RoomService roomService;
+  private DaysService daysService;
 
   @Override
   public HotelListDTO getAllByLocation(HotelRequestDTO hotelRequest) {
@@ -36,7 +38,7 @@ public class HotelServiceImpl implements HotelService {
       if (availableRooms.isEmpty()) {
         hotels.remove(i);
         i--;
-      }else {
+      } else {
         hotels.get(i).setRooms(availableRooms);
       }
     }
@@ -72,10 +74,10 @@ public class HotelServiceImpl implements HotelService {
 
   private HotelResponseDTO convertHotelToResponseDTO(Hotel hotel, String checkInDate, String checkOutDate) {
     return new HotelResponseDTO(hotel.getId(), hotel.getName(), hotel.getLocation(),
-            hotel.getStreet(), hotel.getStars(), hotel.getImg(),
-            roomService.convertToRoomDTO(roomService.getRoomsByType(hotel, RoomType.values()),
-                    roomService.getRoomsCountByType(hotel.getRooms()),
-                    checkInDate, checkOutDate));
+            hotel.getStreet(), hotel.getStars(), (daysService.getFullTravelDates(checkInDate, checkOutDate).size()) - 1,
+            hotel.getImg(), roomService.convertToRoomDTO(roomService.getRoomsByType(hotel, RoomType.values()),
+            roomService.getRoomsCountByType(hotel.getRooms()),
+            checkInDate, checkOutDate));
   }
 
 }

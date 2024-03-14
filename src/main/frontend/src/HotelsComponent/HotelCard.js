@@ -2,8 +2,15 @@ import React from 'react';
 import "./HotelCard.css"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faStar} from "@fortawesome/free-solid-svg-icons";
+import {useNavigate} from 'react-router-dom';
 
-const HotelCard = ({hotel, isAll}) => {
+const HotelCard = ({hotel, isAll, searchData}) => {
+
+    const navigate = useNavigate();
+
+    const handleSelect = () => {
+        navigate('/booking/hotels', {state: {hotel, searchData}});
+    };
 
     const generateStars = () => {
         return Array.from({length: hotel.stars}, (_, index) => (
@@ -38,7 +45,8 @@ const HotelCard = ({hotel, isAll}) => {
                     </div>
                     {!isAll && (
                         <div style={{textAlign: "right"}}>
-                            <button className="btn btn-primary " type="submit"><span></span>Select</button>
+                            <button className="btn btn-primary " onClick={handleSelect} type="submit"><span></span>Select
+                            </button>
                         </div>
                     )}
                 </div>

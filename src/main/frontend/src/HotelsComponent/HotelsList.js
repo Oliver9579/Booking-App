@@ -3,7 +3,7 @@ import HotelCard from './HotelCard';
 
 class HotelList extends Component {
     render() {
-        const {hotels, isAll} = this.props;
+        const {hotels, isAll, searchData} = this.props;
 
 
         if (hotels.length === 0) {
@@ -17,7 +17,7 @@ class HotelList extends Component {
             <div>
                 <h2>Hotels</h2>
                 {hotels.map((hotel, index) => (
-                    <HotelCard key={index} hotel={hotel} isAll={isAll}/>
+                    <HotelCard key={index} hotel={hotel} isAll={isAll} searchData={searchData}/>
                 ))}
             </div>
         );

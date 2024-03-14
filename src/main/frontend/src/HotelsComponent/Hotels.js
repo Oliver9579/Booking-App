@@ -8,6 +8,7 @@ import Navbar from "../NavBarComponent/Navbar";
 const Hotels = () => {
     const [hotels, setHotels] = useState([]);
     const [isAll, setIsAll] = useState(true);
+    const [searchData, setSearchData] = useState([]);
 
     useEffect(() => {
         fetchHotels();
@@ -36,6 +37,7 @@ const Hotels = () => {
     const searchHotels = (searchData) => {
         const token = localStorage.getItem("token");
         let url = 'http://localhost:3000/api/hotels';
+        setSearchData(searchData);
 
         axios.get(url, {
             headers: {
@@ -69,7 +71,7 @@ const Hotels = () => {
                     <HotelsSearchBar onSearch={searchHotels}/>
                 </div>
                 <div>
-                    <HotelsList hotels={hotels} isAll={isAll}/>
+                    <HotelsList hotels={hotels} isAll={isAll} searchData={searchData}/>
                 </div>
             </div>
         </div>

@@ -24,7 +24,6 @@ const BookingSeatsForOneWay = () => {
 
     const handleBooking = async () => {
         const totalPrice = seats.filter((seat) => seat.clicked).reduce((sum, seat) => sum + seat.price, 0);
-        console.error(seats.filter((seat) => seat.clicked).map((seat) => seat.id));
         const requestBody = {
             startDate: flight.departureDate, // Use the appropriate field from your searchData
             totalPrice,

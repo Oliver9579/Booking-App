@@ -6,7 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 @Data
 @NoArgsConstructor
@@ -21,8 +21,8 @@ public class CarDTO {
   private TransmissionType transmissionType;
   private String pickUpLocation;
   private String dropOffLocation;
-  private LocalDate pickUpDate;
-  private LocalDate dropOffDate;
+  private Date pickUpDate;
+  private Date dropOffDate;
   private int fullPrice;
   private String img;
 

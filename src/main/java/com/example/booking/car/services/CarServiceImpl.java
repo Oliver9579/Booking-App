@@ -10,8 +10,7 @@ import com.example.booking.exceptions.SameDateException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -73,26 +72,29 @@ public class CarServiceImpl implements CarService {
 
   }
 
+  @Override
+  public Car getCarById(Integer id) {
+    return carRepository.findById(id).orElseThrow(NoCarFoundException::new);
+  }
+
+  @Override
+  public CarDTO convertCarToCarDTO(Car car, int travelLength, Date pickUpDate, Date dropOffDate) {
+    return new CarDTO(car.getId(), car.getBrand(), car.getModel(), car.getCarType(),
+            car.getCapacity(), car.getTransmissionType(), car.getPickUpLocation(),
+            car.getDropOffLocation(), pickUpDate, dropOffDate,
+            car.getPricePerDay() * travelLength, car.getImg());
+  }
+
   private List<Car> getCarsByDates(CarRequestDTO carRequest, List<Car> cars) {
     if (cars.isEmpty()) throw new NoCarFoundException();
     if (carRequest.getPickUpDate().equals(carRequest.getDropOffDate())) throw new SameDateException();
     return cars.stream()
             .filter(car -> isCarAvailable(car,
-                    carRequest.getPickUpDate(),
-                    carRequest.getDropOffDate())).collect(Collectors.toList());
+                    carRequest.getPickUpDateString(),
+                    carRequest.getDropOffDateString())).collect(Collectors.toList());
   }
 
-  private CarListDTO convertCarsToCarListDTO(List<Car> cars, int travelLength, String pickUpDate, String dropOffDate) {
+  private CarListDTO convertCarsToCarListDTO(List<Car> cars, int travelLength, Date pickUpDate, Date dropOffDate) {
     return new CarListDTO(cars.stream().map(car -> convertCarToCarDTO(car, travelLength, pickUpDate, dropOffDate)).collect(Collectors.toList()));
-  }
-
-  private CarDTO convertCarToCarDTO(Car car, int travelLength, String pickUpDate, String dropOffDate) {
-    DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    LocalDate parsedPickUpDate = LocalDate.parse(pickUpDate, dateFormatter);
-    LocalDate parsedDropOffDate = LocalDate.parse(dropOffDate, dateFormatter);
-    return new CarDTO(car.getId(), car.getBrand(), car.getModel(), car.getCarType(),
-            car.getCapacity(), car.getTransmissionType(), car.getPickUpLocation(),
-            car.getDropOffLocation(), parsedPickUpDate, parsedDropOffDate,
-            car.getPricePerDay() * travelLength, car.getImg());
   }
 }

@@ -1,5 +1,7 @@
 package com.example.booking.booking.controllers;
 
+import com.example.booking.booking.DTOs.bookingCar.BookingCarRequestDTO;
+import com.example.booking.booking.DTOs.bookingCar.BookingCarResponseDTO;
 import com.example.booking.booking.DTOs.bookingFlight.BookingOneWayFlightRequestDTO;
 import com.example.booking.booking.DTOs.bookingFlight.BookingOneWayFlightResponseDTO;
 import com.example.booking.booking.DTOs.bookingFlight.BookingRoundTripFlightRequestDTO;
@@ -51,6 +53,14 @@ public class BookingController {
     int userId = ((User) auth.getPrincipal()).getId();
     User user = userService.getById(userId);
     return ResponseEntity.ok().body(bookingService.createHotelBooking(user, bookingHotel));
+  }
+
+  @PostMapping("/cars")
+  public ResponseEntity<BookingCarResponseDTO> createCarBooking(
+          UsernamePasswordAuthenticationToken auth, @Valid @RequestBody BookingCarRequestDTO bookingCar) {
+    int userId = ((User) auth.getPrincipal()).getId();
+    User user = userService.getById(userId);
+    return ResponseEntity.ok().body(bookingService.createCarBooking(user, bookingCar));
   }
 
 }

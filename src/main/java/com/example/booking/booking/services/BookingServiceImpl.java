@@ -1,5 +1,7 @@
 package com.example.booking.booking.services;
 
+import com.example.booking.booking.DTOs.bookingCar.BookingCarRequestDTO;
+import com.example.booking.booking.DTOs.bookingCar.BookingCarResponseDTO;
 import com.example.booking.booking.DTOs.bookingFlight.BookingOneWayFlightRequestDTO;
 import com.example.booking.booking.DTOs.bookingFlight.BookingOneWayFlightResponseDTO;
 import com.example.booking.booking.DTOs.bookingFlight.BookingRoundTripFlightRequestDTO;
@@ -8,6 +10,7 @@ import com.example.booking.booking.DTOs.bookingHotel.BookingHotelRequestDTO;
 import com.example.booking.booking.DTOs.bookingHotel.BookingHotelResponseDTO;
 import com.example.booking.booking.models.Booking;
 import com.example.booking.booking.repository.BookingRepository;
+import com.example.booking.car.models.Car;
 import com.example.booking.car.services.CarService;
 import com.example.booking.date.models.Days;
 import com.example.booking.date.services.DaysService;
@@ -92,6 +95,25 @@ public class BookingServiceImpl implements BookingService {
 
     return new BookingHotelResponseDTO(booking.getBookingDate(), booking.getStartDate(), booking.getEndDate(),
             booking.getTotalPrice(), hotelService.convertToResponseDTO(hotel));
+  }
+
+  @Override
+  public BookingCarResponseDTO createCarBooking(User user, BookingCarRequestDTO bookingCar) {
+    Car car = carService.getCarById(bookingCar.getCarId());
+
+    List<Days> days = daysService.getFullTravelDates(bookingCar.getStartDateInString(),
+                    bookingCar.getEndDateInString()).stream()
+            .map(date -> daysService.getByDate(date)).collect(Collectors.toList());
+
+    car.setUnavailable(days);
+
+    Booking booking = bookingRepository.save(new Booking(bookingCar.getStartDate(), bookingCar.getEndDate(),
+            bookingCar.getTotalPrice(), user, car));
+
+    return new BookingCarResponseDTO(booking.getBookingDate(), booking.getStartDate(), booking.getEndDate(),
+            booking.getTotalPrice(), carService.convertCarToCarDTO(
+            car, days.size(), bookingCar.getStartDate(), bookingCar.getEndDate()));
+
   }
 
 }

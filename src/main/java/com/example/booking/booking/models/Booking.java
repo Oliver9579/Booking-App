@@ -96,4 +96,13 @@ public class Booking {
     this.user = user;
     this.hotel = hotel;
   }
+
+  public Booking(Date startDate, Date endDate, int totalPrice, User user, Car car) {
+    this.bookingDate = new Date();
+    this.startDate = startDate;
+    this.endDate = endDate;
+    this.totalPrice = totalPrice;
+    this.user = user;
+    this.car = car;
+  }
 }

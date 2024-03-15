@@ -37,7 +37,7 @@ public class CarServiceImpl implements CarService {
   }
 
   @Override
-  public CarListDTO getCarsWithDifferentDropOffLocation(CarDifferentDropOffDTO carDifferentDropOff,
+  public CarListDTO getCarsWithDifferentDropOffLocation(CarDifferentDropOffRequestDTO carDifferentDropOff,
                                                         String carType, Integer capacity, String transmissionType) {
     List<Car> cars = carRepository.findByPickUpLocationAndDropOffLocation(
             carDifferentDropOff.getPickUpLocation(), carDifferentDropOff.getDropOffLocation(),
@@ -69,7 +69,7 @@ public class CarServiceImpl implements CarService {
     if (cars.isEmpty()) throw new NoCarFoundException();
     return cars.stream().map(car -> new AllCarsDTO(car.getId(), car.getBrand(), car.getModel(), car.getCarType(),
             car.getCapacity(), car.getTransmissionType(), car.getPickUpLocation(), car.getDropOffLocation(),
-            car.getPricePerDay())).collect(Collectors.toList());
+            car.getPricePerDay(), car.getImg())).collect(Collectors.toList());
 
   }
 
@@ -93,6 +93,6 @@ public class CarServiceImpl implements CarService {
     return new CarDTO(car.getId(), car.getBrand(), car.getModel(), car.getCarType(),
             car.getCapacity(), car.getTransmissionType(), car.getPickUpLocation(),
             car.getDropOffLocation(), parsedPickUpDate, parsedDropOffDate,
-            car.getPricePerDay() * travelLength);
+            car.getPricePerDay() * travelLength, car.getImg());
   }
 }

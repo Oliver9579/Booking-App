@@ -24,5 +24,6 @@ public class CarDTO {
   private LocalDate pickUpDate;
   private LocalDate dropOffDate;
   private int fullPrice;
+  private String img;
 
 }

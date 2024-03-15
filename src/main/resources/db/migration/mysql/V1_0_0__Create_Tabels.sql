@@ -58,6 +58,7 @@ CREATE TABLE IF NOT EXISTS cars (
                              pick_up_location VARCHAR(255) NOT NULL,
                              drop_off_location VARCHAR(255) NOT NULL,
                              price_per_day INT NOT NULL,
+                             img VARCHAR(255),
                              created_at BIGINT NOT NULL
 );
 

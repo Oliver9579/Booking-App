@@ -43,12 +43,13 @@ VALUES
     ('SINGLE', 1, 90, 2),
     ('DOUBLE', 2, 130, 2);
 
-INSERT INTO cars (brand, model, car_type, capacity, transmission_type, pick_up_location, drop_off_location, price_per_day, created_at)
+INSERT INTO cars (brand, model, car_type, capacity, transmission_type, pick_up_location, drop_off_location, price_per_day, img, created_at)
 VALUES
-    ('Toyota', 'Camry', 'MEDIUM', 5, 'AUTOMATIC', 'New York', 'New York', 50, UNIX_TIMESTAMP()),
-    ('Ford', 'Mustang', 'MEDIUM', 5, 'MANUAL', 'Chicago', 'Miami', 100, UNIX_TIMESTAMP()),
-    ('Fiat', '500', 'SMALL', 4, 'AUTOMATIC', 'Los Angeles', 'Las Vegas', 75, UNIX_TIMESTAMP()),
-    ('Volkswagen', 'Touran', 'LARGE', 7, 'MANUAL', 'San Francisco', 'San Francisco', 85, UNIX_TIMESTAMP());
+    ('Toyota', 'Camry', 'MEDIUM', 5, 'AUTOMATIC', 'New York', 'New York', 50, 'camry.png', UNIX_TIMESTAMP()),
+    ('Ford', 'Mustang', 'MEDIUM', 5, 'MANUAL', 'Chicago', 'Miami', 100, 'mustang.png', UNIX_TIMESTAMP()),
+    ('Fiat', '500', 'SMALL', 4, 'AUTOMATIC', 'Los Angeles', 'Las Vegas', 75, 'fiat500.png', UNIX_TIMESTAMP()),
+    ('Volkswagen', 'Touran', 'LARGE', 7, 'MANUAL', 'San Francisco', 'San Francisco', 85, 'touran.png', UNIX_TIMESTAMP()),
+    ('Smart', 'Fortwo', 'SMALL', 2, 'AUTOMATIC', 'Chicago', 'Miami', 20, 'fortwo.png', UNIX_TIMESTAMP());
 
 INSERT INTO dates (date)
 SELECT DATE_ADD('2024-06-01', INTERVAL (t4 + t2*10 + t1*100) DAY) AS date

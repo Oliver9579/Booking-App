@@ -6,7 +6,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -40,7 +39,7 @@ public class CarController {
           @RequestParam(required = false) String carType,
           @RequestParam(required = false) Integer capacity,
           @RequestParam(required = false) String transmissionType) {
-    CarDifferentDropOffDTO carDifferentDropOff = CarDifferentDropOffDTO.convertCarRequest(
+    CarDifferentDropOffRequestDTO carDifferentDropOff = CarDifferentDropOffRequestDTO.convertCarRequest(
             pickUpLocation, dropOffLocation, pickUpDate, dropOffDate);
     return ResponseEntity.ok().body(carService.getCarsWithDifferentDropOffLocation(carDifferentDropOff,
             carType, capacity, transmissionType));

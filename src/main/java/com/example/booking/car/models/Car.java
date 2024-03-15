@@ -59,6 +59,9 @@ public class Car {
   @Column(name = "price_per_day")
   private int pricePerDay;
 
+  @Column(name = "img")
+  private String img;
+
   @NotNull
   @Column(name = "created_at")
   private Long createdAt;

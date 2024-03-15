@@ -20,4 +20,5 @@ public class AllCarsDTO {
   private String pickUpLocation;
   private String dropOffLocation;
   private int pricePerDay;
+  private String img;
 }

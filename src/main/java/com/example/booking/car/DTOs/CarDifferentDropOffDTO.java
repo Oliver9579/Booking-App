@@ -16,4 +16,9 @@ public class CarDifferentDropOffDTO extends CarRequestDTO {
     super(pickUpLocation, pickUpDate, dropOffDate);
     this.dropOffLocation = dropOffLocation;
   }
+
+  public static CarDifferentDropOffDTO convertCarRequest(String pickUpLocation, String dropOffLocation, String pickUpDate, String dropOffDate) {
+    return new CarDifferentDropOffDTO(pickUpLocation, dropOffLocation, pickUpDate, dropOffDate);
+  }
+
 }

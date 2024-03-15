@@ -32,4 +32,6 @@ public interface CarRepository extends CrudRepository<Car, Integer> {
                                                    @Param("capacity") Integer capacity,
                                                    @Param("transmissionType") String transmissionType);
 
+  List<Car> findAll();
+
 }

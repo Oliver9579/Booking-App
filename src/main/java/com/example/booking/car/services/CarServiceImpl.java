@@ -63,6 +63,16 @@ public class CarServiceImpl implements CarService {
     return isAvailable;
   }
 
+  @Override
+  public List<AllCarsDTO> getAllCars() {
+    List<Car> cars = carRepository.findAll();
+    if (cars.isEmpty()) throw new NoCarFoundException();
+    return cars.stream().map(car -> new AllCarsDTO(car.getId(), car.getBrand(), car.getModel(), car.getCarType(),
+            car.getCapacity(), car.getTransmissionType(), car.getPickUpLocation(), car.getDropOffLocation(),
+            car.getPricePerDay())).collect(Collectors.toList());
+
+  }
+
   private List<Car> getCarsByDates(CarRequestDTO carRequest, List<Car> cars) {
     if (cars.isEmpty()) throw new NoCarFoundException();
     if (carRequest.getPickUpDate().equals(carRequest.getDropOffDate())) throw new SameDateException();

@@ -70,9 +70,9 @@ const Hotels = () => {
                     <HotelsSearchBar onSearch={searchHotels}/>
                 </div>
                 {errorMessage === '' ? (
-                <div>
-                    <HotelsList hotels={hotels} isAll={isAll} searchData={searchData}/>
-                </div>
+                    <div>
+                        <HotelsList hotels={hotels} isAll={isAll} searchData={searchData}/>
+                    </div>
                 ) : (
                     <div className="alert alert-danger">
                         <h6>{errorMessage}</h6>

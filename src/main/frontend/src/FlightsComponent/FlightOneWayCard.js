@@ -24,7 +24,7 @@ const FlightOneWayCard = ({flight, isAll}) => {
 
     return (
         <div>
-            <div className="flight-card" style={{maxWidth: '100%'}}>
+            <div className="flight-card" style={{maxWidth: '80%'}}>
                 <div style={{textAlign: "center"}}>
                     <div className="p-2 d-inline">{flight.airline}</div>
                     <div className="p-2 d-inline">Id: {flight.id}</div>

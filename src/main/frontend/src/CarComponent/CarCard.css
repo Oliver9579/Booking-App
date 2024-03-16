@@ -1,0 +1,39 @@
+.car-card {
+    max-width: 90%;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.describable {
+    font-size: 100%;
+    padding: 0 10px 0 0;
+}
+
+.transmission-type-describe {
+    position: absolute;
+    color: white;
+    transform: translateX(-40%) translateY(-100%);
+    background: #36454F;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.passengers-describe {
+    position: absolute;
+    color: white;
+    transform: translateY(-145%);
+    background: #36454F;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.air-conditioning-describe {
+    position: absolute;
+    color: white;
+    transform: translateX(+20%) translateY(-145%);
+    background: #36454F;
+    padding: 10px;
+    border-radius: 10px;
+}

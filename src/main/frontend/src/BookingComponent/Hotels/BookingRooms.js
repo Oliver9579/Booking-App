@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {useLocation} from 'react-router-dom';
+import {useLocation, useNavigate} from 'react-router-dom';
 import "./BookingRooms.css";
 import axios from "axios";
 import Room from "./Room";
@@ -9,6 +9,8 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 
 const BookingRooms = () => {
+
+    const navigate = useNavigate();
 
     const [roomCounts, setRoomCounts] = useState({
         SINGLE: 0,
@@ -79,8 +81,6 @@ const BookingRooms = () => {
             rooms: rooms
         };
 
-        console.error(requestBody);
-
         try {
             const token = localStorage.getItem("token");
             const config = {
@@ -103,10 +103,7 @@ const BookingRooms = () => {
 
     if (bookingSuccess) {
         return (
-            <div className="booking-success">
-                <p>Booking successful!</p>
-                <a href="/dashboard">Go to Dashboard</a>
-            </div>
+            navigate('/booking/success')
         );
     }
 

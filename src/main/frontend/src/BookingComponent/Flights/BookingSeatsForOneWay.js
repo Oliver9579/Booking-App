@@ -1,11 +1,13 @@
 import React, {useState} from "react";
-import {useLocation} from 'react-router-dom';
+import {useLocation, useNavigate} from 'react-router-dom';
 import "./BookingSeats.css";
 import axios from "axios";
 import Seat from "./Seat";
 import FlightOneWayCard from "../../FlightsComponent/FlightOneWayCard";
 
 const BookingSeatsForOneWay = () => {
+
+    const navigate = useNavigate();
 
     const location = useLocation();
 
@@ -72,10 +74,7 @@ const BookingSeatsForOneWay = () => {
 
     if (bookingSuccess) {
         return (
-            <div className="booking-success">
-                <p>Booking successful!</p>
-                <a href="/dashboard">Go to Dashboard</a>
-            </div>
+            navigate('/booking/success')
         );
     }
 

@@ -20,7 +20,7 @@ const HotelCard = ({hotel, isAll, searchData}) => {
 
     return (
         <div>
-            <div className="flight-card row">
+            <div className="hotel-card row">
                 <div className="col-4" style={{padding: '0px'}}>
 
                     <img src={require(`./img/${hotel.img}`)} alt={hotel.name}

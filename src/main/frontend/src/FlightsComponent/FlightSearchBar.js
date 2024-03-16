@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import "./FlightSearchBar.css"
 
 const FlightSearchBar = ({onSearch}) => {
-    const [flightType, setFlightType] = useState('oneWay'); // Default to one-way
+    const [flightType, setFlightType] = useState('oneWay');
     const [origin, setOrigin] = useState('');
     const [destination, setDestination] = useState('');
     const [departureDate, setDepartureDate] = useState('');

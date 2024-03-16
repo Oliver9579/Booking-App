@@ -11,7 +11,7 @@ const FlightOneWayCard = ({flight, isAll}) => {
     };
 
     const departureTime = new Date(flight.departureDate);
-    const landingTime = new Date(departureTime.getTime() + flight.duration * 60 * 1000); // Convert duration to milliseconds
+    const landingTime = new Date(departureTime.getTime() + flight.duration * 60 * 1000);
 
     const hours = Math.floor(flight.duration / 60);
     const minutes = flight.duration % 60;

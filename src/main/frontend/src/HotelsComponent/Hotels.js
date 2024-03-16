@@ -9,6 +9,7 @@ const Hotels = () => {
     const [hotels, setHotels] = useState([]);
     const [isAll, setIsAll] = useState(true);
     const [searchData, setSearchData] = useState([]);
+    const [errorMessage, setErrorMessage] = useState('')
 
     useEffect(() => {
         fetchHotels();
@@ -23,13 +24,13 @@ const Hotels = () => {
         })
             .then((response) => {
                 setHotels(response.data);
+                setErrorMessage('')
             })
             .catch((error) => {
-                if (error.response && error.response.status === 403) {
-                    setHotels([]);
-                    alert("Your session is expired. Please Log In");
+                if (error.response) {
+                    setErrorMessage(error.response.data.message);
                 } else {
-                    alert('Error fetching hotels');
+                    alert(error.message);
                 }
             });
     };
@@ -46,17 +47,15 @@ const Hotels = () => {
             params: searchData
         })
             .then((response) => {
+                setErrorMessage('')
                 setHotels(response.data.hotels);
                 setIsAll(false);
             })
             .catch((error) => {
-                if (error.response && error.response.status === 404) {
-                    setHotels([]);
-                } else if (error.response && error.response.status === 403) {
-                    setHotels([]);
-                    alert("Your session is expired. Please Log In");
+                if (error.response) {
+                    setErrorMessage(error.response.data.message);
                 } else {
-                    alert(error.response.data.message);
+                    alert(error.message);
                 }
             });
     };
@@ -70,9 +69,15 @@ const Hotels = () => {
                 <div className="form-outline mb-4 mw-100">
                     <HotelsSearchBar onSearch={searchHotels}/>
                 </div>
+                {errorMessage === '' ? (
                 <div>
                     <HotelsList hotels={hotels} isAll={isAll} searchData={searchData}/>
                 </div>
+                ) : (
+                    <div className="alert alert-danger">
+                        <h6>{errorMessage}</h6>
+                    </div>
+                )}
             </div>
         </div>
     );

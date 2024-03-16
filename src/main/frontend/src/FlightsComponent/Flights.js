@@ -8,6 +8,7 @@ const Flights = () => {
     const [flights, setFlights] = useState([]);
     const [searchData, setSearchData] = useState({});
     const [isAll, setIsAll] = useState(true);
+    const [errorMessage, setErrorMessage] = useState('')
 
     useEffect(() => {
         fetchFlights();
@@ -21,14 +22,14 @@ const Flights = () => {
             }
         })
             .then((response) => {
-                setFlights(response.data.flights); // Update flights state with fetched data
+                setFlights(response.data.flights);
+                setErrorMessage('')
             })
             .catch((error) => {
-                if (error.response && error.response.status === 403) {
-                    setFlights([]);
-                    alert("Your session is expired. Please Log In");
-                }else {
-                    alert('Error fetching flights:');
+                if (error.response) {
+                    setErrorMessage(error.response.data.message);
+                } else {
+                    alert(error.message);
                 }
             });
     };
@@ -50,17 +51,15 @@ const Flights = () => {
             params: searchData
         })
             .then((response) => {
+                setErrorMessage('')
                 setFlights(response.data.flights);
                 setIsAll(false);
             })
             .catch((error) => {
-                if (error.response && error.response.status === 404) {
-                    setFlights([]);
-                } else if (error.response && error.response.status === 403) {
-                    setFlights([]);
-                    alert("Your session is expired. Please Log In");
+                if (error.response) {
+                    setErrorMessage(error.response.data.message);
                 } else {
-                    alert(error.response.data.message);
+                    alert(error.message);
                 }
             });
     };
@@ -74,9 +73,15 @@ const Flights = () => {
                 <div className="form-outline mb-4 mw-100">
                     <FlightSearchBar onSearch={searchFlights}/>
                 </div>
+                {errorMessage === '' ? (
                 <div>
                     <FlightsList flights={flights} searchData={searchData} isAll={isAll}/>
                 </div>
+                ) : (
+                    <div className="alert alert-danger">
+                        <h6>{errorMessage}</h6>
+                    </div>
+                )}
             </div>
         </div>
     );

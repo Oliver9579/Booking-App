@@ -25,6 +25,7 @@ public class CarServiceImpl implements CarService {
   @Override
   public CarListDTO getCarsWithSameDropOffLocation(CarSameDropOffRequestDTO carSameDropOffRequest,
                                                    String carType, Integer capacity, String transmissionType) {
+    if (carSameDropOffRequest.getPickUpDateString().equals(carSameDropOffRequest.getDropOffDateString())) throw new SameDateException();
     List<Car> cars = carRepository.findSameDropOffLocationCar(carSameDropOffRequest.getPickUpLocation(),
             carType, capacity, transmissionType);
     List<Car> availableCars = getCarsByDates(carSameDropOffRequest, cars);
@@ -38,6 +39,7 @@ public class CarServiceImpl implements CarService {
   @Override
   public CarListDTO getCarsWithDifferentDropOffLocation(CarDifferentDropOffRequestDTO carDifferentDropOff,
                                                         String carType, Integer capacity, String transmissionType) {
+    if (carDifferentDropOff.getPickUpDateString().equals(carDifferentDropOff.getDropOffDateString())) throw new SameDateException();
     List<Car> cars = carRepository.findByPickUpLocationAndDropOffLocation(
             carDifferentDropOff.getPickUpLocation(), carDifferentDropOff.getDropOffLocation(),
             carType, capacity, transmissionType);

@@ -2,6 +2,7 @@ package com.example.booking.flight.services;
 
 import com.example.booking.exceptions.IdNotFoundException;
 import com.example.booking.exceptions.NoFlightFoundException;
+import com.example.booking.exceptions.SameDateException;
 import com.example.booking.flight.DTOs.*;
 import com.example.booking.flight.models.Flight;
 import com.example.booking.flight.reporitories.FlightRepository;
@@ -52,6 +53,7 @@ public class FlightServiceImpl implements FlightService {
 
   @Override
   public FlightListDTO getFlightsRoundTrip(FlightRoundTripRequestDTO flightRoundTrip) {
+    if (flightRoundTrip.getDepartureDate().equals(flightRoundTrip.getReturnDate())) throw new SameDateException();
     ArrayList<FlightDTO> flights = new ArrayList<>();
     List<List<Object>> flightsId = flightRepository.findByDestination(flightRoundTrip);
     if (flightsId.isEmpty())throw new NoFlightFoundException();

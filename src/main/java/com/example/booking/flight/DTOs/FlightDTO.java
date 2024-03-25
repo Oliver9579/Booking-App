@@ -1,6 +1,5 @@
 package com.example.booking.flight.DTOs;
 
-import com.example.booking.flight.models.Flight;
 import com.example.booking.seat.models.Seat;
 import lombok.*;
 

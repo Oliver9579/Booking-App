@@ -6,13 +6,13 @@ import com.example.booking.flight.models.Flight;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
-import org.springframework.data.util.Pair;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface FlightRepository extends CrudRepository<Flight, Integer> {
 
+  @Query(value = "SELECT * FROM flights LIMIT 20", nativeQuery = true)
   List<Flight> findAll();
 
   Optional<Flight> findById(Integer id);

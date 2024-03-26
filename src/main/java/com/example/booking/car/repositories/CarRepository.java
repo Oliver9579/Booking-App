@@ -32,6 +32,7 @@ public interface CarRepository extends CrudRepository<Car, Integer> {
                                                    @Param("capacity") Integer capacity,
                                                    @Param("transmissionType") String transmissionType);
 
+  @Query(value = "SELECT * FROM cars LIMIT 15", nativeQuery = true)
   List<Car> findAll();
 
 }

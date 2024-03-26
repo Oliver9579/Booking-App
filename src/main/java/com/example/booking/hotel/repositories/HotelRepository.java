@@ -1,6 +1,7 @@
 package com.example.booking.hotel.repositories;
 
 import com.example.booking.hotel.models.Hotel;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
@@ -9,6 +10,7 @@ public interface HotelRepository extends CrudRepository<Hotel, Integer> {
 
   List<Hotel> findAllByLocation(String location);
 
+  @Query(value = "SELECT * FROM hotels LIMIT 10", nativeQuery = true)
   List<Hotel> findAll();
 
 }

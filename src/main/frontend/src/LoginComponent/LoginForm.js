@@ -68,6 +68,8 @@ const LoginForm = () => {
                                 </div>
                             </form>
                             {error && <p className="error-message text-center">{error}</p>}
+                            <p className="text-center mt-3">Don't have an account? <a href="/">Sign Up</a>
+                            </p>
                         </div>
                     </div>
                 </div>

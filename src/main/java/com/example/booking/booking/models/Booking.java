@@ -3,6 +3,8 @@ package com.example.booking.booking.models;
 import com.example.booking.car.models.Car;
 import com.example.booking.flight.models.Flight;
 import com.example.booking.hotel.models.Hotel;
+import com.example.booking.room.models.Room;
+import com.example.booking.seat.models.Seat;
 import com.example.booking.user.models.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,7 +13,9 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -59,6 +63,12 @@ public class Booking {
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "hotel_id")
   private Hotel hotel;
+
+  @OneToMany(mappedBy = "booking")
+  private List<Room> rooms = new ArrayList<>();
+
+  @OneToMany(mappedBy = "booking")
+  private List<Seat> seats = new ArrayList<>();
 
   public Booking(User user, Date startDate, Date endDate, int totalPrice) {
     this.user = user;

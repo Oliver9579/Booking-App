@@ -20,6 +20,7 @@ import com.example.booking.hotel.models.Hotel;
 import com.example.booking.hotel.services.HotelService;
 import com.example.booking.room.models.Room;
 import com.example.booking.room.services.RoomService;
+import com.example.booking.seat.models.Seat;
 import com.example.booking.seat.services.SeatService;
 import com.example.booking.user.models.User;
 import com.example.booking.user.services.UserService;
@@ -45,10 +46,15 @@ public class BookingServiceImpl implements BookingService {
   @Override
   public BookingOneWayFlightResponseDTO createOneWayFlightBooking(User user, BookingOneWayFlightRequestDTO bookingFlight) {
     Flight flight = flightService.getFlightById(bookingFlight.getOutboundFlightId());
-    flight.setSeats(seatService.setSeatsAvailabilityFalse(seatService.getSeatsById(bookingFlight.getSeatsId())));
+    List<Seat> seats = seatService.setSeatsAvailabilityFalse(seatService.getSeatsById(bookingFlight.getSeatsId()));
 
     Booking booking = bookingRepository.save(new Booking(bookingFlight.getStartDate(),
             bookingFlight.getTotalPrice(), user, flight));
+
+    for (Seat seat: seats) {
+      seat.setBooking(booking);
+      seatService.save(seat);
+    }
 
     return new BookingOneWayFlightResponseDTO(booking.getBookingDate(), booking.getStartDate(), booking.getTotalPrice(),
             flightService.convertToFlightDTO(booking.getOutboundFlight()));

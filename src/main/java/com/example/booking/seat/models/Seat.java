@@ -46,6 +46,11 @@ public class Seat {
   @JoinColumn(name = "flight_id", nullable = false)
   private Flight flight;
 
+  @JsonIgnore
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "booking_id")
+  private Booking booking;
+
   public Seat(String seatNumber, SeatType seatType, int price, Boolean availability) {
     this.seatNumber = seatNumber;
     this.seatType = seatType;

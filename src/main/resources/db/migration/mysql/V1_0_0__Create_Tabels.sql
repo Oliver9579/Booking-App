@@ -18,16 +18,6 @@ CREATE TABLE IF NOT EXISTS flights (
                          created_at BIGINT NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS seats (
-                       id INT PRIMARY KEY AUTO_INCREMENT,
-                       seat_number VARCHAR(10),
-                       seat_type VARCHAR(50),
-                       price INT NOT NULL,
-                       availability BOOLEAN,
-                       flight_id INT,
-                       FOREIGN KEY (flight_id) REFERENCES flights(id)
-);
-
 CREATE TABLE IF NOT EXISTS hotels (
                         id INT PRIMARY KEY AUTO_INCREMENT,
                         name VARCHAR(255) NOT NULL,
@@ -37,16 +27,6 @@ CREATE TABLE IF NOT EXISTS hotels (
                         img VARCHAR(255),
                         created_at BIGINT NOT NULL
 );
-
-CREATE TABLE IF NOT EXISTS rooms (
-                       id INT PRIMARY KEY AUTO_INCREMENT,
-                       room_type VARCHAR(50),
-                       capacity INT,
-                       price_per_night INT NOT NULL,
-                       hotel_id INT,
-                       FOREIGN KEY (hotel_id) REFERENCES hotels(id)
-);
-
 
 CREATE TABLE IF NOT EXISTS cars (
                              id INT PRIMARY KEY AUTO_INCREMENT,
@@ -78,6 +58,29 @@ CREATE TABLE IF NOT EXISTS bookings (
                             FOREIGN KEY (outbound_flight_id) REFERENCES flights(id),
                             FOREIGN KEY (return_flight_id) REFERENCES flights(id),
                             FOREIGN KEY (hotel_id) REFERENCES hotels(id)
+);
+
+CREATE TABLE IF NOT EXISTS seats (
+                            id INT PRIMARY KEY AUTO_INCREMENT,
+                            seat_number VARCHAR(10),
+                            seat_type VARCHAR(50),
+                            price INT NOT NULL,
+                            availability BOOLEAN,
+                            flight_id INT,
+                            booking_id INT,
+                            FOREIGN KEY (flight_id) REFERENCES flights(id),
+                            FOREIGN KEY (booking_id) REFERENCES bookings(id)
+);
+
+CREATE TABLE IF NOT EXISTS rooms (
+                            id INT PRIMARY KEY AUTO_INCREMENT,
+                            room_type VARCHAR(50),
+                            capacity INT,
+                            price_per_night INT NOT NULL,
+                            hotel_id INT,
+                            booking_id INT,
+                            FOREIGN KEY (hotel_id) REFERENCES hotels(id),
+                            FOREIGN KEY (booking_id) REFERENCES bookings(id)
 );
 
 CREATE TABLE IF NOT EXISTS reviews (

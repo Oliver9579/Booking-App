@@ -1,5 +1,6 @@
 package com.example.booking.room.models;
 
+import com.example.booking.booking.models.Booking;
 import com.example.booking.date.models.Days;
 import com.example.booking.hotel.models.Hotel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -49,6 +50,11 @@ public class Room {
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "hotel_id", nullable = false)
   private Hotel hotel;
+
+  @JsonIgnore
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "booking_id")
+  private Booking booking;
 
   public Room(RoomType roomType, int capacity, int pricePerNight) {
     this.roomType = roomType;

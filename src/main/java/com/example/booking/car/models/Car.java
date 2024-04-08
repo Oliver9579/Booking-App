@@ -2,6 +2,7 @@ package com.example.booking.car.models;
 
 import com.example.booking.booking.models.Booking;
 import com.example.booking.date.models.Days;
+import com.example.booking.review.models.Review;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -75,6 +76,9 @@ public class Car {
 
   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
   private List<Booking> booking = new ArrayList<>();
+
+  @OneToMany(mappedBy = "car", cascade = CascadeType.ALL)
+  private List<Review> reviews = new ArrayList<>();
 
   public Car(String brand, String model, CarType carType, String pickUpLocation,
              String dropOffLocation, int pricePerDay) {

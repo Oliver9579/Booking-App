@@ -1,6 +1,7 @@
 package com.example.booking.flight.models;
 
 import com.example.booking.booking.models.Booking;
+import com.example.booking.review.models.Review;
 import com.example.booking.seat.models.Seat;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -57,6 +58,9 @@ public class Flight {
 
   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
   private List<Booking> bookings = new ArrayList<>();
+
+  @OneToMany(mappedBy = "flight", cascade = CascadeType.ALL)
+  private List<Review> reviews = new ArrayList<>();
 
   public Flight(String airline, String origin, String destination, Date departureDate, int duration) {
     this.airline = airline;

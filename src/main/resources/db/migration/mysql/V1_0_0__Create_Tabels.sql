@@ -85,13 +85,16 @@ CREATE TABLE IF NOT EXISTS rooms (
 
 CREATE TABLE IF NOT EXISTS reviews (
                         id INT PRIMARY KEY AUTO_INCREMENT,
-                        review_type VARCHAR(255) NOT NULL,
-                        review_id INT NOT NULL,
-                        rating INT NOT NULL,
-                        comment VARCHAR(2000),
-                        review_date BIGINT NOT NULL,
+                        comment VARCHAR(2000) NOT NULL ,
+                        review_date DATETIME NOT NULL ,
                         user_id INT NOT NULL,
-                        FOREIGN KEY (user_id) REFERENCES users(id)
+                        flight_id INT,
+                        hotel_id INT,
+                        car_id INT,
+                        FOREIGN KEY (user_id) REFERENCES users(id),
+                        FOREIGN KEY (flight_id) REFERENCES flights(id),
+                        FOREIGN KEY (hotel_id) REFERENCES hotels(id),
+                        FOREIGN KEY (car_id) REFERENCES cars(id)
 );
 
 CREATE TABLE IF NOT EXISTS dates (

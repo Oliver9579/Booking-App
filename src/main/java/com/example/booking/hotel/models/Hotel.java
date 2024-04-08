@@ -1,6 +1,7 @@
 package com.example.booking.hotel.models;
 
 import com.example.booking.booking.models.Booking;
+import com.example.booking.review.models.Review;
 import com.example.booking.room.models.Room;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
@@ -54,5 +55,8 @@ public class Hotel {
 
   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
   private List<Booking> booking = new ArrayList<>();
+
+  @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL)
+  private List<Review> reviews = new ArrayList<>();
 
 }

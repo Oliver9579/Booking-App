@@ -2,6 +2,7 @@ package com.example.booking.user.models;
 
 import com.example.booking.booking.models.Booking;
 import com.example.booking.email.models.EmailVerificationToken;
+import com.example.booking.review.models.Review;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -68,6 +69,9 @@ public class User implements UserDetails {
 
   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
   private List<Booking> booking = new ArrayList<>();
+
+  @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+  private List<Review> reviews = new ArrayList<>();
 
   public User(String firstName, String lastName, String userName, String email, String password, String phoneNumber) {
     this.firstName = firstName;

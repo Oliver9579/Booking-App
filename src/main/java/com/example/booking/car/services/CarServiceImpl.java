@@ -7,6 +7,7 @@ import com.example.booking.date.services.DaysService;
 import com.example.booking.exceptions.NoAvailableCarException;
 import com.example.booking.exceptions.NoCarFoundException;
 import com.example.booking.exceptions.SameDateException;
+import com.example.booking.review.services.ReviewService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -20,12 +21,14 @@ public class CarServiceImpl implements CarService {
 
   private CarRepository carRepository;
   private DaysService daysService;
+  private ReviewService reviewService;
 
 
   @Override
   public CarListDTO getCarsWithSameDropOffLocation(CarSameDropOffRequestDTO carSameDropOffRequest,
                                                    String carType, Integer capacity, String transmissionType) {
-    if (carSameDropOffRequest.getPickUpDateString().equals(carSameDropOffRequest.getDropOffDateString())) throw new SameDateException();
+    if (carSameDropOffRequest.getPickUpDateString().equals(carSameDropOffRequest.getDropOffDateString()))
+      throw new SameDateException();
     List<Car> cars = carRepository.findSameDropOffLocationCar(carSameDropOffRequest.getPickUpLocation(),
             carType, capacity, transmissionType);
     List<Car> availableCars = getCarsByDates(carSameDropOffRequest, cars);
@@ -39,7 +42,8 @@ public class CarServiceImpl implements CarService {
   @Override
   public CarListDTO getCarsWithDifferentDropOffLocation(CarDifferentDropOffRequestDTO carDifferentDropOff,
                                                         String carType, Integer capacity, String transmissionType) {
-    if (carDifferentDropOff.getPickUpDateString().equals(carDifferentDropOff.getDropOffDateString())) throw new SameDateException();
+    if (carDifferentDropOff.getPickUpDateString().equals(carDifferentDropOff.getDropOffDateString()))
+      throw new SameDateException();
     List<Car> cars = carRepository.findByPickUpLocationAndDropOffLocation(
             carDifferentDropOff.getPickUpLocation(), carDifferentDropOff.getDropOffLocation(),
             carType, capacity, transmissionType);
@@ -70,7 +74,9 @@ public class CarServiceImpl implements CarService {
     if (cars.isEmpty()) throw new NoCarFoundException();
     return cars.stream().map(car -> new AllCarsDTO(car.getId(), car.getBrand(), car.getModel(), car.getCarType(),
             car.getCapacity(), car.getTransmissionType(), car.getPickUpLocation(), car.getDropOffLocation(),
-            car.getPricePerDay(), car.getImg())).collect(Collectors.toList());
+            car.getPricePerDay(), car.getImg(),
+            car.getReviews().stream().map(review -> reviewService.convertToResponse(review))
+                    .collect(Collectors.toList()))).collect(Collectors.toList());
 
   }
 
@@ -84,7 +90,9 @@ public class CarServiceImpl implements CarService {
     return new CarDTO(car.getId(), car.getBrand(), car.getModel(), car.getCarType(),
             car.getCapacity(), car.getTransmissionType(), car.getPickUpLocation(),
             car.getDropOffLocation(), pickUpDate, dropOffDate,
-            car.getPricePerDay() * travelLength, car.getImg());
+            car.getPricePerDay() * travelLength, car.getImg(),
+            car.getReviews().stream().map(review -> reviewService.convertToResponse(review))
+                    .collect(Collectors.toList()));
   }
 
   private List<Car> getCarsByDates(CarRequestDTO carRequest, List<Car> cars) {

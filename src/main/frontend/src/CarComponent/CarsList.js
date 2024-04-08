@@ -7,7 +7,7 @@ class CarList extends Component {
 
         return (
             <div>
-                <h2>Cars</h2>
+                <h2 className="blur-include">Cars</h2>
                 {cars.map((car, index) => (
                     <CarCard key={index} car={car} isAll={isAll} searchData={searchData}/>
                 ))}

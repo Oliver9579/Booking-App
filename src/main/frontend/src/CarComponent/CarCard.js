@@ -4,16 +4,30 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPerson, faSnowflake, faEuroSign} from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
+import Review from "../ReviewComponent/Review";
 
 const CarCard = ({car, isAll, searchData}) => {
 
     const navigate = useNavigate();
+    const [showReviewsModal, setShowReviewsModal] = useState(false);
 
     const [showTransmissionDescription, setShowTransmissionDescription] = useState(false);
     const [showPassengers, setShowPassengers] = useState(false);
     const [showAirConditioning, setShowAirConditioning] = useState(false);
 
     const [bookingSuccess, setBookingSuccess] = useState(false);
+
+    const toggleReviewsModal = () => {
+        setShowReviewsModal(!showReviewsModal);
+        let blurIncludeDivs = document.querySelectorAll(".blur-include");
+        if (!showReviewsModal) {
+            document.body.style.overflow = 'hidden';
+            blurIncludeDivs.forEach((value) => value.classList.add('blur'));
+        } else {
+            blurIncludeDivs.forEach((value) => value.classList.remove('blur'));
+            document.body.style.overflow = 'auto';
+        }
+    };
 
     const handleBooking = async () => {
         const requestBody = {
@@ -50,7 +64,7 @@ const CarCard = ({car, isAll, searchData}) => {
 
     return (
         <div>
-            <div className="car-card row">
+            <div className={`car-card row blur-include`}>
                 <div className="col-4" style={{padding: '0px'}}>
                     <img src={require(`./img/${car.img}`)} alt={`${car.brand} ${car.model}`}
                          style={{
@@ -67,6 +81,9 @@ const CarCard = ({car, isAll, searchData}) => {
                         <div className="p-2 d-inline"><strong
                             style={{fontSize: '150%'}}> {car.brand} {car.model}</strong></div>
                         <div className="p-2 d-inline">Id: {car.id}</div>
+                        <button className="p-2 d-inline btn btn-primary reviewsButton"
+                                type="submit" onClick={toggleReviewsModal}><span></span>Reviews
+                        </button>
                     </div>
                     <div style={{textAlign: "left", padding: '8px'}}>
                         {showTransmissionDescription && (
@@ -142,6 +159,28 @@ const CarCard = ({car, isAll, searchData}) => {
                 )}
             </div>
             <br/>
+            {showReviewsModal && (
+                <div className="modal show blur-exclude review" tabIndex="-1" role="dialog" style={{display: 'block'}}>
+                    <div className="modal-dialog" role="document">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h5 className="modal-title">Reviews</h5>
+                                <button type="button" className="close" onClick={toggleReviewsModal}>
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div className="modal-body">
+                                <Review reviews={car.reviews}></Review>
+                            </div>
+                            <div className="modal-footer">
+                                <button type="button" className="btn btn-secondary" onClick={toggleReviewsModal}>Close
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
+
         </div>
     );
 

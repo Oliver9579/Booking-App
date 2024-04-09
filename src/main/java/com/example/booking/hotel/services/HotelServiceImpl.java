@@ -7,6 +7,7 @@ import com.example.booking.exceptions.SameDateException;
 import com.example.booking.hotel.DTOs.*;
 import com.example.booking.hotel.models.Hotel;
 import com.example.booking.hotel.repositories.HotelRepository;
+import com.example.booking.review.services.ReviewService;
 import com.example.booking.room.models.Room;
 import com.example.booking.room.models.RoomBookingDTO;
 import com.example.booking.room.models.RoomType;
@@ -24,6 +25,7 @@ public class HotelServiceImpl implements HotelService {
   private HotelRepository hotelRepository;
   private RoomService roomService;
   private DaysService daysService;
+  private ReviewService reviewService;
 
   @Override
   public HotelListDTO getAllByLocation(HotelRequestDTO hotelRequest) {
@@ -49,8 +51,11 @@ public class HotelServiceImpl implements HotelService {
   public List<AllHotelDTO> getAllHotel() {
     List<Hotel> hotels = hotelRepository.findAll();
     return (hotels.stream().map(hotel -> new AllHotelDTO(
-            hotel.getId(), hotel.getName(), hotel.getLocation(), hotel.getStreet(), hotel.getStars(),
-            hotel.getImg()))).collect(Collectors.toList());
+            hotel.getId(), hotel.getName(), hotel.getLocation(), hotel.getStreet(), hotel.getStars(), hotel.getImg(),
+            hotel.getReviews().stream()
+                    .map(review -> reviewService.convertToResponse(review))
+                    .collect(Collectors.toList()))))
+            .collect(Collectors.toList());
   }
 
   @Override
@@ -62,7 +67,8 @@ public class HotelServiceImpl implements HotelService {
   public HotelBookingResponseDTO convertToResponseDTO(Hotel hotel) {
     return new HotelBookingResponseDTO(hotel.getId(), hotel.getName(), hotel.getLocation(), hotel.getStreet(),
             hotel.getStars(), hotel.getRooms().stream().map(room -> new RoomBookingDTO(room.getId(), room.getRoomType(),
-            room.getCapacity(), room.getPricePerNight())).collect(Collectors.toList()));
+            room.getCapacity(), room.getPricePerNight())).collect(Collectors.toList()),
+            hotel.getReviews().stream().map(review -> reviewService.convertToResponse(review)).collect(Collectors.toList()));
   }
 
 
@@ -77,7 +83,8 @@ public class HotelServiceImpl implements HotelService {
             hotel.getStreet(), hotel.getStars(), (daysService.getFullTravelDates(checkInDate, checkOutDate).size()) - 1,
             hotel.getImg(), roomService.convertToRoomDTO(roomService.getRoomsByType(hotel, RoomType.values()),
             roomService.getRoomsCountByType(hotel.getRooms()),
-            checkInDate, checkOutDate));
+            checkInDate, checkOutDate),
+            hotel.getReviews().stream().map(review -> reviewService.convertToResponse(review)).collect(Collectors.toList()));
   }
 
 }

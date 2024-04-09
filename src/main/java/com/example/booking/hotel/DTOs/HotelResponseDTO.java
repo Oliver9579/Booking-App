@@ -1,5 +1,6 @@
 package com.example.booking.hotel.DTOs;
 
+import com.example.booking.review.DTOs.ReviewResponseDTO;
 import com.example.booking.room.DTOs.RoomDTO;
 import lombok.Data;
 
@@ -16,8 +17,9 @@ public class HotelResponseDTO {
   private int numberOfNights;
   private String img;
   private List<RoomDTO> rooms;
+  private List<ReviewResponseDTO> reviews;
 
-  public HotelResponseDTO(int id, String name, String location, String street, int stars, int numberOfNights, String img, List<RoomDTO> rooms) {
+  public HotelResponseDTO(int id, String name, String location, String street, int stars, int numberOfNights, String img, List<RoomDTO> rooms, List<ReviewResponseDTO> reviews) {
     this.id = id;
     this.name = name;
     this.location = location;
@@ -26,5 +28,6 @@ public class HotelResponseDTO {
     this.numberOfNights = numberOfNights;
     this.img = img;
     this.rooms = rooms;
+    this.reviews = reviews;
   }
 }

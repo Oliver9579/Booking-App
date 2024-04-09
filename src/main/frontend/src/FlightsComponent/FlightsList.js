@@ -29,14 +29,14 @@ class FlightsList extends Component {
             }
             return (
                 <div>
-                    <h2>Flight List</h2>
+                    <h2 className="blur-include">Flight List</h2>
                     {flightCards}
                 </div>
             );
         } else {
             return (
                 <div>
-                    <h2>Flight List</h2>
+                    <h2 className="blur-include">Flight List</h2>
                     {flights.map((flight, index) => (
                         <FlightOneWayCard key={index} flight={flight} searchData={searchData} isAll={isAll}/>
                     ))}

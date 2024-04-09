@@ -66,11 +66,11 @@ const Flights = () => {
 
     return (
         <div style={{width: '60%'}}>
-            <div style={{marginBottom: '5%'}}>
+            <div style={{marginBottom: '5%'}} className="blur-include">
                 <Navbar/>
             </div>
             <div>
-                <div className="form-outline mb-4 mw-100">
+                <div className="form-outline mb-4 mw-100 blur-include">
                     <FlightSearchBar onSearch={searchFlights}/>
                 </div>
                 {errorMessage === '' ? (

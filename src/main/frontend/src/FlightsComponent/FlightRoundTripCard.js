@@ -1,10 +1,37 @@
-import React from 'react';
+import React, {useState} from 'react';
 import "./FlightOneWayCard.css"
+import "../ReviewComponent/Review.css"
 import {useNavigate} from "react-router-dom";
+import Review from "../ReviewComponent/Review";
 
 const FlightRoundTripCard = ({flightToDestination, flightReturn}) => {
 
     const navigate = useNavigate();
+    const [showFlightToDestinationReviewsModal, setShowFlightToDestinationReviewsModal] = useState(false);
+    const [showFlightReturnReviewsModal, setShowFlightReturnReviewsModal] = useState(false);
+    const toggleFlightToDestinationReviewsModal = () => {
+        setShowFlightToDestinationReviewsModal(!showFlightToDestinationReviewsModal);
+        let blurIncludeDivs = document.querySelectorAll(".blur-include");
+        if (!showFlightToDestinationReviewsModal) {
+            document.body.style.overflow = 'hidden';
+            blurIncludeDivs.forEach((value) => value.classList.add('blur'));
+        } else {
+            blurIncludeDivs.forEach((value) => value.classList.remove('blur'));
+            document.body.style.overflow = 'auto';
+        }
+    };
+
+    const toggleFlightReturnReviewsModal = () => {
+        setShowFlightReturnReviewsModal(!showFlightReturnReviewsModal);
+        let blurIncludeDivs = document.querySelectorAll(".blur-include");
+        if (!showFlightReturnReviewsModal) {
+            document.body.style.overflow = 'hidden';
+            blurIncludeDivs.forEach((value) => value.classList.add('blur'));
+        } else {
+            blurIncludeDivs.forEach((value) => value.classList.remove('blur'));
+            document.body.style.overflow = 'auto';
+        }
+    };
 
     const handleSelect = () => {
         navigate('/booking/flights/roundTrip', {state: {flightToDestination, flightReturn}});
@@ -51,10 +78,13 @@ const FlightRoundTripCard = ({flightToDestination, flightReturn}) => {
 
     return (
         <div>
-            <div className="flight-card">
+            <div className="flight-card blur-include">
                 <div style={{textAlign: "center"}}>
                     <div className="p-2 d-inline">{flightToDestination.airline}</div>
                     <div className="p-2 d-inline">Id: {flightToDestination.id}</div>
+                    <button className="p-2 d-inline btn btn-primary reviewsButton"
+                            type="submit" onClick={toggleFlightToDestinationReviewsModal}><span></span>Reviews
+                    </button>
                 </div>
                 <div style={{textAlign: "center"}}>
                     <div
@@ -77,6 +107,9 @@ const FlightRoundTripCard = ({flightToDestination, flightReturn}) => {
                 <div style={{textAlign: "center"}}>
                     <div className="p-2 d-inline">{flightReturn.airline}</div>
                     <div className="p-2 d-inline">Id: {flightReturn.id}</div>
+                    <button className="p-2 d-inline btn btn-primary reviewsButton"
+                            type="submit" onClick={toggleFlightReturnReviewsModal}><span></span>Reviews
+                    </button>
                 </div>
                 <div style={{textAlign: "center"}}>
                     <div className="p-2 d-inline">{flightReturn.origin} to {flightReturn.destination}</div>
@@ -98,6 +131,14 @@ const FlightRoundTripCard = ({flightToDestination, flightReturn}) => {
                 </div>
             </div>
             <br/>
+
+            <Review reviews={flightToDestination.reviews} toggleReviewsModal={toggleFlightToDestinationReviewsModal}
+                    showReviewsModal={showFlightToDestinationReviewsModal}></Review>
+
+            <Review reviews={flightReturn.reviews} toggleReviewsModal={toggleFlightReturnReviewsModal}
+                    showReviewsModal={showFlightReturnReviewsModal}></Review>
+
+
         </div>
     );
 };

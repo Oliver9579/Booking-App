@@ -43,9 +43,10 @@ const FlightOneWayCard = ({flight, isAll}) => {
                 <div style={{textAlign: "center"}}>
                     <div className="p-2 d-inline">{flight.airline}</div>
                     <div className="p-2 d-inline">Id: {flight.id}</div>
-                    <button className="p-2 d-inline btn btn-primary reviewsButton"
+                    <button className="p-2 d-inline btn btn-primary reviews-button"
                             type="submit" onClick={toggleReviewsModal}><span></span>Reviews
                     </button>
+                    <div className="p-2 d-inline">({flight.reviews.length})</div>
                 </div>
                 <div style={{textAlign: "center"}}>
                     <div className="p-2 d-inline">{flight.origin} to {flight.destination}</div>

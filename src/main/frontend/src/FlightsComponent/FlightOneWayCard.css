@@ -5,3 +5,8 @@
     border: 1px solid #ccc;
     border-radius: 5px;
 }
+
+.reviews-button {
+    background-color: white;
+    color: #0066A2;
+}

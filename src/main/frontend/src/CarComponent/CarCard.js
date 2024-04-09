@@ -81,9 +81,10 @@ const CarCard = ({car, isAll, searchData}) => {
                         <div className="p-2 d-inline"><strong
                             style={{fontSize: '150%'}}> {car.brand} {car.model}</strong></div>
                         <div className="p-2 d-inline">Id: {car.id}</div>
-                        <button className="p-2 d-inline btn btn-primary reviewsButton"
+                        <button className="p-2 d-inline btn btn-primary reviews-button"
                                 type="submit" onClick={toggleReviewsModal}><span></span>Reviews
                         </button>
+                        <div className="p-2 d-inline">({car.reviews.length})</div>
                     </div>
                     <div style={{textAlign: "left", padding: '8px'}}>
                         {showTransmissionDescription && (

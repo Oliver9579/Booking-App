@@ -82,9 +82,10 @@ const FlightRoundTripCard = ({flightToDestination, flightReturn}) => {
                 <div style={{textAlign: "center"}}>
                     <div className="p-2 d-inline">{flightToDestination.airline}</div>
                     <div className="p-2 d-inline">Id: {flightToDestination.id}</div>
-                    <button className="p-2 d-inline btn btn-primary reviewsButton"
+                    <button className="p-2 d-inline btn btn-primary reviews-button"
                             type="submit" onClick={toggleFlightToDestinationReviewsModal}><span></span>Reviews
                     </button>
+                    <div className="p-2 d-inline">({flightToDestination.reviews.length})</div>
                 </div>
                 <div style={{textAlign: "center"}}>
                     <div
@@ -107,9 +108,10 @@ const FlightRoundTripCard = ({flightToDestination, flightReturn}) => {
                 <div style={{textAlign: "center"}}>
                     <div className="p-2 d-inline">{flightReturn.airline}</div>
                     <div className="p-2 d-inline">Id: {flightReturn.id}</div>
-                    <button className="p-2 d-inline btn btn-primary reviewsButton"
+                    <button className="p-2 d-inline btn btn-primary reviews-button"
                             type="submit" onClick={toggleFlightReturnReviewsModal}><span></span>Reviews
                     </button>
+                    <div className="p-2 d-inline">({flightReturn.reviews.length})</div>
                 </div>
                 <div style={{textAlign: "center"}}>
                     <div className="p-2 d-inline">{flightReturn.origin} to {flightReturn.destination}</div>

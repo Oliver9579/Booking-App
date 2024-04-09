@@ -45,9 +45,10 @@ const HotelCard = ({hotel, isAll, searchData}) => {
                     <div style={{textAlign: "left"}}>
                         <div className="p-2 d-inline"><strong> {hotel.name}</strong></div>
                         <div className="p-2 d-inline">Id: {hotel.id}</div>
-                        <button className="p-2 d-inline btn btn-primary reviewsButton"
+                        <button className="p-2 d-inline btn btn-primary reviews-button"
                                 type="submit" onClick={toggleReviewsModal}><span></span>Reviews
                         </button>
+                        <div className="p-2 d-inline">({hotel.reviews.length})</div>
                     </div>
                     <div style={{textAlign: "left"}}>
                         <div className="p-2 d-inline">{generateStars()}</div>

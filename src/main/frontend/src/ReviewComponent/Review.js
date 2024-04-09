@@ -14,19 +14,25 @@ const Review = ({reviews, toggleReviewsModal, showReviewsModal}) => {
                             </button>
                         </div>
                         <div className="modal-body">
-                            {reviews.map((review, index) => (
-                                <div key={index}>
-                                    <div>
-                                        <strong>Username:</strong> {review.username} - <strong>Review
-                                        Date:</strong> {review.reviewDate}
+                            {reviews.length > 0 ? (
+                                reviews.map((review, index) => (
+                                    <div key={index}>
+                                        <div>
+                                            <strong>Username:</strong> {review.username} - <strong>Review
+                                            Date:</strong> {review.reviewDate}
+                                        </div>
+                                        <div>
+                                            <strong>Comment:</strong> {review.comment}
+                                        </div>
+                                        <hr/>
                                     </div>
-                                    <div>
-                                        <strong>Comment:</strong> {review.comment}
-                                    </div>
-                                    <hr/>
+                                ))
+                            ) : (
+                                <div className="alert alert-danger">
+                                    <h6>There are no reviews!</h6>
                                 </div>
-                            ))}
-                        </div>
+                            )}
+                        < /div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-secondary" onClick={toggleReviewsModal}>Close
                             </button>

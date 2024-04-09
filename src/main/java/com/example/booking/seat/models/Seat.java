@@ -1,6 +1,5 @@
 package com.example.booking.seat.models;
 
-import com.example.booking.booking.models.Booking;
 import com.example.booking.flight.models.Flight;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
@@ -10,7 +9,6 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.List;
 
 @Setter
 @Getter
@@ -45,11 +43,6 @@ public class Seat {
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "flight_id", nullable = false)
   private Flight flight;
-
-  @JsonIgnore
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "booking_id")
-  private Booking booking;
 
   public Seat(String seatNumber, SeatType seatType, int price, Boolean availability) {
     this.seatNumber = seatNumber;

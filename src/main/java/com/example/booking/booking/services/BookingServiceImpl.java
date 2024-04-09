@@ -27,6 +27,7 @@ import com.example.booking.user.services.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -49,12 +50,7 @@ public class BookingServiceImpl implements BookingService {
     List<Seat> seats = seatService.setSeatsAvailabilityFalse(seatService.getSeatsById(bookingFlight.getSeatsId()));
 
     Booking booking = bookingRepository.save(new Booking(bookingFlight.getStartDate(),
-            bookingFlight.getTotalPrice(), user, flight));
-
-    for (Seat seat: seats) {
-      seat.setBooking(booking);
-      seatService.save(seat);
-    }
+            bookingFlight.getTotalPrice(), user, flight, seats));
 
     return new BookingOneWayFlightResponseDTO(booking.getBookingDate(), booking.getStartDate(), booking.getTotalPrice(),
             flightService.convertToFlightDTO(booking.getOutboundFlight()));
@@ -65,16 +61,16 @@ public class BookingServiceImpl implements BookingService {
           User user, BookingRoundTripFlightRequestDTO bookingFlight) {
     Flight flightToDestination = flightService.getFlightById(bookingFlight.getOutboundFlightId());
     Flight flightReturn = flightService.getFlightById(bookingFlight.getReturnFlightId());
+    List<Seat> seatsForFlightOne = seatService.setSeatsAvailabilityFalse(
+            seatService.getSeatsById(bookingFlight.getOutboundFlightSeatsId()));
+    List<Seat> seatsForFlightTwo = seatService.setSeatsAvailabilityFalse(
+            seatService.getSeatsById(bookingFlight.getReturnFlightSeatsId()));
 
-    flightToDestination.setSeats(seatService.setSeatsAvailabilityFalse(
-            seatService.getSeatsById(bookingFlight.getOutboundFlightSeatsId())));
-
-    flightReturn.setSeats(seatService.setSeatsAvailabilityFalse(
-            seatService.getSeatsById(bookingFlight.getReturnFlightSeatsId())));
-
+    List<Seat> seats = new ArrayList<>(seatsForFlightOne);
+    seats.addAll(seatsForFlightTwo);
 
     Booking booking = bookingRepository.save(new Booking(bookingFlight.getStartDate(), bookingFlight.getEndDate(),
-            bookingFlight.getTotalPrice(), user, flightToDestination, flightReturn));
+            bookingFlight.getTotalPrice(), user, flightToDestination, flightReturn, seats));
 
     return new BookingRoundTripFlightResponseDTO(
             booking.getBookingDate(), booking.getStartDate(), booking.getEndDate(), booking.getTotalPrice(),
@@ -94,10 +90,10 @@ public class BookingServiceImpl implements BookingService {
 
     List<Room> oneRoomForEachRequestType = roomService.getOneRoomForEachGivenType(availableRooms, bookingHotel.getRooms());
 
-    hotel.setRooms(roomService.setUnavailableDates(oneRoomForEachRequestType, days));
+    roomService.setUnavailableDates(oneRoomForEachRequestType, days);
 
     Booking booking = bookingRepository.save(new Booking(bookingHotel.getStartDate(), bookingHotel.getEndDate(),
-            bookingHotel.getTotalPrice(), user, hotel));
+            bookingHotel.getTotalPrice(), user, hotel, oneRoomForEachRequestType));
 
     return new BookingHotelResponseDTO(booking.getBookingDate(), booking.getStartDate(), booking.getEndDate(),
             booking.getTotalPrice(), hotelService.convertToResponseDTO(hotel));

@@ -13,7 +13,6 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -64,11 +63,21 @@ public class Booking {
   @JoinColumn(name = "hotel_id")
   private Hotel hotel;
 
-  @OneToMany(mappedBy = "booking")
-  private List<Room> rooms = new ArrayList<>();
+  @OneToMany
+  @JoinTable(
+          name = "booking_seats",
+          joinColumns = @JoinColumn(name = "booking_id"),
+          inverseJoinColumns = @JoinColumn(name = "seat_id")
+  )
+  private List<Seat> bookedSeats;
 
-  @OneToMany(mappedBy = "booking")
-  private List<Seat> seats = new ArrayList<>();
+  @OneToMany
+  @JoinTable(
+          name = "booking_rooms",
+          joinColumns = @JoinColumn(name = "booking_id"),
+          inverseJoinColumns = @JoinColumn(name = "room_id")
+  )
+  private List<Room> bookedRooms;
 
   public Booking(User user, Date startDate, Date endDate, int totalPrice) {
     this.user = user;
@@ -78,17 +87,18 @@ public class Booking {
     this.totalPrice = totalPrice;
   }
 
-  public Booking(Date startDate, int totalPrice, User user,
-                 Flight outboundFlight) {
+  public Booking(Date startDate, int totalPrice, User user, Flight outboundFlight,
+                 List<Seat> bookedSeats) {
     this.bookingDate = new Date();
     this.startDate = startDate;
     this.totalPrice = totalPrice;
     this.user = user;
     this.outboundFlight = outboundFlight;
+    this.bookedSeats = bookedSeats;
   }
 
   public Booking(Date startDate, Date endDate, int totalPrice, User user, Flight outboundFlight,
-                 Flight returnFlight) {
+                 Flight returnFlight, List<Seat> bookedSeats) {
     this.bookingDate = new Date();
     this.startDate = startDate;
     this.endDate = endDate;
@@ -96,15 +106,17 @@ public class Booking {
     this.user = user;
     this.outboundFlight = outboundFlight;
     this.returnFlight = returnFlight;
+    this.bookedSeats = bookedSeats;
   }
 
-  public Booking(Date startDate, Date endDate, int totalPrice, User user, Hotel hotel) {
+  public Booking(Date startDate, Date endDate, int totalPrice, User user, Hotel hotel, List<Room> bookedRooms) {
     this.bookingDate = new Date();
     this.startDate = startDate;
     this.endDate = endDate;
     this.totalPrice = totalPrice;
     this.user = user;
     this.hotel = hotel;
+    this.bookedRooms = bookedRooms;
   }
 
   public Booking(Date startDate, Date endDate, int totalPrice, User user, Car car) {

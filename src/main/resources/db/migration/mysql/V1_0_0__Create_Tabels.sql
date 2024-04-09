@@ -67,9 +67,7 @@ CREATE TABLE IF NOT EXISTS seats (
                             price INT NOT NULL,
                             availability BOOLEAN,
                             flight_id INT,
-                            booking_id INT,
-                            FOREIGN KEY (flight_id) REFERENCES flights(id),
-                            FOREIGN KEY (booking_id) REFERENCES bookings(id)
+                            FOREIGN KEY (flight_id) REFERENCES flights(id)
 );
 
 CREATE TABLE IF NOT EXISTS rooms (
@@ -78,9 +76,7 @@ CREATE TABLE IF NOT EXISTS rooms (
                             capacity INT,
                             price_per_night INT NOT NULL,
                             hotel_id INT,
-                            booking_id INT,
-                            FOREIGN KEY (hotel_id) REFERENCES hotels(id),
-                            FOREIGN KEY (booking_id) REFERENCES bookings(id)
+                            FOREIGN KEY (hotel_id) REFERENCES hotels(id)
 );
 
 CREATE TABLE IF NOT EXISTS reviews (
@@ -100,6 +96,20 @@ CREATE TABLE IF NOT EXISTS reviews (
 CREATE TABLE IF NOT EXISTS dates (
                         id INT PRIMARY KEY AUTO_INCREMENT,
                         date DATE NOT NULL
+);
+
+CREATE TABLE booking_seats (
+                        booking_id INT,
+                        seat_id INT,
+                        FOREIGN KEY (booking_id) REFERENCES bookings(id),
+                        FOREIGN KEY (seat_id) REFERENCES seats(id)
+);
+
+CREATE TABLE booking_rooms (
+                        booking_id INT,
+                        room_id INT,
+                        FOREIGN KEY (booking_id) REFERENCES bookings(id),
+                        FOREIGN KEY (room_id) REFERENCES rooms(id)
 );
 
 CREATE TABLE IF NOT EXISTS room_dates (

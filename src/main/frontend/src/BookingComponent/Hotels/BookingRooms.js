@@ -46,7 +46,7 @@ const BookingRooms = () => {
                             {totalRoomCount === 1 ? '1 room' : `${totalRoomCount} rooms`} for <br/>
                             <h3 style={{fontWeight: "normal"}}>{totalPriceSum} <FontAwesomeIcon icon={faEuroSign}/></h3>
                         </div>}
-                        <button className="btn btn-primary" onClick={handleBooking}
+                        <button className="btn btn-primary blur-include" onClick={handleBooking}
                                 disabled={!Object.values(roomCounts).some(count => count > 0)}>Book
                         </button>
                     </div> :
@@ -109,11 +109,11 @@ const BookingRooms = () => {
 
     return (
         <div style={{width: '60%'}}>
-            <h2 style={{paddingLeft: '15%'}}>Hotel</h2>
+            <h2 className="blur-include" style={{paddingLeft: '15%'}}>Hotel</h2>
             <HotelCard hotel={hotel} isAll={true}/>
             <br/>
-            <h4>Available Rooms</h4>
-            <div className="row" style={{backgroundColor: '#0096FF', color: "white"}}>
+            <h4 className="blur-include">Available Rooms</h4>
+            <div className="row blur-include" style={{backgroundColor: '#0096FF', color: "white"}}>
                 <div className="col-10 cols row" style={{padding: 0, textAlign: "center"}}>
                     <div className="col-3 room-details" style={{padding: 0}}>
                         <p style={{margin: '10%', fontWeight: "bold"}}>Room Type</p>

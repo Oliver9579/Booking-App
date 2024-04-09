@@ -3,6 +3,7 @@ import axios from 'axios';
 import HotelsSearchBar from "../HotelsComponent/HotelSearchBar";
 import HotelsList from "../HotelsComponent/HotelsList";
 import Navbar from "../NavBarComponent/Navbar";
+import "../ReviewComponent/Review.css"
 
 
 const Hotels = () => {
@@ -62,11 +63,11 @@ const Hotels = () => {
 
     return (
         <div style={{width: '60%'}}>
-            <div style={{marginBottom: '5%'}}>
+            <div className="blur-include" style={{marginBottom: '5%'}}>
                 <Navbar/>
             </div>
             <div>
-                <div className="form-outline mb-4 mw-100">
+                <div className="form-outline mb-4 mw-100 blur-include">
                     <HotelsSearchBar onSearch={searchHotels}/>
                 </div>
                 {errorMessage === '' ? (

@@ -55,7 +55,7 @@ const Room = ({room, searchData, onRoomCountChange}) => {
 
     const availableOptions = Array.from({length: room.availableNumber + 1}, (_, i) => i);
     return (
-        <div className="col-10 cols row" style={{padding: 0, textAlign: "center"}}>
+        <div className="col-10 cols row blur-include" style={{padding: 0, textAlign: "center"}}>
             <div className="col-3 room-data" style={{textAlign: "left", padding: 0}}>
                 <p style={{margin: '10% 5% 5% 5%'}}> {room.roomType} </p>
                 {renderRoomDescription(room.roomType)}

@@ -15,7 +15,7 @@ class HotelList extends Component {
         }
         return (
             <div>
-                <h2>Hotels</h2>
+                <h2 className="blur-include">Hotels</h2>
                 {hotels.map((hotel, index) => (
                     <HotelCard key={index} hotel={hotel} isAll={isAll} searchData={searchData}/>
                 ))}

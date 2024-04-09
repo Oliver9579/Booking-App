@@ -67,7 +67,7 @@ const BookingSeatsForRoundTrip = () => {
         const seatGroups = [];
         for (let i = 0; i < flightToDestination.seats.length; i += 6) {
             seatGroups.push(
-                <div className="row" key={i}>
+                <div className="row blur-include" key={i}>
                     {flightToDestination.seats.slice(i, 6 + i).map((seat, index) => (
                         <div key={index} className={'col-2'}
                              style={{paddingBottom: '7%', textAlign: "center"}}>
@@ -85,7 +85,7 @@ const BookingSeatsForRoundTrip = () => {
         const seatGroups = [];
         for (let i = 0; i < flightReturn.seats.length; i += 6) {
             seatGroups.push(
-                <div className="row" key={i}>
+                <div className="row blur-include" key={i}>
                     {flightReturn.seats.slice(i, 6 + i).map((seat, index) => (
                         <div key={index} className={'col-2'}
                              style={{paddingBottom: '7%', textAlign: "center"}}>
@@ -110,7 +110,7 @@ const BookingSeatsForRoundTrip = () => {
 
     return (
         <div>
-            <h2>Flight</h2>
+            <h2 className="blur-include">Flight</h2>
             <FlightOneWayCard flight={flightToDestination} isAll={true}/>
             <br/>
             <div className="container">

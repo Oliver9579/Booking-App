@@ -6,6 +6,7 @@ import com.example.booking.exceptions.SameDateException;
 import com.example.booking.flight.DTOs.*;
 import com.example.booking.flight.models.Flight;
 import com.example.booking.flight.reporitories.FlightRepository;
+import com.example.booking.review.services.ReviewService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,7 @@ import java.util.stream.Collectors;
 public class FlightServiceImpl implements FlightService {
 
   private FlightRepository flightRepository;
+  private ReviewService reviewService;
 
   @Override
   public FlightListDTO getAllFlights() {
@@ -35,7 +37,8 @@ public class FlightServiceImpl implements FlightService {
   @Override
   public FlightDTO convertToFlightDTO(Flight flight) {
     return new FlightDTO(flight.getId(), flight.getAirline(), flight.getOrigin(), flight.getDestination(),
-            flight.getDepartureDate(), flight.getDuration(), flight.getSeats());
+            flight.getDepartureDate(), flight.getDuration(), flight.getSeats(),
+            flight.getReviews().stream().map(review -> reviewService.convertToResponse(review)).collect(Collectors.toList()));
   }
 
   @Override

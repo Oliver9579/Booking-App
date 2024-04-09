@@ -1,7 +1,10 @@
 package com.example.booking.flight.DTOs;
 
+import com.example.booking.review.DTOs.ReviewResponseDTO;
 import com.example.booking.seat.models.Seat;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 import java.util.List;
@@ -18,5 +21,6 @@ public class FlightDTO {
   private Date departureDate;
   private int duration;
   private List<Seat> seats;
+  private List<ReviewResponseDTO> reviews;
 
 }

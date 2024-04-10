@@ -1,12 +1,47 @@
 .flight-card {
     max-width: 70%;
     margin: 0 auto;
-    padding: 20px;
+    /*padding: 20px;*/
     border: 1px solid #ccc;
-    border-radius: 5px;
+    /*border-radius: 5px;*/
+}
+
+.selected {
+    max-height: 100%;
+    height: 40px;
+    color: white;
+    background-color: #0096FF;
+    padding: 5px;
+    font-weight: bold;
+}
+
+.header {
+    max-height: 100%;
+    height: 40px;
+    padding: 5px;
+    color: darkslategray;
+    background-color: #DCDCDC;
+}
+
+.body {
+    max-height: 100%;
+    height: 150px;
+}
+
+.footer {
+    max-height: 100%;
+    height: 80px;
+    background-color: #DCDCDC;
 }
 
 .reviews-button {
     background-color: white;
     color: #0066A2;
+}
+
+.book-button {
+    max-height: 100%;
+    max-width: 100%;
+    width: 100%;
+    height: 100%;
 }

@@ -3,8 +3,12 @@ import "./FlightOneWayCard.css"
 import "../ReviewComponent/Review.css"
 import {useNavigate} from 'react-router-dom';
 import Review from "../ReviewComponent/Review";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faEuroSign, faPlane, faPlaneDeparture} from "@fortawesome/free-solid-svg-icons";
 
 const FlightOneWayCard = ({flight, isAll}) => {
+
+    //TODO 3 BETUS REPTER NÉV BEVEZETÉS
 
     const navigate = useNavigate();
     const [showReviewsModal, setShowReviewsModal] = useState(false);
@@ -30,42 +34,91 @@ const FlightOneWayCard = ({flight, isAll}) => {
 
     const hours = Math.floor(flight.duration / 60);
     const minutes = flight.duration % 60;
-    const formattedDuration = `${hours}h ${minutes}m`;
+    const formattedDuration = `${hours}h ${minutes}min`;
 
     const formattedDepartureDate = departureTime.toLocaleDateString();
     const formattedDepartureTime = departureTime.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'});
-    const formattedLandingDate = landingTime.toLocaleDateString();
     const formattedLandingTime = landingTime.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'});
+
+    const basePrice = flight.duration;
 
     return (
         <div>
-            <div className="flight-card blur-include" style={{maxWidth: '80%'}}>
-                <div style={{textAlign: "center"}}>
-                    <div className="p-2 d-inline">{flight.airline}</div>
-                    <div className="p-2 d-inline">Id: {flight.id}</div>
-                    <button className="p-2 d-inline btn btn-primary reviews-button"
+            {!isAll && (
+                <div className="flight-card selected blur-include" style={{maxWidth: '100%'}}>Your selected trip</div>
+            )}
+            <div className="flight-card header blur-include" style={{maxWidth: '100%'}}>
+                <FontAwesomeIcon icon={faPlaneDeparture}/> <p
+                style={{display: "inline", fontWeight: "bold"}}>Departure</p> {formattedDepartureDate}
+            </div>
+            <div className="flight-card body blur-include row"
+                 style={{maxWidth: '100%', margin: "auto", padding: '10px'}}>
+                <div className="col-4" style={{maxWidth: '100%', maxHeight: '100%', paddingTop: '2%'}}>
+                    <button className="btn btn-primary reviews-button"
+                            style={{height: '30%', marginLeft: '37%'}}
                             type="submit" onClick={toggleReviewsModal}><span></span>Reviews
                     </button>
-                    <div className="p-2 d-inline">({flight.reviews.length})</div>
+                    <div className="p-2 d-inline" style={{padding: '2px'}}>({flight.reviews.length})</div>
+                    <div style={{maxWidth: '100%', margin: '0'}}>
+                        <div className="row">
+                            <div className="col-4" style={{maxWidth: '150%'}}>
+                                <img src={require(`./img/${flight.img}`)} alt={flight.airline}
+                                     style={{maxWidth: '100%', height: 'auto'}}/>
+                            </div>
+                            <div className="col-8">
+                                <div style={{
+                                    fontSize: '12px',
+                                    fontWeight: "bold",
+                                    paddingTop: '8%'
+                                }}>{flight.airline}</div>
+                                <div style={{fontSize: '12px'}}>{flight.flightNumber}</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div style={{textAlign: "center"}}>
-                    <div className="p-2 d-inline">{flight.origin} to {flight.destination}</div>
+                <div className="col-3" style={{maxWidth: '100%', maxHeight: '100%', textAlign: "center"}}>
+                    <p
+                        style={{paddingTop: '10%'}}>
+                        <div style={{fontWeight: 'bold', fontSize: '30px'}}>{formattedDepartureTime}</div>
+                        <p className="d-inline" style={{fontWeight: 'bold'}}>BCN </p>
+                        <p className="d-inline">{flight.origin}</p>
+                        <div style={{fontSize: '15px', fontWeight: "lighter"}}>{flight.origin}</div>
+                    </p>
                 </div>
-                <div style={{textAlign: "center"}}>
-                    <div className="p-2 d-inline">Departure
-                        Time: {formattedDepartureDate} {formattedDepartureTime}</div>
-                    <div className="p-2 d-inline">Landing Time: {formattedLandingDate} {formattedLandingTime}</div>
+                <div className="col-2" style={{maxWidth: '100%', maxHeight: '100%', textAlign: "center"}}>
+                    <div style={{fontSize: '17px', paddingTop: '20%'}}>{formattedDuration}</div>
+                    <img src={require("./img/arrow.png")} alt="arrow"
+                         style={{maxWidth: '100%', height: 'auto', paddingLeft: '10px'}}/>
+                    <div style={{fontSize: '12px'}}>{flight.flightType}</div>
                 </div>
-                <div style={{textAlign: "center"}}>
-                    <div className="p-2 d-inline">Duration: {formattedDuration}</div>
+                <div className="col-3" style={{maxWidth: '100%', maxHeight: '100%', textAlign: "center"}}>
+                    <p
+                        style={{paddingTop: '10%'}}>
+                        <div style={{fontWeight: 'bold', fontSize: '30px'}}>{formattedLandingTime}</div>
+                        <p className="d-inline" style={{fontWeight: 'bold'}}>BCN </p>
+                        <p className="d-inline">{flight.destination}</p>
+                        <div style={{fontSize: '15px', fontWeight: "lighter"}}>{flight.destination}</div>
+                    </p>
                 </div>
-                {!isAll && (
-                    <div style={{textAlign: "right"}}>
-                        <button className="btn btn-primary " onClick={handleSelect} type="submit"><span></span>Select
+            </div>
+            {!isAll && (
+                <div className="flight-card footer blur-include text-right row"
+                     style={{maxWidth: '100%', padding: '2%'}}>
+                    <div className="col-8" style={{fontSize: '18px', paddingTop: '1%'}}><FontAwesomeIcon
+                        icon={faPlane}/> Standard ticket
+                    </div>
+                    <div className=" col-2">
+                        <div style={{fontSize: '20px', fontWeight: 'bold'}}><FontAwesomeIcon
+                            icon={faEuroSign}/> {basePrice}</div>
+                        <div className="" style={{fontSize: '10px', fontWeight: 'lighter'}}>price per person</div>
+                    </div>
+                    <div className="col-2" style={{padding: '0'}}>
+                        <button className="btn btn-primary book-button" onClick={handleSelect} type="submit">
+                            <span></span>Book
                         </button>
                     </div>
-                )}
-            </div>
+                </div>
+            )}
             <br/>
             <Review reviews={flight.reviews} toggleReviewsModal={toggleReviewsModal}
                     showReviewsModal={showReviewsModal}></Review>

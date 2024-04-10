@@ -22,14 +22,12 @@ VALUES ('Delta Airlines', 'New York', 'Los Angeles', '2024-06-15 16:30:00', 360,
        ('British Airways', 'Rome', 'Paris', '2024-07-03 10:45:00', 90, UNIX_TIMESTAMP()),
        ('American Airlines', 'Houston', 'Chicago', '2024-06-30 08:00:00', 185, UNIX_TIMESTAMP()),
        ('Lufthansa', 'Frankfurt', 'Berlin', '2024-06-15 09:00:00', 90, UNIX_TIMESTAMP()),
-       ('Air France', 'Paris', 'Nice', '2024-06-16 10:30:00', 110, UNIX_TIMESTAMP()),
        ('KLM', 'Amsterdam', 'London', '2024-06-17 13:45:00', 75, UNIX_TIMESTAMP()),
        ('Cathay Pacific', 'Hong Kong', 'Tokyo', '2024-06-18 15:00:00', 240, UNIX_TIMESTAMP()),
        ('Singapore Airlines', 'Singapore', 'Bangkok', '2024-06-19 17:30:00', 140, UNIX_TIMESTAMP()),
        ('Emirates', 'Dubai', 'Delhi', '2024-06-20 20:00:00', 210, UNIX_TIMESTAMP()),
        ('Qantas', 'Sydney', 'Melbourne', '2024-07-10 08:00:00', 90, UNIX_TIMESTAMP()),
        ('Lufthansa', 'Frankfurt', 'Berlin', '2024-06-15 09:00:00', 90, UNIX_TIMESTAMP()),
-       ('Air France', 'Paris', 'Nice', '2024-06-16 10:30:00', 110, UNIX_TIMESTAMP()),
        ('KLM', 'Amsterdam', 'London', '2024-06-17 13:45:00', 75, UNIX_TIMESTAMP()),
        ('Cathay Pacific', 'Hong Kong', 'Tokyo', '2024-06-18 15:00:00', 240, UNIX_TIMESTAMP()),
        ('Singapore Airlines', 'Singapore', 'Bangkok', '2024-06-19 17:30:00', 140, UNIX_TIMESTAMP()),
@@ -49,15 +47,11 @@ VALUES ('Delta Airlines', 'New York', 'Los Angeles', '2024-06-15 16:30:00', 360,
        ('Brussels Airlines', 'Brussels', 'Berlin', '2024-07-01 19:30:00', 100, UNIX_TIMESTAMP()),
        ('SAS', 'Stockholm', 'Copenhagen', '2024-07-02 08:00:00', 80, UNIX_TIMESTAMP()),
        ('LOT Polish Airlines', 'Warsaw', 'Krakow', '2024-07-03 09:30:00', 70, UNIX_TIMESTAMP()),
-       ('Air Europa', 'Madrid', 'Lisbon', '2024-07-04 11:00:00', 90, UNIX_TIMESTAMP()),
        ('Norwegian Air Shuttle', 'Oslo', 'Trondheim', '2024-07-05 12:30:00', 75, UNIX_TIMESTAMP()),
-       ('Air Baltic', 'Riga', 'Tallinn', '2024-07-06 14:00:00', 60, UNIX_TIMESTAMP()),
        ('Aegean Airlines', 'Athens', 'Thessaloniki', '2024-07-07 15:30:00', 80, UNIX_TIMESTAMP()),
        ('Garuda Indonesia', 'Jakarta', 'Bali', '2024-07-08 17:00:00', 110, UNIX_TIMESTAMP()),
        ('Korean Air', 'Seoul', 'Jeju', '2024-07-09 18:30:00', 80, UNIX_TIMESTAMP()),
        ('China Eastern Airlines', 'Shanghai', 'Beijing', '2024-07-10 20:00:00', 150, UNIX_TIMESTAMP()),
-       ('China Southern Airlines', 'Guangzhou', 'Chengdu', '2024-07-11 21:30:00', 180, UNIX_TIMESTAMP()),
-       ('Air India', 'Delhi', 'Mumbai', '2024-07-12 23:00:00', 150, UNIX_TIMESTAMP()),
        ('Malaysia Airlines', 'Kuala Lumpur', 'Penang', '2024-07-13 10:30:00', 60, UNIX_TIMESTAMP()),
        ('Vietnam Airlines', 'Hanoi', 'Ho Chi Minh City', '2024-07-14 12:00:00', 120, UNIX_TIMESTAMP()),
        ('Philippine Airlines', 'Manila', 'Cebu', '2024-07-15 13:30:00', 110, UNIX_TIMESTAMP()),
@@ -65,12 +59,10 @@ VALUES ('Delta Airlines', 'New York', 'Los Angeles', '2024-06-15 16:30:00', 360,
        ('Japan Airlines', 'Tokyo', 'Fukuoka', '2024-07-17 16:30:00', 130, UNIX_TIMESTAMP()),
        ('Asiana Airlines', 'Seoul', 'Busan', '2024-07-18 18:00:00', 85, UNIX_TIMESTAMP()),
        ('EVA Air', 'Taipei', 'Kaohsiung', '2024-07-19 19:30:00', 70, UNIX_TIMESTAMP()),
-       ('Air Astana', 'Nur-Sultan', 'Almaty', '2024-07-20 08:00:00', 100, UNIX_TIMESTAMP()),
        ('S7 Airlines', 'Moscow', 'Novosibirsk', '2024-07-21 09:30:00', 240, UNIX_TIMESTAMP()),
        ('Pegasus Airlines', 'Istanbul', 'Izmir', '2024-07-22 11:00:00', 90, UNIX_TIMESTAMP()),
        ('Aeroflot', 'Moscow', 'Sochi', '2024-07-23 12:30:00', 150, UNIX_TIMESTAMP()),
        ('Uzbekistan Airways', 'Tashkent', 'Samarkand', '2024-07-24 14:00:00', 70, UNIX_TIMESTAMP()),
-       ('Air Arabia', 'Sharjah', 'Muscat', '2024-07-25 15:30:00', 60, UNIX_TIMESTAMP()),
        ('Oman Air', 'Muscat', 'Salalah', '2024-07-26 17:00:00', 100, UNIX_TIMESTAMP()),
        ('Gulf Air', 'Bahrain', 'Doha', '2024-07-27 18:30:00', 70, UNIX_TIMESTAMP()),
        ('Royal Jordanian', 'Amman', 'Aqaba', '2024-07-28 20:00:00', 60, UNIX_TIMESTAMP()),
@@ -82,6 +74,12 @@ VALUES ('Delta Airlines', 'New York', 'Los Angeles', '2024-06-15 16:30:00', 360,
        ('Armenia Aircompany', 'Yerevan', 'Shirak', '2024-08-04 15:00:00', 60, UNIX_TIMESTAMP()),
        ('Belavia', 'Minsk', 'Gomel', '2024-08-05 16:30:00', 70, UNIX_TIMESTAMP()),
        ('Ukraine International Airlines', 'Kyiv', 'Lviv', '2024-08-06 18:00:00', 90, UNIX_TIMESTAMP()),
+       ('Air France', 'Paris', 'Nice', '2024-06-16 10:30:00', 110, UNIX_TIMESTAMP()),
+       ('Air France', 'Paris', 'Nice', '2024-06-16 10:30:00', 110, UNIX_TIMESTAMP()),
+       ('Air Europa', 'Madrid', 'Lisbon', '2024-07-04 11:00:00', 90, UNIX_TIMESTAMP()),
+       ('Air Baltic', 'Riga', 'Tallinn', '2024-07-06 14:00:00', 60, UNIX_TIMESTAMP()),
+       ('Air India', 'Delhi', 'Mumbai', '2024-07-12 23:00:00', 150, UNIX_TIMESTAMP()),
+       ('Air Astana', 'Nur-Sultan', 'Almaty', '2024-07-20 08:00:00', 100, UNIX_TIMESTAMP()),
        ('Air Moldova', 'Chisinau', 'Bucharest', '2024-08-07 19:30:00', 80, UNIX_TIMESTAMP());
 ;
 
@@ -96,9 +94,9 @@ BEGIN
     DECLARE flightId INT default 1;
     DECLARE seatCounter INT default 1;
     DECLARE flightCounter INT default 1;
-    WHILE flightCounter <= 84
+    WHILE flightCounter <= 82
         DO
-        SET @flightDuration = (select duration from flights where id = flightCounter);
+            SET @flightDuration = (select duration from flights where id = flightCounter);
             WHILE seatCounter <= 60
                 DO
                     if seatCounter < 7 then
@@ -137,3 +135,64 @@ END ;;
 DELIMITER ;
 
 CALL generateSeats();
+
+CREATE TEMPORARY TABLE flight_types_list
+(
+    flight_type VARCHAR(50)
+);
+
+INSERT INTO flight_types_list (flight_type)
+VALUES ('Airbus A220'),
+       ('Airbus A300'),
+       ('Airbus A310'),
+       ('Airbus A318'),
+       ('Airbus A319'),
+       ('Airbus A320'),
+       ('Airbus A321'),
+       ('Airbus A330'),
+       ('Airbus A340'),
+       ('Airbus A350'),
+       ('Airbus A380'),
+       ('Boeing 717'),
+       ('Boeing 757'),
+       ('Boeing 767'),
+       ('Boeing 777'),
+       ('Boeing 787'),
+       ('Bombardier CRJ-100'),
+       ('Bombardier CRJ-200'),
+       ('Bombardier CRJ-700'),
+       ('Bombardier CRJ-900'),
+       ('Bombardier Dash 8'),
+       ('Embraer ERJ 135'),
+       ('Embraer ERJ 140'),
+       ('Embraer ERJ 145'),
+       ('Embraer 170'),
+       ('Embraer 175'),
+       ('Embraer 190'),
+       ('Embraer 195');
+;
+
+
+UPDATE flights
+    JOIN (
+        SELECT id,
+               (SELECT flight_type FROM flight_types_list ORDER BY RAND() LIMIT 1) AS random_flight_type
+        FROM flights
+    ) AS random_flights
+    ON flights.id = random_flights.id
+SET flights.flight_type = random_flights.random_flight_type;
+
+DROP TEMPORARY TABLE IF EXISTS flight_types_list;
+
+UPDATE flights
+SET flight_number = CONCAT(SUBSTRING(airline, 1, 1), LPAD(FLOOR(RAND() * 10000), 4, '0'));
+
+UPDATE flights
+SET img = CASE
+              WHEN SUBSTRING(airline, 1, 3) = 'Air'
+                  THEN CONCAT(CONCAT('air', SUBSTRING(SUBSTRING_INDEX(airline, ' ', -1), 1, 1)),'.png')
+              ELSE CONCAT(LOWER(SUBSTRING_INDEX(airline, ' ', 1)), '.png')
+    END;
+
+
+

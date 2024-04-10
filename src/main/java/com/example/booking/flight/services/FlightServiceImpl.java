@@ -3,7 +3,10 @@ package com.example.booking.flight.services;
 import com.example.booking.exceptions.IdNotFoundException;
 import com.example.booking.exceptions.NoFlightFoundException;
 import com.example.booking.exceptions.SameDateException;
-import com.example.booking.flight.DTOs.*;
+import com.example.booking.flight.DTOs.FlightDTO;
+import com.example.booking.flight.DTOs.FlightListDTO;
+import com.example.booking.flight.DTOs.FlightOneWayRequestDTO;
+import com.example.booking.flight.DTOs.FlightRoundTripRequestDTO;
 import com.example.booking.flight.models.Flight;
 import com.example.booking.flight.reporitories.FlightRepository;
 import com.example.booking.review.services.ReviewService;
@@ -37,7 +40,8 @@ public class FlightServiceImpl implements FlightService {
   @Override
   public FlightDTO convertToFlightDTO(Flight flight) {
     return new FlightDTO(flight.getId(), flight.getAirline(), flight.getOrigin(), flight.getDestination(),
-            flight.getDepartureDate(), flight.getDuration(), flight.getSeats(),
+            flight.getDepartureDate(), flight.getDuration(), flight.getFlightNumber(), flight.getFlightType(),
+            flight.getImg(), flight.getSeats(),
             flight.getReviews().stream().map(review -> reviewService.convertToResponse(review)).collect(Collectors.toList()));
   }
 
@@ -59,7 +63,7 @@ public class FlightServiceImpl implements FlightService {
     if (flightRoundTrip.getDepartureDate().equals(flightRoundTrip.getReturnDate())) throw new SameDateException();
     ArrayList<FlightDTO> flights = new ArrayList<>();
     List<List<Object>> flightsId = flightRepository.findByDestination(flightRoundTrip);
-    if (flightsId.isEmpty())throw new NoFlightFoundException();
+    if (flightsId.isEmpty()) throw new NoFlightFoundException();
 
     for (int i = 0; i < flightsId.size(); i++) {
       flights.add(convertToFlightDTO(

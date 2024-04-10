@@ -3,7 +3,6 @@ package com.example.booking.flight.models;
 import com.example.booking.booking.models.Booking;
 import com.example.booking.review.models.Review;
 import com.example.booking.seat.models.Seat;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -49,6 +48,17 @@ public class Flight {
   private int duration;
 
   @NotNull
+  @Column(name = "flight_number")
+  private String flightNumber;
+
+  @NotNull
+  @Column(name = "flight_type")
+  private String flightType;
+
+  @Column(name = "img")
+  private String img;
+
+  @NotNull
   @Column(name = "created_at")
   private Long createdAt;
 
@@ -62,12 +72,14 @@ public class Flight {
   @OneToMany(mappedBy = "flight", cascade = CascadeType.ALL)
   private List<Review> reviews = new ArrayList<>();
 
-  public Flight(String airline, String origin, String destination, Date departureDate, int duration) {
+  public Flight(String airline, String origin, String destination, Date departureDate, int duration, String flightNumber, String flightType) {
     this.airline = airline;
     this.origin = origin;
     this.destination = destination;
     this.departureDate = departureDate;
     this.duration = duration;
+    this.flightNumber = flightNumber;
+    this.flightType = flightType;
     this.createdAt = System.currentTimeMillis() / 1000;
   }
 

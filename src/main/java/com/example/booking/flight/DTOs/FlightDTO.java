@@ -20,6 +20,9 @@ public class FlightDTO {
   private String destination;
   private Date departureDate;
   private int duration;
+  private String flightNumber;
+  private String flightType;
+  private String img;
   private List<Seat> seats;
   private List<ReviewResponseDTO> reviews;
 

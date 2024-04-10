@@ -15,6 +15,9 @@ CREATE TABLE IF NOT EXISTS flights (
                          destination VARCHAR(255) NOT NULL,
                          departure_date DATETIME NOT NULL,
                          duration INT NOT NULL,
+                         flight_number VARCHAR(255),
+                         flight_type VARCHAR(255),
+                         img VARCHAR(255),
                          created_at BIGINT NOT NULL
 );
 

@@ -3,6 +3,8 @@ import "./FlightOneWayCard.css"
 import "../ReviewComponent/Review.css"
 import {useNavigate} from "react-router-dom";
 import Review from "../ReviewComponent/Review";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faEuroSign, faPlane, faPlaneArrival, faPlaneDeparture} from "@fortawesome/free-solid-svg-icons";
 
 const FlightRoundTripCard = ({flightToDestination, flightReturn}) => {
 
@@ -50,7 +52,6 @@ const FlightRoundTripCard = ({flightToDestination, flightReturn}) => {
         hour: '2-digit',
         minute: '2-digit'
     });
-    const flightToDestinationFormattedLandingDate = flightToDestinationLandingTime.toLocaleDateString();
     const flightToDestinationFormattedLandingTime = flightToDestinationLandingTime.toLocaleTimeString([], {
         hour: '2-digit',
         minute: '2-digit'
@@ -70,77 +71,220 @@ const FlightRoundTripCard = ({flightToDestination, flightReturn}) => {
         hour: '2-digit',
         minute: '2-digit'
     });
-    const flightReturnFormattedLandingDate = flightReturnLandingTime.toLocaleDateString();
     const flightReturnFormattedLandingTime = flightReturnLandingTime.toLocaleTimeString([], {
         hour: '2-digit',
         minute: '2-digit'
     });
 
+    const basePrice = flightToDestination.duration + flightReturn.duration;
+
     return (
-        <div>
-            <div className="flight-card blur-include">
-                <div style={{textAlign: "center"}}>
-                    <div className="p-2 d-inline">{flightToDestination.airline}</div>
-                    <div className="p-2 d-inline">Id: {flightToDestination.id}</div>
-                    <button className="p-2 d-inline btn btn-primary reviews-button"
+        <div style={{paddingBottom: '60px'}}>
+            {/*<div className="flight-card selected blur-include" style={{maxWidth: '100%'}}>Your selected trip</div>*/}
+
+            <div className="flight-card card-header blur-include" style={{maxWidth: '100%'}}>
+                <FontAwesomeIcon icon={faPlaneDeparture}/> <p
+                style={{
+                    display: "inline",
+                    fontWeight: "bold"
+                }}>Departure</p> {flightToDestinationFormattedDepartureDate}
+            </div>
+
+            <div className="flight-card card-body blur-include row"
+                 style={{maxWidth: '100%', margin: "auto", padding: '10px'}}>
+                <div className="col-4" style={{maxWidth: '100%', maxHeight: '100%', paddingTop: '2%'}}>
+                    <button className="btn btn-primary reviews-button"
+                            style={{height: '30%', marginLeft: '37%'}}
                             type="submit" onClick={toggleFlightToDestinationReviewsModal}><span></span>Reviews
                     </button>
-                    <div className="p-2 d-inline">({flightToDestination.reviews.length})</div>
+                    <div className="p-2 d-inline" style={{padding: '2px'}}>({flightToDestination.reviews.length})</div>
+                    <div style={{maxWidth: '100%', margin: '0'}}>
+                        <div className="row">
+                            <div className="col-4" style={{maxWidth: '150%'}}>
+                                <img src={require(`./img/${flightToDestination.img}`)} alt={flightToDestination.airline}
+                                     style={{maxWidth: '100%', height: 'auto'}}/>
+                            </div>
+                            <div className="col-8">
+                                <div style={{
+                                    fontSize: '12px',
+                                    fontWeight: "bold",
+                                    paddingTop: '8%'
+                                }}>{flightToDestination.airline}</div>
+                                <div style={{fontSize: '12px'}}>{flightToDestination.flightNumber}</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div style={{textAlign: "center"}}>
-                    <div
-                        className="p-2 d-inline">{flightToDestination.origin} to {flightToDestination.destination}</div>
+                <div className="col-3" style={{maxWidth: '100%', maxHeight: '100%', textAlign: "center"}}>
+                    <p
+                        style={{paddingTop: '10%'}}>
+                        <div style={{
+                            fontWeight: 'bold',
+                            fontSize: '30px'
+                        }}>{flightToDestinationFormattedDepartureTime}</div>
+                        <p className="d-inline"
+                           style={{fontWeight: 'bold'}}>{flightToDestination.originAirportCode} </p>
+                        <p className="d-inline">{flightToDestination.origin}</p>
+                        <div style={{fontSize: '15px', fontWeight: "lighter"}}>{flightToDestination.origin}</div>
+                    </p>
                 </div>
-                <div style={{textAlign: "center"}}>
-                    <div className="p-2 d-inline">Departure
-                        Time: {flightToDestinationFormattedDepartureDate} {flightToDestinationFormattedDepartureTime}</div>
-                    <div className="p-2 d-inline">Landing
-                        Time: {flightToDestinationFormattedLandingDate} {flightToDestinationFormattedLandingTime}</div>
+                <div className="col-2" style={{maxWidth: '100%', maxHeight: '100%', textAlign: "center"}}>
+                    <div style={{fontSize: '17px', paddingTop: '20%'}}>{flightToDestinationFormattedDuration}</div>
+                    <img src={require("./img/arrow.png")} alt="arrow"
+                         style={{maxWidth: '100%', height: 'auto', paddingLeft: '10px'}}/>
+                    <div style={{fontSize: '12px'}}>{flightToDestination.flightType}</div>
                 </div>
-                <div style={{textAlign: "center"}}>
-                    <div className="p-2 d-inline">Duration: {flightToDestinationFormattedDuration}</div>
+                <div className="col-3" style={{maxWidth: '100%', maxHeight: '100%', textAlign: "center"}}>
+                    <p
+                        style={{paddingTop: '10%'}}>
+                        <div style={{
+                            fontWeight: 'bold',
+                            fontSize: '30px'
+                        }}>{flightToDestinationFormattedLandingTime}</div>
+                        <p className="d-inline"
+                           style={{fontWeight: 'bold'}}>{flightToDestination.destinationAirportCode} </p>
+                        <p className="d-inline">{flightToDestination.destination}</p>
+                        <div style={{fontSize: '15px', fontWeight: "lighter"}}>{flightToDestination.destination}</div>
+                    </p>
                 </div>
+            </div>
 
-                <div className="divider">
-                    <hr></hr>
-                </div>
+            <div className="flight-card card-header blur-include" style={{maxWidth: '100%'}}>
+                <FontAwesomeIcon icon={faPlaneArrival}/> <p
+                style={{
+                    display: "inline",
+                    fontWeight: "bold"
+                }}>Return</p> {flightReturnFormattedDepartureDate}
+            </div>
 
-                <div style={{textAlign: "center"}}>
-                    <div className="p-2 d-inline">{flightReturn.airline}</div>
-                    <div className="p-2 d-inline">Id: {flightReturn.id}</div>
-                    <button className="p-2 d-inline btn btn-primary reviews-button"
+            <div className="flight-card card-body blur-include row"
+                 style={{maxWidth: '100%', margin: "auto", padding: '10px'}}>
+                <div className="col-4" style={{maxWidth: '100%', maxHeight: '100%', paddingTop: '2%'}}>
+                    <button className="btn btn-primary reviews-button"
+                            style={{height: '30%', marginLeft: '37%'}}
                             type="submit" onClick={toggleFlightReturnReviewsModal}><span></span>Reviews
                     </button>
-                    <div className="p-2 d-inline">({flightReturn.reviews.length})</div>
+                    <div className="p-2 d-inline" style={{padding: '2px'}}>({flightReturn.reviews.length})</div>
+                    <div style={{maxWidth: '100%', margin: '0'}}>
+                        <div className="row">
+                            <div className="col-4" style={{maxWidth: '150%'}}>
+                                <img src={require(`./img/${flightToDestination.img}`)} alt={flightReturn.airline}
+                                     style={{maxWidth: '100%', height: 'auto'}}/>
+                            </div>
+                            <div className="col-8">
+                                <div style={{
+                                    fontSize: '12px',
+                                    fontWeight: "bold",
+                                    paddingTop: '8%'
+                                }}>{flightReturn.airline}</div>
+                                <div style={{fontSize: '12px'}}>{flightReturn.flightNumber}</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div style={{textAlign: "center"}}>
-                    <div className="p-2 d-inline">{flightReturn.origin} to {flightReturn.destination}</div>
+                <div className="col-3" style={{maxWidth: '100%', maxHeight: '100%', textAlign: "center"}}>
+                    <p
+                        style={{paddingTop: '10%'}}>
+                        <div style={{fontWeight: 'bold', fontSize: '30px'}}>{flightReturnFormattedDepartureTime}</div>
+                        <p className="d-inline" style={{fontWeight: 'bold'}}>{flightReturn.originAirportCode} </p>
+                        <p className="d-inline">{flightReturn.origin}</p>
+                        <div style={{fontSize: '15px', fontWeight: "lighter"}}>{flightReturn.origin}</div>
+                    </p>
                 </div>
-                <div style={{textAlign: "center"}}>
-                    <div className="p-2 d-inline">Departure
-                        Time: {flightReturnFormattedDepartureDate} {flightReturnFormattedDepartureTime}</div>
-                    <div className="p-2 d-inline">Landing
-                        Time: {flightReturnFormattedLandingDate} {flightReturnFormattedLandingTime}</div>
+                <div className="col-2" style={{maxWidth: '100%', maxHeight: '100%', textAlign: "center"}}>
+                    <div style={{fontSize: '17px', paddingTop: '20%'}}>{flightReturnFormattedDuration}</div>
+                    <img src={require("./img/arrow.png")} alt="arrow"
+                         style={{maxWidth: '100%', height: 'auto', paddingLeft: '10px'}}/>
+                    <div style={{fontSize: '12px'}}>{flightReturn.flightType}</div>
                 </div>
-                <div style={{textAlign: "center"}}>
-                    <div className="p-2 d-inline">Duration: {flightReturnFormattedDuration}</div>
+                <div className="col-3" style={{maxWidth: '100%', maxHeight: '100%', textAlign: "center"}}>
+                    <p
+                        style={{paddingTop: '10%'}}>
+                        <div style={{fontWeight: 'bold', fontSize: '30px'}}>{flightReturnFormattedLandingTime}</div>
+                        <p className="d-inline" style={{fontWeight: 'bold'}}>{flightReturn.destinationAirportCode} </p>
+                        <p className="d-inline">{flightReturn.destination}</p>
+                        <div style={{fontSize: '15px', fontWeight: "lighter"}}>{flightReturn.destination}</div>
+                    </p>
                 </div>
-
-
-                <div style={{textAlign: "right"}}>
-                    <button className="btn btn-primary " onClick={handleSelect} type="submit"><span></span>Select
+            </div>
+            <div className="flight-card card-footer blur-include text-right row"
+                 style={{maxWidth: '100%', padding: '2%'}}>
+                <div className="col-8" style={{fontSize: '18px', paddingTop: '1%'}}><FontAwesomeIcon
+                    icon={faPlane}/> Standard ticket
+                </div>
+                <div className=" col-2">
+                    <div style={{fontSize: '20px', fontWeight: 'bold'}}><FontAwesomeIcon
+                        icon={faEuroSign}/> {basePrice}</div>
+                    <div className="" style={{fontSize: '10px', fontWeight: 'lighter'}}>price per person</div>
+                </div>
+                <div className="col-2" style={{padding: '0'}}>
+                    <button className="btn btn-primary book-button" onClick={handleSelect} type="submit">
+                        <span></span>Book
                     </button>
                 </div>
             </div>
-            <br/>
+
+            {/*<div className="flight-card blur-include">*/}
+            {/*    <div style={{textAlign: "center"}}>*/}
+            {/*        <div className="p-2 d-inline">{flightToDestination.airline}</div>*/}
+            {/*        <div className="p-2 d-inline">Id: {flightToDestination.id}</div>*/}
+            {/*        <button className="p-2 d-inline btn btn-primary reviews-button"*/}
+            {/*                type="submit" onClick={toggleFlightToDestinationReviewsModal}><span></span>Reviews*/}
+            {/*        </button>*/}
+            {/*        <div className="p-2 d-inline">({flightToDestination.reviews.length})</div>*/}
+            {/*    </div>*/}
+            {/*    <div style={{textAlign: "center"}}>*/}
+            {/*        <div*/}
+            {/*            className="p-2 d-inline">{flightToDestination.origin} to {flightToDestination.destination}</div>*/}
+            {/*    </div>*/}
+            {/*    <div style={{textAlign: "center"}}>*/}
+            {/*        <div className="p-2 d-inline">Departure*/}
+            {/*            Time: {flightToDestinationFormattedDepartureDate} {flightToDestinationFormattedDepartureTime}</div>*/}
+            {/*        <div className="p-2 d-inline">Landing*/}
+            {/*            Time: {flightToDestinationFormattedLandingDate} {flightToDestinationFormattedLandingTime}</div>*/}
+            {/*    </div>*/}
+            {/*    <div style={{textAlign: "center"}}>*/}
+            {/*        <div className="p-2 d-inline">Duration: {flightToDestinationFormattedDuration}</div>*/}
+            {/*    </div>*/}
+
+            {/*    <div className="divider">*/}
+            {/*        <hr></hr>*/}
+            {/*    </div>*/}
+
+            {/*    <div style={{textAlign: "center"}}>*/}
+            {/*        <div className="p-2 d-inline">{flightReturn.airline}</div>*/}
+            {/*        <div className="p-2 d-inline">Id: {flightReturn.id}</div>*/}
+            {/*        <button className="p-2 d-inline btn btn-primary reviews-button"*/}
+            {/*                type="submit" onClick={toggleFlightReturnReviewsModal}><span></span>Reviews*/}
+            {/*        </button>*/}
+            {/*        <div className="p-2 d-inline">({flightReturn.reviews.length})</div>*/}
+            {/*    </div>*/}
+            {/*    <div style={{textAlign: "center"}}>*/}
+            {/*        <div className="p-2 d-inline">{flightReturn.origin} to {flightReturn.destination}</div>*/}
+            {/*    </div>*/}
+            {/*    <div style={{textAlign: "center"}}>*/}
+            {/*        <div className="p-2 d-inline">Departure*/}
+            {/*            Time: {flightReturnFormattedDepartureDate} {flightReturnFormattedDepartureTime}</div>*/}
+            {/*        <div className="p-2 d-inline">Landing*/}
+            {/*            Time: {flightReturnFormattedLandingDate} {flightReturnFormattedLandingTime}</div>*/}
+            {/*    </div>*/}
+            {/*    <div style={{textAlign: "center"}}>*/}
+            {/*        <div className="p-2 d-inline">Duration: {flightReturnFormattedDuration}</div>*/}
+            {/*    </div>*/}
+
+
+            {/*    <div style={{textAlign: "right"}}>*/}
+            {/*        <button className="btn btn-primary " onClick={handleSelect} type="submit"><span></span>Select*/}
+            {/*        </button>*/}
+            {/*    </div>*/}
+            {/*</div>*/}
+            {/*<br/>*/}
 
             <Review reviews={flightToDestination.reviews} toggleReviewsModal={toggleFlightToDestinationReviewsModal}
                     showReviewsModal={showFlightToDestinationReviewsModal}></Review>
 
             <Review reviews={flightReturn.reviews} toggleReviewsModal={toggleFlightReturnReviewsModal}
                     showReviewsModal={showFlightReturnReviewsModal}></Review>
-
-
         </div>
     );
 };

@@ -8,8 +8,6 @@ import {faEuroSign, faPlane, faPlaneDeparture} from "@fortawesome/free-solid-svg
 
 const FlightOneWayCard = ({flight, isAll}) => {
 
-    //TODO 3 BETUS REPTER NÉV BEVEZETÉS
-
     const navigate = useNavigate();
     const [showReviewsModal, setShowReviewsModal] = useState(false);
 
@@ -44,14 +42,16 @@ const FlightOneWayCard = ({flight, isAll}) => {
 
     return (
         <div>
-            {!isAll && (
-                <div className="flight-card selected blur-include" style={{maxWidth: '100%'}}>Your selected trip</div>
-            )}
-            <div className="flight-card header blur-include" style={{maxWidth: '100%'}}>
+            {/*{!isAll && (*/}
+            {/*    <div className="flight-card selected blur-include" style={{maxWidth: '100%'}}>Your selected trip</div>*/}
+            {/*)}*/}
+
+            <div className="flight-card card-header blur-include" style={{maxWidth: '100%'}}>
                 <FontAwesomeIcon icon={faPlaneDeparture}/> <p
                 style={{display: "inline", fontWeight: "bold"}}>Departure</p> {formattedDepartureDate}
             </div>
-            <div className="flight-card body blur-include row"
+
+            <div className="flight-card card-body blur-include row"
                  style={{maxWidth: '100%', margin: "auto", padding: '10px'}}>
                 <div className="col-4" style={{maxWidth: '100%', maxHeight: '100%', paddingTop: '2%'}}>
                     <button className="btn btn-primary reviews-button"
@@ -80,7 +80,7 @@ const FlightOneWayCard = ({flight, isAll}) => {
                     <p
                         style={{paddingTop: '10%'}}>
                         <div style={{fontWeight: 'bold', fontSize: '30px'}}>{formattedDepartureTime}</div>
-                        <p className="d-inline" style={{fontWeight: 'bold'}}>BCN </p>
+                        <p className="d-inline" style={{fontWeight: 'bold'}}>{flight.originAirportCode} </p>
                         <p className="d-inline">{flight.origin}</p>
                         <div style={{fontSize: '15px', fontWeight: "lighter"}}>{flight.origin}</div>
                     </p>
@@ -95,14 +95,15 @@ const FlightOneWayCard = ({flight, isAll}) => {
                     <p
                         style={{paddingTop: '10%'}}>
                         <div style={{fontWeight: 'bold', fontSize: '30px'}}>{formattedLandingTime}</div>
-                        <p className="d-inline" style={{fontWeight: 'bold'}}>BCN </p>
+                        <p className="d-inline" style={{fontWeight: 'bold'}}>{flight.destinationAirportCode} </p>
                         <p className="d-inline">{flight.destination}</p>
                         <div style={{fontSize: '15px', fontWeight: "lighter"}}>{flight.destination}</div>
                     </p>
                 </div>
             </div>
+
             {!isAll && (
-                <div className="flight-card footer blur-include text-right row"
+                <div className="flight-card card-footer blur-include text-right row"
                      style={{maxWidth: '100%', padding: '2%'}}>
                     <div className="col-8" style={{fontSize: '18px', paddingTop: '1%'}}><FontAwesomeIcon
                         icon={faPlane}/> Standard ticket

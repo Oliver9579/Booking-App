@@ -82,7 +82,7 @@ const FlightRoundTripCard = ({flightToDestination, flightReturn}) => {
         <div style={{paddingBottom: '60px'}}>
             {/*<div className="flight-card selected blur-include" style={{maxWidth: '100%'}}>Your selected trip</div>*/}
 
-            <div className="flight-card card-header blur-include" style={{maxWidth: '100%'}}>
+            <div className="flight-card flight-card-header blur-include" style={{maxWidth: '100%'}}>
                 <FontAwesomeIcon icon={faPlaneDeparture}/> <p
                 style={{
                     display: "inline",
@@ -90,7 +90,7 @@ const FlightRoundTripCard = ({flightToDestination, flightReturn}) => {
                 }}>Departure</p> {flightToDestinationFormattedDepartureDate}
             </div>
 
-            <div className="flight-card card-body blur-include row"
+            <div className="flight-card flight-card-body blur-include row"
                  style={{maxWidth: '100%', margin: "auto", padding: '10px'}}>
                 <div className="col-4" style={{maxWidth: '100%', maxHeight: '100%', paddingTop: '2%'}}>
                     <button className="btn btn-primary reviews-button"
@@ -149,7 +149,7 @@ const FlightRoundTripCard = ({flightToDestination, flightReturn}) => {
                 </div>
             </div>
 
-            <div className="flight-card card-header blur-include" style={{maxWidth: '100%'}}>
+            <div className="flight-card flight-card-header blur-include" style={{maxWidth: '100%'}}>
                 <FontAwesomeIcon icon={faPlaneArrival}/> <p
                 style={{
                     display: "inline",
@@ -157,7 +157,7 @@ const FlightRoundTripCard = ({flightToDestination, flightReturn}) => {
                 }}>Return</p> {flightReturnFormattedDepartureDate}
             </div>
 
-            <div className="flight-card card-body blur-include row"
+            <div className="flight-card flight-card-body blur-include row"
                  style={{maxWidth: '100%', margin: "auto", padding: '10px'}}>
                 <div className="col-4" style={{maxWidth: '100%', maxHeight: '100%', paddingTop: '2%'}}>
                     <button className="btn btn-primary reviews-button"
@@ -207,7 +207,7 @@ const FlightRoundTripCard = ({flightToDestination, flightReturn}) => {
                     </p>
                 </div>
             </div>
-            <div className="flight-card card-footer blur-include text-right row"
+            <div className="flight-card flight-card-footer blur-include text-right row"
                  style={{maxWidth: '100%', padding: '2%'}}>
                 <div className="col-8" style={{fontSize: '18px', paddingTop: '1%'}}><FontAwesomeIcon
                     icon={faPlane}/> Standard ticket

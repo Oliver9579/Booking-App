@@ -1,9 +1,7 @@
 .flight-card {
     max-width: 70%;
     margin: 0 auto;
-    /*padding: 20px;*/
     border: 1px solid #ccc;
-    /*border-radius: 5px;*/
 }
 
 .selected {
@@ -15,7 +13,7 @@
     font-weight: bold;
 }
 
-.card-header {
+.flight-card-header {
     max-height: 100%;
     height: 40px;
     padding: 5px;
@@ -23,12 +21,12 @@
     background-color: #DCDCDC;
 }
 
-.card-body {
+.flight-card-body {
     max-height: 100%;
     height: 150px;
 }
 
-.card-footer {
+.flight-card-footer {
     max-height: 100%;
     height: 80px;
     background-color: #DCDCDC;

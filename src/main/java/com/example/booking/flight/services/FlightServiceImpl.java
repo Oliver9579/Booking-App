@@ -39,9 +39,9 @@ public class FlightServiceImpl implements FlightService {
 
   @Override
   public FlightDTO convertToFlightDTO(Flight flight) {
-    return new FlightDTO(flight.getId(), flight.getAirline(), flight.getOrigin(), flight.getDestination(),
-            flight.getDepartureDate(), flight.getDuration(), flight.getFlightNumber(), flight.getFlightType(),
-            flight.getImg(), flight.getSeats(),
+    return new FlightDTO(flight.getId(), flight.getAirline(), flight.getOrigin(), flight.getOriginAirportCode(),
+            flight.getDestination(), flight.getDestinationAirportCode(), flight.getDepartureDate(),
+            flight.getDuration(), flight.getFlightNumber(), flight.getFlightType(), flight.getImg(), flight.getSeats(),
             flight.getReviews().stream().map(review -> reviewService.convertToResponse(review)).collect(Collectors.toList()));
   }
 

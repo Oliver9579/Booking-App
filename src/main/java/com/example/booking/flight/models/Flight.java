@@ -35,9 +35,15 @@ public class Flight {
   @Column(name = "origin")
   private String origin;
 
+  @Column(name = "origin_airport_code")
+  private String originAirportCode;
+
   @NotNull
   @Column(name = "destination")
   private String destination;
+
+  @Column(name = "destination_airport_code")
+  private String destinationAirportCode;
 
   @NotNull
   @Column(name = "departure_date")
@@ -72,10 +78,13 @@ public class Flight {
   @OneToMany(mappedBy = "flight", cascade = CascadeType.ALL)
   private List<Review> reviews = new ArrayList<>();
 
-  public Flight(String airline, String origin, String destination, Date departureDate, int duration, String flightNumber, String flightType) {
+  public Flight(String airline, String origin, String originAirportCode, String destination, String destinationAirportCode,
+                Date departureDate, int duration, String flightNumber, String flightType) {
     this.airline = airline;
     this.origin = origin;
+    this.originAirportCode = originAirportCode;
     this.destination = destination;
+    this.destinationAirportCode = destinationAirportCode;
     this.departureDate = departureDate;
     this.duration = duration;
     this.flightNumber = flightNumber;

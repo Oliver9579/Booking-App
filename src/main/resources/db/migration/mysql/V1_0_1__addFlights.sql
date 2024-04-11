@@ -190,9 +190,133 @@ SET flight_number = CONCAT(SUBSTRING(airline, 1, 1), LPAD(FLOOR(RAND() * 10000),
 UPDATE flights
 SET img = CASE
               WHEN SUBSTRING(airline, 1, 3) = 'Air'
-                  THEN CONCAT(CONCAT('air', SUBSTRING(SUBSTRING_INDEX(airline, ' ', -1), 1, 1)),'.png')
+                  THEN CONCAT(CONCAT('air', SUBSTRING(SUBSTRING_INDEX(airline, ' ', -1), 1, 1)), '.png')
               ELSE CONCAT(LOWER(SUBSTRING_INDEX(airline, ' ', 1)), '.png')
     END;
+
+CREATE TEMPORARY TABLE IF NOT EXISTS airport_codes
+(
+    city         VARCHAR(100),
+    airport_code VARCHAR(10)
+);
+
+INSERT INTO airport_codes (city, airport_code)
+VALUES ('Los Angeles', 'LAX'),
+       ('Miami', 'MIA'),
+       ('Seattle', 'SEA'),
+       ('Paris', 'CDG'),
+       ('Chicago', 'ORD'),
+       ('New York', 'JFK'),
+       ('San Francisco', 'SFO'),
+       ('London', 'LHR'),
+       ('Dallas', 'DFW'),
+       ('Denver', 'DEN'),
+       ('Rome', 'FCO'),
+       ('Houston', 'IAH'),
+       ('Berlin', 'BER'),
+       ('Tokyo', 'HND'),
+       ('Tokyo', 'NRT'),
+       ('Bangkok', 'BKK'),
+       ('Delhi', 'DEL'),
+       ('Melbourne', 'MEL'),
+       ('Ankara', 'ESB'),
+       ('Saint Petersburg', 'LED'),
+       ('Geneva', 'GVA'),
+       ('Manila', 'MNL'),
+       ('Osaka', 'KIX'),
+       ('Edinburgh', 'EDI'),
+       ('Rovaniemi', 'RVN'),
+       ('Barcelona', 'BCN'),
+       ('Milan', 'MXP'),
+       ('Milan', 'LIN'),
+       ('Salzburg', 'SZG'),
+       ('Copenhagen', 'CPH'),
+       ('Krakow', 'KRK'),
+       ('Trondheim', 'TRD'),
+       ('Thessaloniki', 'SKG'),
+       ('Bali', 'DPS'),
+       ('Jeju', 'CJU'),
+       ('Beijing', 'PEK'),
+       ('Penang', 'PEN'),
+       ('Ho Chi Minh City', 'SGN'),
+       ('Cebu', 'CEB'),
+       ('Chiang Mai', 'CNX'),
+       ('Fukuoka', 'FUK'),
+       ('Busan', 'PUS'),
+       ('Kaohsiung', 'KHH'),
+       ('Novosibirsk', 'OVB'),
+       ('Izmir', 'ADB'),
+       ('Sochi', 'AER'),
+       ('Samarkand', 'SKD'),
+       ('Salalah', 'SLL'),
+       ('Doha', 'DOH'),
+       ('Aqaba', 'AQJ'),
+       ('Cairo', 'CAI'),
+       ('Jeddah', 'JED'),
+       ('Eilat', 'ETH'),
+       ('Ganja', 'KVD'),
+       ('Batumi', 'BUS'),
+       ('Shirak', 'LWN'),
+       ('Gomel', 'GME'),
+       ('Lviv', 'LWO'),
+       ('Nice', 'NCE'),
+       ('Lisbon', 'LIS'),
+       ('Tallinn', 'TLL'),
+       ('Mumbai', 'BOM'),
+       ('Almaty', 'ALA'),
+       ('Bucharest', 'OTP'),
+       ('Frankfurt', 'FRA'),
+       ('Amsterdam', 'AMS'),
+       ('Hong Kong', 'HKG'),
+       ('Singapore', 'SIN'),
+       ('Dubai', 'DXB'),
+       ('Sydney', 'SYD'),
+       ('Istanbul', 'IST'),
+       ('Moscow', 'SVO'),
+       ('Moscow', 'DME'),
+       ('Zurich', 'ZRH'),
+       ('Abu Dhabi', 'AUH'),
+       ('Helsinki', 'HEL'),
+       ('Madrid', 'MAD'),
+       ('Vienna', 'VIE'),
+       ('Brussels', 'BRU'),
+       ('Stockholm', 'ARN'),
+       ('Warsaw', 'WAW'),
+       ('Oslo', 'OSL'),
+       ('Athens', 'ATH'),
+       ('Jakarta', 'CGK'),
+       ('Seoul', 'ICN'),
+       ('Shanghai', 'PVG'),
+       ('Kuala Lumpur', 'KUL'),
+       ('Hanoi', 'HAN'),
+       ('Taipei', 'TPE'),
+       ('Tashkent', 'TAS'),
+       ('Muscat', 'MCT'),
+       ('Bahrain', 'BAH'),
+       ('Amman', 'AMM'),
+       ('Beirut', 'BEY'),
+       ('Riyadh', 'RUH'),
+       ('Tel Aviv', 'TLV'),
+       ('Baku', 'GYD'),
+       ('Tbilisi', 'TBS'),
+       ('Yerevan', 'EVN'),
+       ('Minsk', 'MSQ'),
+       ('Kyiv', 'KBP'),
+       ('Riga', 'RIX'),
+       ('Nur-Sultan', 'NQZ'),
+       ('Chisinau', 'KIV');
+
+UPDATE flights
+    JOIN airport_codes ON flights.origin = airport_codes.city
+SET flights.origin_airport_code = airport_codes.airport_code;
+
+UPDATE flights
+    JOIN airport_codes ON flights.destination = airport_codes.city
+SET flights.destination_airport_code = airport_codes.airport_code;
+
+
+DROP TEMPORARY TABLE IF EXISTS airport_codes;
+
 
 
 

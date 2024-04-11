@@ -224,62 +224,6 @@ const FlightRoundTripCard = ({flightToDestination, flightReturn}) => {
                 </div>
             </div>
 
-            {/*<div className="flight-card blur-include">*/}
-            {/*    <div style={{textAlign: "center"}}>*/}
-            {/*        <div className="p-2 d-inline">{flightToDestination.airline}</div>*/}
-            {/*        <div className="p-2 d-inline">Id: {flightToDestination.id}</div>*/}
-            {/*        <button className="p-2 d-inline btn btn-primary reviews-button"*/}
-            {/*                type="submit" onClick={toggleFlightToDestinationReviewsModal}><span></span>Reviews*/}
-            {/*        </button>*/}
-            {/*        <div className="p-2 d-inline">({flightToDestination.reviews.length})</div>*/}
-            {/*    </div>*/}
-            {/*    <div style={{textAlign: "center"}}>*/}
-            {/*        <div*/}
-            {/*            className="p-2 d-inline">{flightToDestination.origin} to {flightToDestination.destination}</div>*/}
-            {/*    </div>*/}
-            {/*    <div style={{textAlign: "center"}}>*/}
-            {/*        <div className="p-2 d-inline">Departure*/}
-            {/*            Time: {flightToDestinationFormattedDepartureDate} {flightToDestinationFormattedDepartureTime}</div>*/}
-            {/*        <div className="p-2 d-inline">Landing*/}
-            {/*            Time: {flightToDestinationFormattedLandingDate} {flightToDestinationFormattedLandingTime}</div>*/}
-            {/*    </div>*/}
-            {/*    <div style={{textAlign: "center"}}>*/}
-            {/*        <div className="p-2 d-inline">Duration: {flightToDestinationFormattedDuration}</div>*/}
-            {/*    </div>*/}
-
-            {/*    <div className="divider">*/}
-            {/*        <hr></hr>*/}
-            {/*    </div>*/}
-
-            {/*    <div style={{textAlign: "center"}}>*/}
-            {/*        <div className="p-2 d-inline">{flightReturn.airline}</div>*/}
-            {/*        <div className="p-2 d-inline">Id: {flightReturn.id}</div>*/}
-            {/*        <button className="p-2 d-inline btn btn-primary reviews-button"*/}
-            {/*                type="submit" onClick={toggleFlightReturnReviewsModal}><span></span>Reviews*/}
-            {/*        </button>*/}
-            {/*        <div className="p-2 d-inline">({flightReturn.reviews.length})</div>*/}
-            {/*    </div>*/}
-            {/*    <div style={{textAlign: "center"}}>*/}
-            {/*        <div className="p-2 d-inline">{flightReturn.origin} to {flightReturn.destination}</div>*/}
-            {/*    </div>*/}
-            {/*    <div style={{textAlign: "center"}}>*/}
-            {/*        <div className="p-2 d-inline">Departure*/}
-            {/*            Time: {flightReturnFormattedDepartureDate} {flightReturnFormattedDepartureTime}</div>*/}
-            {/*        <div className="p-2 d-inline">Landing*/}
-            {/*            Time: {flightReturnFormattedLandingDate} {flightReturnFormattedLandingTime}</div>*/}
-            {/*    </div>*/}
-            {/*    <div style={{textAlign: "center"}}>*/}
-            {/*        <div className="p-2 d-inline">Duration: {flightReturnFormattedDuration}</div>*/}
-            {/*    </div>*/}
-
-
-            {/*    <div style={{textAlign: "right"}}>*/}
-            {/*        <button className="btn btn-primary " onClick={handleSelect} type="submit"><span></span>Select*/}
-            {/*        </button>*/}
-            {/*    </div>*/}
-            {/*</div>*/}
-            {/*<br/>*/}
-
             <Review reviews={flightToDestination.reviews} toggleReviewsModal={toggleFlightToDestinationReviewsModal}
                     showReviewsModal={showFlightToDestinationReviewsModal}></Review>
 

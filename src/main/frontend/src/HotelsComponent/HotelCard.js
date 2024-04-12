@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import "./HotelCard.css"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faStar} from "@fortawesome/free-solid-svg-icons";
@@ -10,6 +10,35 @@ const HotelCard = ({hotel, isAll, searchData}) => {
 
     const navigate = useNavigate();
     const [showReviewsModal, setShowReviewsModal] = useState(false);
+
+    const [facilities, setFacilities] = useState({
+        SINGLE: [],
+        DOUBLE: [],
+        TRIPLE: [],
+        FAMILY: []
+    });
+
+    const allFacilitiesList = ["Free WiFi", "City view", "Air conditioning",
+        "Ensuite bathroom", "Flat-screen TV", "Soundproofing", "Minibar"];
+
+    const getRandomFacilities = () => {
+        const randomFacilities = {};
+        Object.keys(facilities).forEach(type => {
+            const selectedFacilities = [];
+            const shuffledFacilities = allFacilitiesList.slice().sort(() => Math.random() - 0.5);
+            for (let i = 0; i < Math.min(Math.random() * 7, shuffledFacilities.length); i++) {
+                selectedFacilities.push(shuffledFacilities[i]);
+            }
+            randomFacilities[type] = selectedFacilities;
+        });
+        return randomFacilities;
+    };
+
+
+    useEffect(() => {
+        const randomFacilities = getRandomFacilities();
+        setFacilities(randomFacilities);
+    }, []);
 
     const toggleReviewsModal = () => {
         setShowReviewsModal(!showReviewsModal);
@@ -24,7 +53,7 @@ const HotelCard = ({hotel, isAll, searchData}) => {
     };
 
     const handleSelect = () => {
-        navigate('/booking/hotels', {state: {hotel, searchData}});
+        navigate('/booking/hotels', {state: {hotel, searchData, facilities}});
     };
 
     const generateStars = () => {

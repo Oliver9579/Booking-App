@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import {useLocation, useNavigate} from 'react-router-dom';
+import MultiRangeSlider from "multi-range-slider-react";
 import "./BookingRooms.css";
 import axios from "axios";
 import Room from "./Room";
@@ -36,6 +37,14 @@ const BookingRooms = () => {
 
     const [selectedRoomTypes, setSelectedRoomTypes] = useState([]);
 
+    const absoluteMinPrice = Math.min(...hotel.rooms.map(room => room.fullPrice));
+
+    const absoluteMaxPrice = Math.max(...hotel.rooms.map(room => room.fullPrice));
+
+    const [minPrice, setMinPrice] = useState(Math.min(...hotel.rooms.map(room => room.fullPrice)));
+
+    const [maxPrice, setMaxPrice] = useState(Math.max(...hotel.rooms.map(room => room.fullPrice)));
+
     const renderRooms = (rooms) => {
 
         const totalPriceSum = Object.values(roomPrices).reduce((acc, price) => acc + price, 0);
@@ -61,16 +70,21 @@ const BookingRooms = () => {
     };
 
     const filterRooms = () => {
-        if (filterRoomsByFacilitiesCheckBoxes().length === 0 && filterRoomsByRoomTypeCheckBoxes().length === 0) {
+        if (filterRoomsByFacilitiesCheckBoxes().length === 4 && filterRoomsByRoomTypeCheckBoxes().length === 4
+            && getRoomsInRange().length === hotel.rooms.length) {
             return hotel.rooms;
-        } else if (!(filterRoomsByFacilitiesCheckBoxes().length === 0) && filterRoomsByRoomTypeCheckBoxes().length === 0) {
-            return filterRoomsByFacilitiesCheckBoxes();
-        } else if (filterRoomsByFacilitiesCheckBoxes().length === 0 && !(filterRoomsByRoomTypeCheckBoxes().length === 0)) {
-            return filterRoomsByRoomTypeCheckBoxes();
+        } else if (!(filterRoomsByFacilitiesCheckBoxes().length === 4) && filterRoomsByRoomTypeCheckBoxes().length === 4) {
+            return filterRoomsByFacilitiesCheckBoxes().filter(value => getRoomsInRange().includes(value));
+        } else if (filterRoomsByFacilitiesCheckBoxes().length === 4 && !(filterRoomsByRoomTypeCheckBoxes().length === 4)) {
+            console.error("vmi")
+            return filterRoomsByRoomTypeCheckBoxes().filter(value => getRoomsInRange().includes(value));
+        } else if (filterRoomsByFacilitiesCheckBoxes().length === 4 && filterRoomsByRoomTypeCheckBoxes().length === 4
+            && !(getRoomsInRange().length === hotel.rooms.length)) {
+            return getRoomsInRange();
         } else {
+            console.error("vmi")
             return filterRoomsByFacilitiesCheckBoxes().filter(value => filterRoomsByRoomTypeCheckBoxes().includes(value));
         }
-
     };
 
     const filterRoomsByFacilitiesCheckBoxes = () => {
@@ -131,6 +145,15 @@ const BookingRooms = () => {
             setSelectedRoomTypes(selectedRoomTypes.filter(roomType => roomType !== id));
         }
     };
+
+    const handleSliderChange = (newValues) => {
+        setMinPrice(newValues.minValue);
+        setMaxPrice(newValues.maxValue);
+    };
+
+    function getRoomsInRange() {
+        return hotel.rooms.filter(room => room.fullPrice >= minPrice && room.fullPrice <= maxPrice);
+    }
 
     const handleRoomCountChange = (roomType, count, totalPrice) => {
         setRoomCounts(prevCounts => ({
@@ -197,7 +220,15 @@ const BookingRooms = () => {
                         <hr/>
 
                         <div style={{fontWeight: 'bold', marginLeft: '10%'}}>Your budget</div>
-
+                        <div className="container" style={{maxHeight: '6%', paddingBottom: '10px'}}>
+                            <MultiRangeSlider style={{margin: '3px', height: '50px'}}
+                                              min={absoluteMinPrice}
+                                              max={absoluteMaxPrice}
+                                              minValue={minPrice}
+                                              maxValue={maxPrice}
+                                              onChange={handleSliderChange}
+                            />
+                        </div>
                         <hr/>
 
                         <div style={{fontWeight: 'bold', marginLeft: '10%'}}>Facilities</div>
@@ -281,9 +312,16 @@ const BookingRooms = () => {
                             </div>
                             <div className="col-2 cols" style={{borderLeft: 0}}></div>
                         </div>
-                        <div>
-                            {renderRooms(filterRooms())}
-                        </div>
+                        {filterRooms().length > 0 ? (
+                            <div>
+                                {renderRooms(filterRooms())}
+                            </div>
+                        ) : (
+                            <div className="alert alert-danger">
+                                <h6>No rooms available based on the selected filters. Please adjust your
+                                    preferences.</h6>
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>

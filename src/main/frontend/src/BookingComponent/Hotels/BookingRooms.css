@@ -80,3 +80,10 @@ input[type="checkbox"]:checked + label:before {
     transform: rotate(45deg);
 }
 
+.multi-range-slider {
+    padding-bottom: 30%;
+}
+
+.thumb-left {
+    padding-left: 4%;
+}

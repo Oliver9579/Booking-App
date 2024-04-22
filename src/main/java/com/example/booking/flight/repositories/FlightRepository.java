@@ -1,4 +1,4 @@
-package com.example.booking.flight.reporitories;
+package com.example.booking.flight.repositories;
 
 import com.example.booking.flight.DTOs.FlightOneWayRequestDTO;
 import com.example.booking.flight.DTOs.FlightRoundTripRequestDTO;

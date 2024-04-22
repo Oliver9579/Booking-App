@@ -1,4 +1,4 @@
-package com.example.booking.booking.repository;
+package com.example.booking.booking.repositories;
 
 import com.example.booking.booking.models.Booking;
 import org.springframework.data.repository.CrudRepository;

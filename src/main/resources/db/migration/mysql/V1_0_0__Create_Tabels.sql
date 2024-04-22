@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS users (
                         email VARCHAR(255) NOT NULL UNIQUE,
                         password VARCHAR(255) NOT NULL,
                         phone_number VARCHAR(255) NOT NULL UNIQUE,
-                        date_of_birth DATETIME,
+                        date_of_birth VARCHAR(255),
                         nationality VARCHAR(255),
                         gender VARCHAR(255),
                         address VARCHAR(255)

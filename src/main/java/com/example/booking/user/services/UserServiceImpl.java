@@ -2,10 +2,12 @@ package com.example.booking.user.services;
 
 import com.example.booking.booking.models.Booking;
 import com.example.booking.email.models.EmailVerificationToken;
+import com.example.booking.exceptions.AlreadyTakenException;
 import com.example.booking.exceptions.ForbiddenActionException;
 import com.example.booking.exceptions.UserNotFoundException;
 import com.example.booking.registration.models.RegistrationDTO;
 import com.example.booking.security.password.PasswordService;
+import com.example.booking.user.models.NewUserDetailsRequestDTO;
 import com.example.booking.user.models.User;
 import com.example.booking.user.models.UserDTO;
 import com.example.booking.user.repositories.UserRepository;
@@ -77,6 +79,32 @@ public class UserServiceImpl implements UserService {
   @Override
   public List<UserDTO> getUsers() {
     return userRepository.findAll().stream().map(this::convertUserToDTO).collect(Collectors.toList());
+  }
+
+  @Override
+  public UserDTO setNewUserDetails(User user, NewUserDetailsRequestDTO newUserDetails) {
+    emailAndPhoneNumberAlreadyExist(newUserDetails);
+
+    user.setFirstName(newUserDetails.getFirstName());
+    user.setLastName(newUserDetails.getLastName());
+    user.setEmail(newUserDetails.getEmail());
+    user.setPhoneNumber(newUserDetails.getPhoneNumber());
+    user.setDateOfBirth(newUserDetails.getDateOfBirth());
+    user.setNationality(newUserDetails.getNationality());
+    user.setGender(newUserDetails.getGender());
+    user.setAddress(newUserDetails.getAddress());
+
+    userRepository.save(user);
+    return convertUserToDTO(user);
+  }
+
+  private boolean emailAndPhoneNumberAlreadyExist(NewUserDetailsRequestDTO newUserDetails) {
+    if (getByEmail(newUserDetails.getEmail()) != null) {
+      throw new AlreadyTakenException("This email is already exists!");
+    }else if (getByPhoneNumber(newUserDetails.getPhoneNumber()) != null) {
+      throw new AlreadyTakenException("This phone number is already exists!");
+    }
+    return false;
   }
 
 }

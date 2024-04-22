@@ -3,6 +3,7 @@ package com.example.booking.user.services;
 import com.example.booking.booking.models.Booking;
 import com.example.booking.email.models.EmailVerificationToken;
 import com.example.booking.registration.models.RegistrationDTO;
+import com.example.booking.user.models.NewUserDetailsRequestDTO;
 import com.example.booking.user.models.User;
 import com.example.booking.user.models.UserDTO;
 
@@ -30,5 +31,7 @@ public interface UserService {
   Boolean isUserIdMatching(Integer userId, Booking booking);
 
   List<UserDTO> getUsers();
+
+  UserDTO setNewUserDetails(User user, NewUserDetailsRequestDTO newUserDetails);
 
 }

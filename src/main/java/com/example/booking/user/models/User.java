@@ -64,7 +64,7 @@ public class User implements UserDetails {
 
   @Column(name = "date_of_birth")
   @JsonIgnore
-  private Date dateOfBirth;
+  private String dateOfBirth;
 
   @Column(name = "nationality")
   @JsonIgnore

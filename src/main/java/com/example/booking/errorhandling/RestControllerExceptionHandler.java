@@ -116,4 +116,9 @@ public class RestControllerExceptionHandler {
     return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new ErrorMessage(ForbiddenActionException.MESSAGE));
   }
 
+  @ExceptionHandler(NoBookingFoundException.class)
+  public ResponseEntity<ErrorMessage> handleNoBookingFound() {
+    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorMessage(NoBookingFoundException.MESSAGE));
+  }
+
 }

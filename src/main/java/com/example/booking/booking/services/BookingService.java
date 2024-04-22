@@ -1,5 +1,6 @@
 package com.example.booking.booking.services;
 
+import com.example.booking.booking.DTOs.AllBookingsResponseDTO;
 import com.example.booking.booking.DTOs.bookingCar.BookingCarRequestDTO;
 import com.example.booking.booking.DTOs.bookingCar.BookingCarResponseDTO;
 import com.example.booking.booking.DTOs.bookingFlight.BookingOneWayFlightRequestDTO;
@@ -20,4 +21,6 @@ public interface BookingService {
   BookingHotelResponseDTO createHotelBooking(User user, BookingHotelRequestDTO bookingHotel);
 
   BookingCarResponseDTO createCarBooking(User user, BookingCarRequestDTO bookingCar);
+
+  AllBookingsResponseDTO getBookings(User user);
 }

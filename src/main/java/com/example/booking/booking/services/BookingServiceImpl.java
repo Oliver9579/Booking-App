@@ -1,5 +1,7 @@
 package com.example.booking.booking.services;
 
+import com.example.booking.booking.DTOs.AllBookingsResponseDTO;
+import com.example.booking.booking.DTOs.BookingResponseDTO;
 import com.example.booking.booking.DTOs.bookingCar.BookingCarRequestDTO;
 import com.example.booking.booking.DTOs.bookingCar.BookingCarResponseDTO;
 import com.example.booking.booking.DTOs.bookingFlight.BookingOneWayFlightRequestDTO;
@@ -14,6 +16,7 @@ import com.example.booking.car.models.Car;
 import com.example.booking.car.services.CarService;
 import com.example.booking.date.models.Days;
 import com.example.booking.date.services.DaysService;
+import com.example.booking.exceptions.NoBookingFoundException;
 import com.example.booking.flight.models.Flight;
 import com.example.booking.flight.services.FlightService;
 import com.example.booking.hotel.models.Hotel;
@@ -118,6 +121,35 @@ public class BookingServiceImpl implements BookingService {
             booking.getEndDate(), carService.convertCarToCarDTO(
             car, days.size(), bookingCar.getStartDate(), bookingCar.getEndDate()));
 
+  }
+
+  @Override
+  public AllBookingsResponseDTO getBookings(User user) {
+    List<Booking> bookings = bookingRepository.findAllByUserId(user.getId());
+    if (bookings.isEmpty()) throw new NoBookingFoundException();
+    List<BookingResponseDTO> bookingsResponse = new ArrayList<>();
+    for (Booking booking : bookings) {
+      if (booking.getOutboundFlight() != null && booking.getReturnFlight() == null) {
+        bookingsResponse.add(new BookingOneWayFlightResponseDTO(booking.getBookingDate(),
+                booking.getStartDate(), booking.getTotalPrice(),
+                flightService.convertToFlightDTO(booking.getOutboundFlight(), booking.getBookedSeats())));
+      } else if (booking.getOutboundFlight() != null && booking.getReturnFlight() != null) {
+        bookingsResponse.add(new BookingRoundTripFlightResponseDTO(
+                booking.getBookingDate(), booking.getStartDate(), booking.getTotalPrice(), booking.getEndDate(),
+                flightService.convertToFlightDTO(booking.getOutboundFlight(), booking.getBookedSeats().stream()
+                        .filter(seat -> seat.getFlight() == booking.getOutboundFlight()).collect(Collectors.toList())),
+                flightService.convertToFlightDTO(booking.getReturnFlight(), booking.getBookedSeats().stream()
+                        .filter(seat -> seat.getFlight() == booking.getReturnFlight()).collect(Collectors.toList()))));
+      } else if (booking.getCar() != null) {
+        bookingsResponse.add(new BookingCarResponseDTO(booking.getBookingDate(), booking.getStartDate(), booking.getTotalPrice(),
+                booking.getEndDate(), carService.convertCarToCarDTO(
+                booking.getCar(), 0, booking.getStartDate(), booking.getEndDate())));
+      } else if (booking.getHotel() != null) {
+        new BookingHotelResponseDTO(booking.getBookingDate(), booking.getStartDate(), booking.getTotalPrice(),
+                booking.getEndDate(), hotelService.convertToHotelBookingResponseDTO(booking.getHotel(), booking.getBookedRooms()));
+      }
+    }
+    return new AllBookingsResponseDTO(bookingsResponse);
   }
 
 }

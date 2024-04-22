@@ -24,6 +24,9 @@ const Navbar = () => {
                     <li className={`nav-item ${isActive('/cars') ? 'active' : ''}`}>
                         <a className="nav-link" href="/cars">Cars {isActive('/cars') && <span className="sr-only">(current)</span>}</a>
                     </li>
+                    <li className={`nav-item ${isActive('/profile') ? 'active' : ''}`}>
+                        <a className="nav-link" href="/profile">Profile {isActive('/profile') && <span className="sr-only">(current)</span>}</a>
+                    </li>
                     <li className={`nav-item ${isActive('/login') ? 'active' : ''}`}>
                         <a className="nav-link" href="/login">Log Out {isActive('/login') && <span className="sr-only">(current)</span>}</a>
                     </li>

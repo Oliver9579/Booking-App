@@ -73,11 +73,11 @@ const Room = ({room, searchData, onRoomCountChange, facilities}) => {
         switch (facility) {
             case "Free WiFi":
                 return <FontAwesomeIcon icon={faWifi}/>;
-            case "City View":
+            case "City view":
                 return <FontAwesomeIcon icon={faCity}/>;
             case "Air conditioning":
                 return <FontAwesomeIcon icon={faFan}/>;
-            case "Ensuite Bathroom":
+            case "Ensuite bathroom":
                 return <FontAwesomeIcon icon={faShower}/>;
             case "Flat-screen TV":
                 return <FontAwesomeIcon icon={faTv}/>;

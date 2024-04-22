@@ -79,7 +79,7 @@ const BookingSeatsForOneWay = () => {
     }
 
     return (
-        <div>
+        <div style={{width: '55%'}}>
             <h2 className="blur-include">Flight</h2>
             <FlightOneWayCard flight={flight} isAll={true}/>
             <br/>

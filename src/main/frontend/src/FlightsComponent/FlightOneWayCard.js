@@ -104,11 +104,11 @@ const FlightOneWayCard = ({flight, isAll}) => {
 
             {!isAll && (
                 <div className="flight-card flight-card-footer blur-include text-right row"
-                     style={{maxWidth: '100%', padding: '2%'}}>
-                    <div className="col-8" style={{fontSize: '18px', paddingTop: '1%'}}><FontAwesomeIcon
+                     style={{maxWidth: '100%', padding: '15px'}}>
+                    <div className="col-8" style={{fontSize: '18px', paddingTop: '10px', paddingRight: 0}}><FontAwesomeIcon
                         icon={faPlane}/> Standard ticket
                     </div>
-                    <div className=" col-2">
+                    <div className=" col-2" style={{paddingLeft: 0}}>
                         <div style={{fontSize: '20px', fontWeight: 'bold'}}><FontAwesomeIcon
                             icon={faEuroSign}/> {basePrice}</div>
                         <div className="" style={{fontSize: '10px', fontWeight: 'lighter'}}>price per person</div>

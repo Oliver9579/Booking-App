@@ -100,9 +100,9 @@ const FlightRoundTripCard = ({flightToDestination, flightReturn}) => {
                     <div className="p-2 d-inline" style={{padding: '2px'}}>({flightToDestination.reviews.length})</div>
                     <div style={{maxWidth: '100%', margin: '0'}}>
                         <div className="row">
-                            <div className="col-4" style={{maxWidth: '150%'}}>
+                            <div className="col-4" style={{maxWidth: '150%', textAlign: "center"}}>
                                 <img src={require(`./img/${flightToDestination.img}`)} alt={flightToDestination.airline}
-                                     style={{maxWidth: '100%', height: 'auto'}}/>
+                                     style={{width: '60px', height: 'auto'}}/>
                             </div>
                             <div className="col-8">
                                 <div style={{
@@ -167,9 +167,9 @@ const FlightRoundTripCard = ({flightToDestination, flightReturn}) => {
                     <div className="p-2 d-inline" style={{padding: '2px'}}>({flightReturn.reviews.length})</div>
                     <div style={{maxWidth: '100%', margin: '0'}}>
                         <div className="row">
-                            <div className="col-4" style={{maxWidth: '150%'}}>
+                            <div className="col-4" style={{maxWidth: '150%', textAlign: "center"}}>
                                 <img src={require(`./img/${flightToDestination.img}`)} alt={flightReturn.airline}
-                                     style={{maxWidth: '100%', height: 'auto'}}/>
+                                     style={{width: '60px', height: 'auto'}}/>
                             </div>
                             <div className="col-8">
                                 <div style={{
@@ -208,11 +208,11 @@ const FlightRoundTripCard = ({flightToDestination, flightReturn}) => {
                 </div>
             </div>
             <div className="flight-card flight-card-footer blur-include text-right row"
-                 style={{maxWidth: '100%', padding: '2%'}}>
-                <div className="col-8" style={{fontSize: '18px', paddingTop: '1%'}}><FontAwesomeIcon
+                 style={{maxWidth: '100%', padding: '15px'}}>
+                <div className="col-8" style={{fontSize: '18px', paddingTop: '10px', paddingRight: 0}}><FontAwesomeIcon
                     icon={faPlane}/> Standard ticket
                 </div>
-                <div className=" col-2">
+                <div className=" col-2" style={{paddingLeft: 0}}>
                     <div style={{fontSize: '20px', fontWeight: 'bold'}}><FontAwesomeIcon
                         icon={faEuroSign}/> {basePrice}</div>
                     <div className="" style={{fontSize: '10px', fontWeight: 'lighter'}}>price per person</div>

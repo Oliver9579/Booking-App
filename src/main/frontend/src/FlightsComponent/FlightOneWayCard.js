@@ -61,9 +61,9 @@ const FlightOneWayCard = ({flight, isAll}) => {
                     <div className="p-2 d-inline" style={{padding: '2px'}}>({flight.reviews.length})</div>
                     <div style={{maxWidth: '100%', margin: '0'}}>
                         <div className="row">
-                            <div className="col-4" style={{maxWidth: '150%'}}>
+                            <div className="col-4" style={{maxWidth: '150%', textAlign:"center"}}>
                                 <img src={require(`./img/${flight.img}`)} alt={flight.airline}
-                                     style={{maxWidth: '100%', height: 'auto'}}/>
+                                     style={{width: '60px', height: 'auto'}}/>
                             </div>
                             <div className="col-8">
                                 <div style={{

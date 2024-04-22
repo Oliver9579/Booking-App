@@ -95,6 +95,11 @@ public class CarServiceImpl implements CarService {
                     .collect(Collectors.toList()));
   }
 
+  @Override
+  public Car save(Car car) {
+    return carRepository.save(car);
+  }
+
   private List<Car> getCarsByDates(CarRequestDTO carRequest, List<Car> cars) {
     if (cars.isEmpty()) throw new NoCarFoundException();
     if (carRequest.getPickUpDate().equals(carRequest.getDropOffDate())) throw new SameDateException();

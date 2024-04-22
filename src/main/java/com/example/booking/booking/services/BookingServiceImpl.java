@@ -112,6 +112,7 @@ public class BookingServiceImpl implements BookingService {
                     bookingCar.getEndDateInString()).stream()
             .map(date -> daysService.getByDate(date)).collect(Collectors.toList());
 
+    days.addAll(car.getUnavailable());
     car.setUnavailable(days);
 
     Booking booking = bookingRepository.save(new Booking(bookingCar.getStartDate(), bookingCar.getEndDate(),
@@ -145,8 +146,8 @@ public class BookingServiceImpl implements BookingService {
                 booking.getEndDate(), carService.convertCarToCarDTO(
                 booking.getCar(), 0, booking.getStartDate(), booking.getEndDate())));
       } else if (booking.getHotel() != null) {
-        new BookingHotelResponseDTO(booking.getBookingDate(), booking.getStartDate(), booking.getTotalPrice(),
-                booking.getEndDate(), hotelService.convertToHotelBookingResponseDTO(booking.getHotel(), booking.getBookedRooms()));
+        bookingsResponse.add(new BookingHotelResponseDTO(booking.getBookingDate(), booking.getStartDate(), booking.getTotalPrice(),
+                booking.getEndDate(), hotelService.convertToHotelBookingResponseDTO(booking.getHotel(), booking.getBookedRooms())));
       }
     }
     return new AllBookingsResponseDTO(bookingsResponse);

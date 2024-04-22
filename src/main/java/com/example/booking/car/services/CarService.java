@@ -22,4 +22,6 @@ public interface CarService {
 
   CarDTO convertCarToCarDTO(Car car, int travelLength, Date pickUpDate, Date dropOffDate);
 
+  Car save(Car car);
+
 }

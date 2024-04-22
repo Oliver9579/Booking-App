@@ -31,5 +31,12 @@ public class UserController {
     return ResponseEntity.ok().body(userService.setNewUserDetails(user, newUserDetails));
   }
 
+  @DeleteMapping()
+  public ResponseEntity<UserDTO> deleteUser(UsernamePasswordAuthenticationToken auth) {
+    Integer userId = ((User) auth.getPrincipal()).getId();
+    User user = userService.getById(userId);
+    return ResponseEntity.ok().body(userService.deleteUser(user));
+  }
+
 
 }

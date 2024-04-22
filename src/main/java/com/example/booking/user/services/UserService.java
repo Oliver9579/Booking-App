@@ -34,4 +34,5 @@ public interface UserService {
 
   UserDTO setNewUserDetails(User user, NewUserDetailsRequestDTO newUserDetails);
 
+  UserDTO deleteUser(User user);
 }

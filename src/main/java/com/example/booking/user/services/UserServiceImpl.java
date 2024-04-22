@@ -49,8 +49,9 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public UserDTO convertUserToDTO(User user) {
-    return new UserDTO(user.getId(), user.getFirstName() + " " + user.getLastName(),
-            user.getUsername(), user.getEmail(), user.getPhoneNumber());
+    return new UserDTO(user.getId(), user.getFirstName() + " " + user.getLastName(), user.getUsername(),
+            user.getEmail(), user.getPhoneNumber(), user.getDateOfBirth(), user.getNationality(), user.getGender(),
+            user.getAddress());
   }
 
   @Override
@@ -77,4 +78,5 @@ public class UserServiceImpl implements UserService {
   public List<UserDTO> getUsers() {
     return userRepository.findAll().stream().map(this::convertUserToDTO).collect(Collectors.toList());
   }
+
 }

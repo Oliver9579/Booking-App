@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -14,5 +16,9 @@ public class UserDTO {
   private String username;
   private String email;
   private String phoneNumber;
+  private Date dateOfBirth;
+  private String nationality;
+  private String gender;
+  private String address;
 
 }

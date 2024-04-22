@@ -8,7 +8,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.validator.constraints.UniqueElements;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -16,6 +15,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -61,6 +61,22 @@ public class User implements UserDetails {
   @Column(name = "phone_number", unique = true)
   @JsonIgnore
   private String phoneNumber;
+
+  @Column(name = "date_of_birth")
+  @JsonIgnore
+  private Date dateOfBirth;
+
+  @Column(name = "nationality")
+  @JsonIgnore
+  private String nationality;
+
+  @Column(name = "gender")
+  @JsonIgnore
+  private String gender;
+
+  @Column(name = "address")
+  @JsonIgnore
+  private String address;
 
   private boolean enabled;
 

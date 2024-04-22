@@ -116,7 +116,7 @@ const FlightRoundTripCard = ({flightToDestination, flightReturn}) => {
                     </div>
                 </div>
                 <div className="col-3" style={{maxWidth: '100%', maxHeight: '100%', textAlign: "center"}}>
-                    <p
+                    <div
                         style={{paddingTop: '10%'}}>
                         <div style={{
                             fontWeight: 'bold',
@@ -126,7 +126,7 @@ const FlightRoundTripCard = ({flightToDestination, flightReturn}) => {
                            style={{fontWeight: 'bold'}}>{flightToDestination.originAirportCode} </p>
                         <p className="d-inline">{flightToDestination.origin}</p>
                         <div style={{fontSize: '15px', fontWeight: "lighter"}}>{flightToDestination.origin}</div>
-                    </p>
+                    </div>
                 </div>
                 <div className="col-2" style={{maxWidth: '100%', maxHeight: '100%', textAlign: "center"}}>
                     <div style={{fontSize: '17px', paddingTop: '20%'}}>{flightToDestinationFormattedDuration}</div>
@@ -135,7 +135,7 @@ const FlightRoundTripCard = ({flightToDestination, flightReturn}) => {
                     <div style={{fontSize: '12px'}}>{flightToDestination.flightType}</div>
                 </div>
                 <div className="col-3" style={{maxWidth: '100%', maxHeight: '100%', textAlign: "center"}}>
-                    <p
+                    <div
                         style={{paddingTop: '10%'}}>
                         <div style={{
                             fontWeight: 'bold',
@@ -145,7 +145,7 @@ const FlightRoundTripCard = ({flightToDestination, flightReturn}) => {
                            style={{fontWeight: 'bold'}}>{flightToDestination.destinationAirportCode} </p>
                         <p className="d-inline">{flightToDestination.destination}</p>
                         <div style={{fontSize: '15px', fontWeight: "lighter"}}>{flightToDestination.destination}</div>
-                    </p>
+                    </div>
                 </div>
             </div>
 
@@ -183,13 +183,13 @@ const FlightRoundTripCard = ({flightToDestination, flightReturn}) => {
                     </div>
                 </div>
                 <div className="col-3" style={{maxWidth: '100%', maxHeight: '100%', textAlign: "center"}}>
-                    <p
+                    <div
                         style={{paddingTop: '10%'}}>
                         <div style={{fontWeight: 'bold', fontSize: '30px'}}>{flightReturnFormattedDepartureTime}</div>
                         <p className="d-inline" style={{fontWeight: 'bold'}}>{flightReturn.originAirportCode} </p>
                         <p className="d-inline">{flightReturn.origin}</p>
                         <div style={{fontSize: '15px', fontWeight: "lighter"}}>{flightReturn.origin}</div>
-                    </p>
+                    </div>
                 </div>
                 <div className="col-2" style={{maxWidth: '100%', maxHeight: '100%', textAlign: "center"}}>
                     <div style={{fontSize: '17px', paddingTop: '20%'}}>{flightReturnFormattedDuration}</div>
@@ -198,13 +198,13 @@ const FlightRoundTripCard = ({flightToDestination, flightReturn}) => {
                     <div style={{fontSize: '12px'}}>{flightReturn.flightType}</div>
                 </div>
                 <div className="col-3" style={{maxWidth: '100%', maxHeight: '100%', textAlign: "center"}}>
-                    <p
+                    <div
                         style={{paddingTop: '10%'}}>
                         <div style={{fontWeight: 'bold', fontSize: '30px'}}>{flightReturnFormattedLandingTime}</div>
                         <p className="d-inline" style={{fontWeight: 'bold'}}>{flightReturn.destinationAirportCode} </p>
                         <p className="d-inline">{flightReturn.destination}</p>
                         <div style={{fontSize: '15px', fontWeight: "lighter"}}>{flightReturn.destination}</div>
-                    </p>
+                    </div>
                 </div>
             </div>
             <div className="flight-card flight-card-footer blur-include text-right row"

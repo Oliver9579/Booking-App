@@ -77,13 +77,13 @@ const FlightOneWayCard = ({flight, isAll}) => {
                     </div>
                 </div>
                 <div className="col-3" style={{maxWidth: '100%', maxHeight: '100%', textAlign: "center"}}>
-                    <p
+                    <div
                         style={{paddingTop: '10%'}}>
                         <div style={{fontWeight: 'bold', fontSize: '30px'}}>{formattedDepartureTime}</div>
                         <p className="d-inline" style={{fontWeight: 'bold'}}>{flight.originAirportCode} </p>
                         <p className="d-inline">{flight.origin}</p>
                         <div style={{fontSize: '15px', fontWeight: "lighter"}}>{flight.origin}</div>
-                    </p>
+                    </div>
                 </div>
                 <div className="col-2" style={{maxWidth: '100%', maxHeight: '100%', textAlign: "center"}}>
                     <div style={{fontSize: '17px', paddingTop: '20%'}}>{formattedDuration}</div>
@@ -92,13 +92,13 @@ const FlightOneWayCard = ({flight, isAll}) => {
                     <div style={{fontSize: '12px'}}>{flight.flightType}</div>
                 </div>
                 <div className="col-3" style={{maxWidth: '100%', maxHeight: '100%', textAlign: "center"}}>
-                    <p
+                    <div
                         style={{paddingTop: '10%'}}>
                         <div style={{fontWeight: 'bold', fontSize: '30px'}}>{formattedLandingTime}</div>
                         <p className="d-inline" style={{fontWeight: 'bold'}}>{flight.destinationAirportCode} </p>
                         <p className="d-inline">{flight.destination}</p>
                         <div style={{fontSize: '15px', fontWeight: "lighter"}}>{flight.destination}</div>
-                    </p>
+                    </div>
                 </div>
             </div>
 

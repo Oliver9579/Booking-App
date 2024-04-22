@@ -8,8 +8,9 @@ import com.example.booking.flight.DTOs.FlightListDTO;
 import com.example.booking.flight.DTOs.FlightOneWayRequestDTO;
 import com.example.booking.flight.DTOs.FlightRoundTripRequestDTO;
 import com.example.booking.flight.models.Flight;
-import com.example.booking.flight.reporitories.FlightRepository;
+import com.example.booking.flight.repositories.FlightRepository;
 import com.example.booking.review.services.ReviewService;
+import com.example.booking.seat.models.Seat;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +29,7 @@ public class FlightServiceImpl implements FlightService {
   public FlightListDTO getAllFlights() {
     return new FlightListDTO(flightRepository.findAll()
             .stream()
-            .map(this::convertToFlightDTO)
+            .map(flight -> convertToFlightDTO(flight, flight.getSeats()))
             .collect(Collectors.toList()));
   }
 
@@ -38,10 +39,10 @@ public class FlightServiceImpl implements FlightService {
   }
 
   @Override
-  public FlightDTO convertToFlightDTO(Flight flight) {
+  public FlightDTO convertToFlightDTO(Flight flight, List<Seat> seats) {
     return new FlightDTO(flight.getId(), flight.getAirline(), flight.getOrigin(), flight.getOriginAirportCode(),
             flight.getDestination(), flight.getDestinationAirportCode(), flight.getDepartureDate(),
-            flight.getDuration(), flight.getFlightNumber(), flight.getFlightType(), flight.getImg(), flight.getSeats(),
+            flight.getDuration(), flight.getFlightNumber(), flight.getFlightType(), flight.getImg(), seats,
             flight.getReviews().stream().map(review -> reviewService.convertToResponse(review)).collect(Collectors.toList()));
   }
 
@@ -53,7 +54,7 @@ public class FlightServiceImpl implements FlightService {
     } else {
       return new FlightListDTO(flights
               .stream()
-              .map(this::convertToFlightDTO)
+              .map(flight -> convertToFlightDTO(flight, flight.getSeats()))
               .collect(Collectors.toList()));
     }
   }
@@ -67,9 +68,11 @@ public class FlightServiceImpl implements FlightService {
 
     for (int i = 0; i < flightsId.size(); i++) {
       flights.add(convertToFlightDTO(
-              flightRepository.findById((Integer) flightsId.get(i).get(0)).get()));
+              flightRepository.findById((Integer) flightsId.get(i).get(0)).get(),
+              flightRepository.findById((Integer) flightsId.get(i).get(0)).get().getSeats()));
       flights.add(convertToFlightDTO(
-              flightRepository.findById((Integer) flightsId.get(i).get(1)).get()));
+              flightRepository.findById((Integer) flightsId.get(i).get(1)).get(),
+              flightRepository.findById((Integer) flightsId.get(i).get(1)).get().getSeats()));
     }
     return new FlightListDTO(flights);
   }

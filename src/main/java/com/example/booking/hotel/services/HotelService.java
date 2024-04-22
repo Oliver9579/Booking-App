@@ -5,6 +5,7 @@ import com.example.booking.hotel.DTOs.HotelBookingResponseDTO;
 import com.example.booking.hotel.DTOs.HotelListDTO;
 import com.example.booking.hotel.DTOs.HotelRequestDTO;
 import com.example.booking.hotel.models.Hotel;
+import com.example.booking.room.models.Room;
 
 import java.util.List;
 
@@ -16,6 +17,6 @@ public interface HotelService {
 
   Hotel getHotelById(Integer id);
 
-  HotelBookingResponseDTO convertToResponseDTO(Hotel hotel);
+  HotelBookingResponseDTO convertToHotelBookingResponseDTO(Hotel hotel, List<Room> rooms);
 
 }

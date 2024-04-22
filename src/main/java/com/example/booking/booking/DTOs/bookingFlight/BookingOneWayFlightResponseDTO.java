@@ -1,23 +1,20 @@
 package com.example.booking.booking.DTOs.bookingFlight;
 
+import com.example.booking.booking.DTOs.BookingResponseDTO;
 import com.example.booking.flight.DTOs.FlightDTO;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Date;
 
-@Data
-public class BookingOneWayFlightResponseDTO {
+@Getter
+@Setter
+public class BookingOneWayFlightResponseDTO extends BookingResponseDTO {
 
-  private Date bookingDate;
-  private Date startDate;
-  private int totalPrice;
   private FlightDTO flight;
 
-  public BookingOneWayFlightResponseDTO(Date bookingDate, Date startDate,
-                                        int totalPrice, FlightDTO flight) {
-    this.bookingDate = bookingDate;
-    this.startDate = startDate;
-    this.totalPrice = totalPrice;
+  public BookingOneWayFlightResponseDTO(Date bookingDate, Date startDate, int totalPrice, FlightDTO flight) {
+    super(bookingDate, startDate, totalPrice);
     this.flight = flight;
   }
 

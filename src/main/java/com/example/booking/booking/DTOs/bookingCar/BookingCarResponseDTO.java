@@ -1,24 +1,23 @@
 package com.example.booking.booking.DTOs.bookingCar;
 
+import com.example.booking.booking.DTOs.BookingResponseDTO;
 import com.example.booking.car.DTOs.CarDTO;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Date;
 
-@Data
-public class BookingCarResponseDTO {
+@Getter
+@Setter
+public class BookingCarResponseDTO extends BookingResponseDTO {
 
-  private Date bookingDate;
-  private Date startDate;
   private Date endDate;
-  private int totalPrice;
   private CarDTO car;
 
-  public BookingCarResponseDTO(Date bookingDate, Date startDate, Date endDate, int totalPrice, CarDTO car) {
-    this.bookingDate = bookingDate;
-    this.startDate = startDate;
+
+  public BookingCarResponseDTO(Date bookingDate, Date startDate, int totalPrice, Date endDate, CarDTO car) {
+    super(bookingDate, startDate, totalPrice);
     this.endDate = endDate;
-    this.totalPrice = totalPrice;
     this.car = car;
   }
 }

@@ -1,6 +1,7 @@
 package com.example.booking.flight.controllers;
 
 import com.example.booking.flight.DTOs.*;
+import com.example.booking.flight.models.Flight;
 import com.example.booking.flight.services.FlightService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +21,8 @@ public class FlightController {
 
   @GetMapping("/{id}")
   public ResponseEntity<FlightDTO> getFlightById(@PathVariable Integer id) {
-    return ResponseEntity.ok().body(flightService.convertToFlightDTO(flightService.getFlightById(id)));
+    Flight flight = flightService.getFlightById(id);
+    return ResponseEntity.ok().body(flightService.convertToFlightDTO(flight, flight.getSeats()));
   }
 
   @GetMapping("/oneWay")

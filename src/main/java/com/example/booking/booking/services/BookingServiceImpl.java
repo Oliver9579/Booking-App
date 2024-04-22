@@ -9,7 +9,7 @@ import com.example.booking.booking.DTOs.bookingFlight.BookingRoundTripFlightResp
 import com.example.booking.booking.DTOs.bookingHotel.BookingHotelRequestDTO;
 import com.example.booking.booking.DTOs.bookingHotel.BookingHotelResponseDTO;
 import com.example.booking.booking.models.Booking;
-import com.example.booking.booking.repository.BookingRepository;
+import com.example.booking.booking.repositories.BookingRepository;
 import com.example.booking.car.models.Car;
 import com.example.booking.car.services.CarService;
 import com.example.booking.date.models.Days;
@@ -53,7 +53,7 @@ public class BookingServiceImpl implements BookingService {
             bookingFlight.getTotalPrice(), user, flight, seats));
 
     return new BookingOneWayFlightResponseDTO(booking.getBookingDate(), booking.getStartDate(), booking.getTotalPrice(),
-            flightService.convertToFlightDTO(booking.getOutboundFlight()));
+            flightService.convertToFlightDTO(booking.getOutboundFlight(), booking.getBookedSeats()));
   }
 
   @Override
@@ -73,9 +73,11 @@ public class BookingServiceImpl implements BookingService {
             bookingFlight.getTotalPrice(), user, flightToDestination, flightReturn, seats));
 
     return new BookingRoundTripFlightResponseDTO(
-            booking.getBookingDate(), booking.getStartDate(), booking.getEndDate(), booking.getTotalPrice(),
-            flightService.convertToFlightDTO(booking.getOutboundFlight()),
-            flightService.convertToFlightDTO(booking.getReturnFlight()));
+            booking.getBookingDate(), booking.getStartDate(), booking.getTotalPrice(), booking.getEndDate(),
+            flightService.convertToFlightDTO(booking.getOutboundFlight(), booking.getBookedSeats().stream()
+                    .filter(seat -> seat.getFlight() == booking.getOutboundFlight()).collect(Collectors.toList())),
+            flightService.convertToFlightDTO(booking.getReturnFlight(), booking.getBookedSeats().stream()
+                    .filter(seat -> seat.getFlight() == booking.getReturnFlight()).collect(Collectors.toList())));
   }
 
   @Override
@@ -95,8 +97,8 @@ public class BookingServiceImpl implements BookingService {
     Booking booking = bookingRepository.save(new Booking(bookingHotel.getStartDate(), bookingHotel.getEndDate(),
             bookingHotel.getTotalPrice(), user, hotel, oneRoomForEachRequestType));
 
-    return new BookingHotelResponseDTO(booking.getBookingDate(), booking.getStartDate(), booking.getEndDate(),
-            booking.getTotalPrice(), hotelService.convertToResponseDTO(hotel));
+    return new BookingHotelResponseDTO(booking.getBookingDate(), booking.getStartDate(), booking.getTotalPrice(),
+            booking.getEndDate(), hotelService.convertToHotelBookingResponseDTO(hotel, booking.getBookedRooms()));
   }
 
   @Override
@@ -112,8 +114,8 @@ public class BookingServiceImpl implements BookingService {
     Booking booking = bookingRepository.save(new Booking(bookingCar.getStartDate(), bookingCar.getEndDate(),
             bookingCar.getTotalPrice(), user, car));
 
-    return new BookingCarResponseDTO(booking.getBookingDate(), booking.getStartDate(), booking.getEndDate(),
-            booking.getTotalPrice(), carService.convertCarToCarDTO(
+    return new BookingCarResponseDTO(booking.getBookingDate(), booking.getStartDate(), booking.getTotalPrice(),
+            booking.getEndDate(), carService.convertCarToCarDTO(
             car, days.size(), bookingCar.getStartDate(), bookingCar.getEndDate()));
 
   }

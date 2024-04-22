@@ -1,25 +1,24 @@
 package com.example.booking.booking.DTOs.bookingHotel;
 
+import com.example.booking.booking.DTOs.BookingResponseDTO;
 import com.example.booking.hotel.DTOs.HotelBookingResponseDTO;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Date;
 
-@Data
-public class BookingHotelResponseDTO {
+@Getter
+@Setter
+public class BookingHotelResponseDTO extends BookingResponseDTO {
 
-  private Date bookingDate;
-  private Date startDate;
   private Date endDate;
-  private int totalPrice;
   private HotelBookingResponseDTO hotel;
 
-  public BookingHotelResponseDTO(Date bookingDate, Date startDate, Date endDate, int totalPrice, HotelBookingResponseDTO hotel) {
-    this.bookingDate = bookingDate;
-    this.startDate = startDate;
+
+  public BookingHotelResponseDTO(Date bookingDate, Date startDate, int totalPrice,
+                                 Date endDate, HotelBookingResponseDTO hotel) {
+    super(bookingDate, startDate, totalPrice);
     this.endDate = endDate;
-    this.totalPrice = totalPrice;
     this.hotel = hotel;
   }
-
 }

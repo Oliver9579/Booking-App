@@ -1,26 +1,25 @@
 package com.example.booking.booking.DTOs.bookingFlight;
 
+import com.example.booking.booking.DTOs.BookingResponseDTO;
 import com.example.booking.flight.DTOs.FlightDTO;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Date;
 
-@Data
-public class BookingRoundTripFlightResponseDTO {
+@Getter
+@Setter
+public class BookingRoundTripFlightResponseDTO extends BookingResponseDTO {
 
-  private Date bookingDate;
-  private Date startDate;
   private Date endDate;
-  private int totalPrice;
   private FlightDTO flightToDestination;
   private FlightDTO flightReturn;
 
-  public BookingRoundTripFlightResponseDTO(Date bookingDate, Date startDate, Date endDate,
-                                           int totalPrice, FlightDTO flightToDestination, FlightDTO flightReturn) {
-    this.bookingDate = bookingDate;
-    this.startDate = startDate;
+
+  public BookingRoundTripFlightResponseDTO(Date bookingDate, Date startDate, int totalPrice, Date endDate,
+                                           FlightDTO flightToDestination, FlightDTO flightReturn) {
+    super(bookingDate, startDate, totalPrice);
     this.endDate = endDate;
-    this.totalPrice = totalPrice;
     this.flightToDestination = flightToDestination;
     this.flightReturn = flightReturn;
   }

@@ -29,7 +29,6 @@ public class HotelServiceImpl implements HotelService {
 
   @Override
   public HotelListDTO getAllByLocation(HotelRequestDTO hotelRequest) {
-    long cnt = 0;
     List<Hotel> hotels = hotelRepository.findAllByLocation(hotelRequest.getLocation());
     if (hotels.isEmpty()) throw new NoHotelFoundException();
     if (hotelRequest.getCheckInDate().equals(hotelRequest.getCheckOutDate())) throw new SameDateException();
@@ -64,9 +63,9 @@ public class HotelServiceImpl implements HotelService {
   }
 
   @Override
-  public HotelBookingResponseDTO convertToResponseDTO(Hotel hotel) {
+  public HotelBookingResponseDTO convertToHotelBookingResponseDTO(Hotel hotel, List<Room> rooms) {
     return new HotelBookingResponseDTO(hotel.getId(), hotel.getName(), hotel.getLocation(), hotel.getStreet(),
-            hotel.getStars(), hotel.getRooms().stream().map(room -> new RoomBookingDTO(room.getId(), room.getRoomType(),
+            hotel.getStars(), rooms.stream().map(room -> new RoomBookingDTO(room.getId(), room.getRoomType(),
             room.getCapacity(), room.getPricePerNight())).collect(Collectors.toList()),
             hotel.getReviews().stream().map(review -> reviewService.convertToResponse(review)).collect(Collectors.toList()));
   }

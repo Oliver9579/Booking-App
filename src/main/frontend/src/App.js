@@ -11,6 +11,7 @@ import BookingSeatsForOneWay from "./BookingComponent/Flights/BookingSeatsForOne
 import BookingSeatsForRoundTrip from "./BookingComponent/Flights/BookingSeatsForRoundTrip";
 import BookingRooms from "./BookingComponent/Hotels/BookingRooms";
 import Cars from "./CarComponent/Cars";
+import Profile from "./ProfileComponent/Profile";
 import BookingSuccess from "./BookingComponent/BookingSuccess";
 
 
@@ -25,6 +26,7 @@ const App = () => {
                     <Route path="/flights" element={<Flights/>}/>
                     <Route path="/hotels" element={<Hotels/>}/>
                     <Route path="/cars" element={<Cars/>}/>
+                    <Route path="/profile" element={<Profile/>}/>
                     <Route path="/booking/flights/oneWay" element={<BookingSeatsForOneWay/>}/>
                     <Route path="/booking/flights/roundTrip" element={<BookingSeatsForRoundTrip/>}/>
                     <Route path="/booking/hotels" element={<BookingRooms/>}/>

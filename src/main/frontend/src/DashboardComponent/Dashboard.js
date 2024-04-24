@@ -37,7 +37,7 @@ const Dashboard = () => {
                 <div className="card-body">
                     <h5 className="card-title">Profile</h5>
                     <p className="card-text">Manage your Booking experience</p>
-                    <a href="/myAccount" className="btn btn-primary">See Profile</a>
+                    <a href="/profile" className="btn btn-primary">See Profile</a>
                 </div>
             </div>
         </div>

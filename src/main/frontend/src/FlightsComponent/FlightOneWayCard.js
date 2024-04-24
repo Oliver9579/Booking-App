@@ -42,9 +42,6 @@ const FlightOneWayCard = ({flight, isAll}) => {
 
     return (
         <div>
-            {/*{!isAll && (*/}
-            {/*    <div className="flight-card selected blur-include" style={{maxWidth: '100%'}}>Your selected trip</div>*/}
-            {/*)}*/}
 
             <div className="flight-card flight-card-header blur-include" style={{maxWidth: '100%'}}>
                 <FontAwesomeIcon icon={faPlaneDeparture}/> <p

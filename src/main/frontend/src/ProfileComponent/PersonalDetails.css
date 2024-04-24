@@ -1,0 +1,50 @@
+.personal-details-card {
+    max-width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.edit-button {
+    background-color: white;
+    color: blue;
+    border: 0;
+}
+
+.edit-button:disabled {
+    background-color: white;
+    color: blue;
+    border: 0;
+    cursor: not-allowed;
+}
+
+.edit-button:hover {
+    background-color: rgb(220, 255, 255);
+    color: blue;
+}
+
+.form-control {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.cancel-button {
+    background-color: white;
+    color: blue;
+    border: 0;
+}
+
+.cancel-button:hover {
+    background-color: rgb(220, 255, 255);
+    color: blue;
+}
+
+.number-without-arrow input::-webkit-outer-spin-button,
+.number-without-arrow input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}

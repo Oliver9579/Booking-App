@@ -67,7 +67,7 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public UserDTO convertUserToDTO(User user) {
-    return new UserDTO(user.getId(), user.getFirstName() + " " + user.getLastName(), user.getUsername(),
+    return new UserDTO(user.getId(), user.getFirstName(), user.getLastName(), user.getUsername(),
             user.getEmail(), user.getPhoneNumber(), user.getDateOfBirth(), user.getNationality(), user.getGender(),
             user.getAddress());
   }

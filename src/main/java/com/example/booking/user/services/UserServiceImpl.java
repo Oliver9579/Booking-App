@@ -99,7 +99,7 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public UserDTO setNewUserDetails(User user, NewUserDetailsRequestDTO newUserDetails) {
-    emailAndPhoneNumberAlreadyExist(newUserDetails);
+    emailAndPhoneNumberAlreadyExist(newUserDetails, user);
 
     user.setFirstName(newUserDetails.getFirstName());
     user.setLastName(newUserDetails.getLastName());
@@ -186,13 +186,17 @@ public class UserServiceImpl implements UserService {
     }
   }
 
-  private boolean emailAndPhoneNumberAlreadyExist(NewUserDetailsRequestDTO newUserDetails) {
-    if (getByEmail(newUserDetails.getEmail()) != null) {
-      throw new AlreadyTakenException("This email is already exists!");
-    } else if (getByPhoneNumber(newUserDetails.getPhoneNumber()) != null) {
-      throw new AlreadyTakenException("This phone number is already exists!");
+  private boolean emailAndPhoneNumberAlreadyExist(NewUserDetailsRequestDTO newUserDetails, User user) {
+    try {
+      if (getByEmail(newUserDetails.getEmail()) != null
+              && !(getByEmail(newUserDetails.getEmail()).equals(user))) {
+        throw new AlreadyTakenException("This email is already exists!");
+      } else if (getByPhoneNumber(newUserDetails.getPhoneNumber()) != null
+              && !(getByPhoneNumber(newUserDetails.getPhoneNumber()).equals(user))) {
+        throw new AlreadyTakenException("This phone number is already exists!");
+      }
+    } catch (UserNotFoundException e) {
     }
     return false;
   }
-
 }

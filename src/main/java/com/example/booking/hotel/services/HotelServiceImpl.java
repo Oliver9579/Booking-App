@@ -65,7 +65,7 @@ public class HotelServiceImpl implements HotelService {
   @Override
   public HotelBookingResponseDTO convertToHotelBookingResponseDTO(Hotel hotel, List<Room> rooms) {
     return new HotelBookingResponseDTO(hotel.getId(), hotel.getName(), hotel.getLocation(), hotel.getStreet(),
-            hotel.getStars(), rooms.stream().map(room -> new RoomBookingDTO(room.getId(), room.getRoomType(),
+            hotel.getStars(), hotel.getImg(), rooms.stream().map(room -> new RoomBookingDTO(room.getId(), room.getRoomType(),
             room.getCapacity(), room.getPricePerNight())).collect(Collectors.toList()),
             hotel.getReviews().stream().map(review -> reviewService.convertToResponse(review)).collect(Collectors.toList()));
   }

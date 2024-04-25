@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import Navbar from "../NavBarComponent/Navbar";
 import PersonalDetails from "./PersonalDetails";
+import Bookings from "../BookingComponent/Bookings";
 
 const Profile = () => {
 
@@ -40,8 +41,13 @@ const Profile = () => {
             </div>
             <div>
                 {errorMessage === '' ? (
-                    <div style={{paddingBottom: '5%'}}>
-                        <PersonalDetails user={user}/>
+                    <div>
+                        <div style={{paddingBottom: '5%'}}>
+                            <PersonalDetails user={user}/>
+                        </div>
+                        <div style={{paddingBottom: '5%'}}>
+                            <Bookings/>
+                        </div>
                     </div>
                 ) : (
                     <div className="alert alert-danger">

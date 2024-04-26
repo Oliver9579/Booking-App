@@ -30,7 +30,6 @@ VALUES ('Delta Airlines', 'New York', 'Los Angeles', '2024-06-15 16:30:00', 360,
        ('Lufthansa', 'Frankfurt', 'Berlin', '2024-06-15 09:00:00', 90, UNIX_TIMESTAMP()),
        ('KLM', 'Amsterdam', 'London', '2024-06-17 13:45:00', 75, UNIX_TIMESTAMP()),
        ('Cathay Pacific', 'Hong Kong', 'Tokyo', '2024-06-18 15:00:00', 240, UNIX_TIMESTAMP()),
-       ('Singapore Airlines', 'Singapore', 'Bangkok', '2024-06-19 17:30:00', 140, UNIX_TIMESTAMP()),
        ('Emirates', 'Dubai', 'Delhi', '2024-06-20 20:00:00', 210, UNIX_TIMESTAMP()),
        ('Qantas', 'Sydney', 'Melbourne', '2024-07-10 08:00:00', 90, UNIX_TIMESTAMP()),
        ('Turkish Airlines', 'Istanbul', 'Ankara', '2024-06-21 11:00:00', 80, UNIX_TIMESTAMP()),
@@ -94,7 +93,7 @@ BEGIN
     DECLARE flightId INT default 1;
     DECLARE seatCounter INT default 1;
     DECLARE flightCounter INT default 1;
-    WHILE flightCounter <= 82
+    WHILE flightCounter <= 81
         DO
             SET @flightDuration = (select duration from flights where id = flightCounter);
             WHILE seatCounter <= 60

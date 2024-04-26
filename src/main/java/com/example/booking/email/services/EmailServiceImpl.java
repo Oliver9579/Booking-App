@@ -26,19 +26,14 @@ public class EmailServiceImpl implements EmailService {
 
   @Value("${spring.mail.username}")
   private String sender;
-  private String port = "8080";
-  private String host;
+  private String port = "3000";
+  private String host = "localhost";
   @Autowired
   private JavaMailSender mailSender;
   @Autowired
   private SpringTemplateEngine templateEngine;
 
-  public EmailServiceImpl() {
-    host = InetAddress.getLoopbackAddress().getHostAddress();
-  }
-
   public EmailServiceImpl(JavaMailSender mailSender, SpringTemplateEngine templateEngine) {
-    this();
     this.mailSender = mailSender;
     this.templateEngine = templateEngine;
   }

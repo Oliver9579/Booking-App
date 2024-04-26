@@ -285,7 +285,7 @@ const PersonalDetails = ({user}) => {
                         </div>
                     ) : (
                         <>
-                            {user.dateOfBirth ? (
+                            {(user.dateOfBirth || originalUser.dateOfBirth) ? (
                                 <div className="col-7"
                                      style={{
                                          paddingLeft: 0, fontWeight: '350', paddingTop: '6px'
@@ -344,7 +344,7 @@ const PersonalDetails = ({user}) => {
                         </div>
                     ) : (
                         <>
-                            {user.nationality ? (
+                            {(user.nationality || originalUser.nationality) ? (
                                 <div className="col-7"
                                      style={{
                                          paddingLeft: 0,
@@ -403,7 +403,7 @@ const PersonalDetails = ({user}) => {
                         </div>
                     ) : (
                         <>
-                            {user.gender ? (
+                            {(user.gender || originalUser.gender) ? (
                                 <div className="col-7"
                                      style={{
                                          paddingLeft: 0, fontWeight: '350', paddingTop: '6px'

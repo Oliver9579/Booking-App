@@ -11,7 +11,7 @@ const BookingSeatsForOneWay = () => {
 
     const location = useLocation();
 
-    const {flight} = location.state || {};
+    const {flight, basePrice} = location.state || {};
 
     const [seats, setSeats] = useState(flight.seats);
 
@@ -19,15 +19,15 @@ const BookingSeatsForOneWay = () => {
 
     const handleSeatClick = (seatId) => {
         const updatedSeats = seats.map((seat) =>
-            seat.id === seatId ? { ...seat, clicked: !seat.clicked } : seat
+            seat.id === seatId ? {...seat, clicked: !seat.clicked} : seat
         );
         setSeats(updatedSeats);
     };
 
     const handleBooking = async () => {
-        const totalPrice = seats.filter((seat) => seat.clicked).reduce((sum, seat) => sum + seat.price, 0);
+        const totalPrice = (seats.filter((seat) => seat.clicked).reduce((sum, seat) => sum + seat.price, 0) + basePrice);
         const requestBody = {
-            startDate: flight.departureDate, // Use the appropriate field from your searchData
+            startDate: flight.departureDate,
             totalPrice,
             outboundFlightId: flight.id,
             seatsId: seats.filter((seat) => seat.clicked).map((seat) => seat.id),
@@ -90,7 +90,8 @@ const BookingSeatsForOneWay = () => {
                 <button
                     className="btn btn-primary blur-inculde"
                     onClick={handleBooking}
-                    disabled={!seats.some((seat) => seat.clicked)}>Book</button>
+                    disabled={!seats.some((seat) => seat.clicked)}>Book
+                </button>
             </div>
         </div>
     )

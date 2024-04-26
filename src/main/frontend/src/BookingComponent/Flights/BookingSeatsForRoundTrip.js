@@ -9,7 +9,7 @@ const BookingSeatsForRoundTrip = () => {
 
     const location = useLocation();
 
-    const {flightToDestination, flightReturn} = location.state || {};
+    const {flightToDestination, flightReturn, basePrice} = location.state || {};
 
     const [flightToDestinationSeats, setFlightToDestinationSeats] = useState(flightToDestination.seats);
 
@@ -32,9 +32,9 @@ const BookingSeatsForRoundTrip = () => {
 
     const handleBooking = async () => {
         let totalPrice = flightToDestinationSeats.filter((seat) => seat.clicked).reduce((sum, seat) => sum + seat.price, 0);
-        totalPrice += flightReturnSeats.filter((seat) => seat.clicked).reduce((sum, seat) => sum + seat.price, 0);
+        totalPrice += (flightReturnSeats.filter((seat) => seat.clicked).reduce((sum, seat) => sum + seat.price, 0) + basePrice);
         const requestBody = {
-            startDate: flightToDestination.departureDate, // Use the appropriate field from your searchData
+            startDate: flightToDestination.departureDate,
             totalPrice: totalPrice,
             outboundFlightId: flightToDestination.id,
             returnFlightId: flightReturn.id,

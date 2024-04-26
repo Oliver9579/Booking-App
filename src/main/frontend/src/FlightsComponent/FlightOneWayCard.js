@@ -12,7 +12,7 @@ const FlightOneWayCard = ({flight, isAll}) => {
     const [showReviewsModal, setShowReviewsModal] = useState(false);
 
     const handleSelect = () => {
-        navigate('/booking/flights/oneWay', {state: {flight}});
+        navigate('/booking/flights/oneWay', {state: {flight, basePrice}});
     };
 
     const toggleReviewsModal = () => {

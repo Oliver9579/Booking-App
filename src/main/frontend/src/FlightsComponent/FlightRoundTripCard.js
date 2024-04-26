@@ -36,7 +36,7 @@ const FlightRoundTripCard = ({flightToDestination, flightReturn}) => {
     };
 
     const handleSelect = () => {
-        navigate('/booking/flights/roundTrip', {state: {flightToDestination, flightReturn}});
+        navigate('/booking/flights/roundTrip', {state: {flightToDestination, flightReturn, basePrice}});
     };
 
     //firstFlight

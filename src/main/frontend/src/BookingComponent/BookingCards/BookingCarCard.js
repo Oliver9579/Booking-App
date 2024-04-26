@@ -5,10 +5,16 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {FormatDate} from "./FormatDate";
 import Review from "../../ReviewComponent/Review";
 import "../../ReviewComponent/Review.css"
+import AddReview from "../../ReviewComponent/AddReview";
 
 const BookingCarCard = ({booking}) => {
 
     const [showReviewsModal, setShowReviewsModal] = useState(false);
+    const [reviews, setReviews] = useState(booking.car.reviews);
+
+    const handleNewReview = (newReview) => {
+        setReviews(prevReviews => [...prevReviews, newReview]);
+    };
 
     const toggleReviewsModal = () => {
         setShowReviewsModal(!showReviewsModal);
@@ -64,15 +70,17 @@ const BookingCarCard = ({booking}) => {
                     <div className="col-2" style={{textAlign: 'right', fontSize: '20px'}}>
                         <strong><FontAwesomeIcon icon={faEuroSign}/> {booking.totalPrice}</strong>
                         <button className="btn btn-primary reviews-button"
-                                style={{height: '40%', marginLeft: '20%'}}
+                                style={{height: '30px', marginLeft: '10%'}}
                                 type="submit" onClick={toggleReviewsModal}><span></span>Reviews
                         </button>
-                        <div className="d-inline" style={{padding: '2px', fontSize: '17px'}}>({booking.car.reviews.length})</div>
+                        <div className="d-inline" style={{padding: '2px', fontSize: '17px'}}>({reviews.length})</div>
                     </div>
                 </div>
             </div>
-            <Review reviews={booking.car.reviews} toggleReviewsModal={toggleReviewsModal}
+            <Review reviews={reviews} toggleReviewsModal={toggleReviewsModal}
                     showReviewsModal={showReviewsModal}></Review>
+
+            <AddReview bookedEntity={booking.car} onNewReview={handleNewReview}></AddReview>
         </div>
     )
 

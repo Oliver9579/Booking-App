@@ -2,10 +2,9 @@ import "./AddReview.css"
 import {useState} from "react";
 import axios from "axios";
 
-const AddReview = ({bookedEntity, onNewReview}) => {
+const AddReview = ({bookedEntityID, reviewedEntityType, onNewReview}) => {
 
     const [comment, setComment] = useState('');
-
 
     const handleAddNewReview = () => {
         const requestBody = {
@@ -19,7 +18,7 @@ const AddReview = ({bookedEntity, onNewReview}) => {
                     'Authorization': `Bearer ${token}`
                 }
             };
-            const url = 'http://localhost:3000/api/reviews/flight/' + bookedEntity.id
+            const url = 'http://localhost:3000/api/reviews/' + reviewedEntityType + bookedEntityID.id;
             axios.post(
                 url,
                 requestBody,

@@ -92,7 +92,8 @@ const BookingOneWayFlightCard = ({booking}) => {
             <Review reviews={reviews} toggleReviewsModal={toggleReviewsModal}
                     showReviewsModal={showReviewsModal}></Review>
 
-            <AddReview bookedEntity={booking.flight} onNewReview={handleNewReview}></AddReview>
+            <AddReview bookedEntityID={booking.flight} reviewedEntityType="flight/"
+                       onNewReview={handleNewReview}></AddReview>
         </div>
     )
 }

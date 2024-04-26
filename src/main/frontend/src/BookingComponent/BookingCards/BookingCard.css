@@ -18,3 +18,12 @@
     padding: 10px;
     border-radius: 10px;
 }
+
+.show-rooms {
+    position: absolute;
+    color: white;
+    transform: translateX(-32%) translateY(-100%);
+    background: #36454F;
+    padding: 10px;
+    border-radius: 10px;
+}

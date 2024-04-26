@@ -37,7 +37,7 @@ const BookingCarCard = ({booking}) => {
                 <h4 className="blur-include">{booking.car.pickUpLocation}-{booking.car.dropOffLocation}</h4>
             )}
             <div className="blur-include"
-                style={{paddingBottom: '15px'}}>{FormatDate(booking.car.pickUpDate)} - {FormatDate(booking.car.dropOffDate)}</div>
+                 style={{paddingBottom: '15px'}}>{FormatDate(booking.car.pickUpDate)} - {FormatDate(booking.car.dropOffDate)}</div>
             <div className="booking-card blur-include">
                 <div className="row" style={{width: '100%', height: '100%'}}>
                     <div className="col-2" style={{height: '100%', display: "flex"}}>
@@ -80,7 +80,8 @@ const BookingCarCard = ({booking}) => {
             <Review reviews={reviews} toggleReviewsModal={toggleReviewsModal}
                     showReviewsModal={showReviewsModal}></Review>
 
-            <AddReview bookedEntity={booking.car} onNewReview={handleNewReview}></AddReview>
+            <AddReview bookedEntityID={booking.car} reviewedEntityType="car/"
+                       onNewReview={handleNewReview}></AddReview>
         </div>
     )
 

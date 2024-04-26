@@ -3,7 +3,18 @@
     height: 120px;
     margin: 0 auto;
     padding: 20px;
-    border: 1px solid #ccc;
+    border-top: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    border-left: 1px solid #ccc;
     border-radius: 5px;
-    box-shadow: 0 2px 4px gray;
+    box-shadow: 0 0 4px gray;
+}
+
+.show-seats {
+    position: absolute;
+    color: white;
+    transform: translateX(-40%) translateY(-100%);
+    background: #36454F;
+    padding: 10px;
+    border-radius: 10px;
 }

@@ -28,7 +28,7 @@ const BookingOneWayFlightCard = ({booking}) => {
             <h4 className="blur-include">{booking.flight.originAirportCode} {booking.flight.origin} -&nbsp;
                 {booking.flight.destinationAirportCode} {booking.flight.destination}</h4>
             <div className="blur-include"
-                style={{paddingBottom: '15px'}}>{FormatDate(departureTime)} - {FormatDate(landingTime)}</div>
+                 style={{paddingBottom: '15px'}}>{FormatDate(departureTime)} - {FormatDate(landingTime)}</div>
             <div className="booking-card blur-include">
                 <div className="row" style={{width: '100%', height: '100%'}}>
                     <div className="col-2" style={{height: '100%', display: "flex"}}>

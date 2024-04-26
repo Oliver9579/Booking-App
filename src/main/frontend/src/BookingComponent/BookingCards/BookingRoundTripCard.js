@@ -130,7 +130,8 @@ const BookingRoundTripCard = ({booking}) => {
                     <hr/>
                 </div>
             </div>
-            <Review reviews={booking.flightToDestination.reviews} toggleReviewsModal={toggleFlightToDestinationReviewsModal}
+            <Review reviews={booking.flightToDestination.reviews}
+                    toggleReviewsModal={toggleFlightToDestinationReviewsModal}
                     showReviewsModal={showFlightToDestinationReviewsModal}></Review>
 
             <Review reviews={booking.flightReturn.reviews} toggleReviewsModal={toggleFlightReturnReviewsModal}

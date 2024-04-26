@@ -10,11 +10,11 @@ const BookingOneWayFlightCard = ({booking}) => {
 
     return (
         <div style={{width: '900px', margin: '0 auto', paddingBottom: '30px'}}>
-            <h4>{booking.flight.originAirportCode} {booking.flight.origin} -&nbsp;
+            <h4 className="blur-include">{booking.flight.originAirportCode} {booking.flight.origin} -&nbsp;
                 {booking.flight.destinationAirportCode} {booking.flight.destination}</h4>
-            <div
+            <div className="blur-include"
                 style={{paddingBottom: '15px'}}>{FormatDate(departureTime)} - {FormatDate(landingTime)}</div>
-            <div className="booking-card">
+            <div className="booking-card blur-include">
                 <div className="row" style={{width: '100%', height: '100%'}}>
                     <div className="col-2" style={{height: '100%', display: "flex"}}>
                         <img src={require(`../../FlightsComponent/img/${booking.flight.img}`)}

@@ -101,7 +101,7 @@ BEGIN
                 DO
                     if seatCounter < 7 then
                         SET @seatType = 'BUSINESS';
-                        SET @seatPrice = (@flightDuration / 60) * 100;
+                        SET @seatPrice = (@flightDuration / 60) * 70;
                         SET @seatNumber = seatCounter;
                         SET @availability = true;
                         SET @flightId = flightCounter;
@@ -110,7 +110,7 @@ BEGIN
                         SET seatCounter = seatCounter + 1;
                     elseif seatCounter < 13 then
                         SET @seatType = 'FIRST_CLASS';
-                        SET @seatPrice = (@flightDuration / 60) * 80;
+                        SET @seatPrice = (@flightDuration / 60) * 50;
                         SET @seatNumber = seatCounter;
                         SET @availability = true;
                         SET @flightId = flightCounter;
@@ -119,7 +119,7 @@ BEGIN
                         SET seatCounter = seatCounter + 1;
                     ELSE
                         SET @seatType = 'ECONOMY';
-                        SET @seatPrice = (@flightDuration / 60) * 50;
+                        SET @seatPrice = (@flightDuration / 60) * 10;
                         SET @seatNumber = seatCounter;
                         SET @availability = true;
                         SET @flightId = flightCounter;

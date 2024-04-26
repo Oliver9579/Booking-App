@@ -3,6 +3,7 @@ import axios from 'axios';
 import Navbar from "../NavBarComponent/Navbar";
 import PersonalDetails from "./PersonalDetails";
 import Bookings from "../BookingComponent/Bookings";
+import "../ReviewComponent/Review.css"
 
 const Profile = () => {
 
@@ -42,7 +43,7 @@ const Profile = () => {
             <div>
                 {errorMessage === '' ? (
                     <div>
-                        <div style={{paddingBottom: '5%'}}>
+                        <div className="blur-include" style={{paddingBottom: '5%'}}>
                             <PersonalDetails user={user}/>
                         </div>
                         <div style={{paddingBottom: '5%'}}>

@@ -7,10 +7,10 @@ const BookingHotelCard = ({booking}) => {
 
     return (
         <div style={{width: '900px', margin: '0 auto', paddingBottom: '30px'}}>
-            <h4>{booking.hotel.location}</h4>
-            <div
-                style={{paddingBottom: '15px'}}>{FormatDate(booking.startDate)} - {FormatDate(booking.endDate)}</div>
-            <div className="booking-card">
+            <h4 className="blur-include">{booking.hotel.location}</h4>
+            <div className="blur-include"
+                 style={{paddingBottom: '15px'}}>{FormatDate(booking.startDate)} - {FormatDate(booking.endDate)}</div>
+            <div className="booking-card blur-include">
                 <div className="row" style={{width: '100%', height: '100%'}}>
                     <div className="col-2" style={{height: '100%', display: "flex"}}>
                         <img src={require(`../../HotelsComponent/img/${booking.hotel.img}`)}

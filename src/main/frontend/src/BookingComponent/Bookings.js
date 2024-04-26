@@ -36,7 +36,7 @@ const Bookings = () => {
         <div>
             {errorMessage === '' ? (
                 <div>
-                    <h1 style={{paddingBottom: '30px'}}>Bookings & Trips</h1>
+                    <h1 className="blur-include" style={{paddingBottom: '30px'}}>Bookings & Trips</h1>
                     <BookingList bookings={bookings}/>
                 </div>
             ) : (

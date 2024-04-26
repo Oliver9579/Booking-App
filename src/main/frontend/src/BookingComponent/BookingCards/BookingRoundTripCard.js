@@ -13,7 +13,7 @@ const BookingRoundTripCard = ({booking}) => {
 
     return (
         <div style={{width: '900px', margin: '0 auto', paddingBottom: '30px'}}>
-            <div className="row">
+            <div className="row blur-include">
                 <div className="col-6">
                     <h4>{booking.flightToDestination.originAirportCode} {booking.flightToDestination.origin} -&nbsp;
                         {booking.flightToDestination.destinationAirportCode} {booking.flightToDestination.destination}</h4>
@@ -23,7 +23,7 @@ const BookingRoundTripCard = ({booking}) => {
                         {booking.flightReturn.destinationAirportCode} {booking.flightReturn.destination}</h4>
                 </div>
             </div>
-            <div className="row">
+            <div className="row blur-include">
                 <div className="col-6" style={{paddingBottom: '15px'}}>
                     {FormatDate(departureTimeToDestination)} - {FormatDate(landingTimeToDestination)}
                 </div>
@@ -31,7 +31,7 @@ const BookingRoundTripCard = ({booking}) => {
                     {FormatDate(departureTimeToReturn)} - {FormatDate(landingTimeToReturn)}
                 </div>
             </div>
-            <div className="booking-card" style={{height: '120px'}}>
+            <div className="booking-card blur-include" style={{height: '120px'}}>
                 <div className="row" style={{width: '100%', height: '100%'}}>
                     <div className="col-2" style={{height: '100%', display: "flex"}}>
                         <img src={require(`../../FlightsComponent/img/${booking.flightToDestination.img}`)}

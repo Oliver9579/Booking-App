@@ -37,7 +37,7 @@ const AddReview = ({bookedEntity, onNewReview}) => {
     };
 
     return (
-        <div className="add-review-card">
+        <div className="add-review-card blur-include">
             <div className="row">
                 <div className="col-10" style={{paddingRight: 0}}>
                     <input className="comment" type="text" name="comment" placeholder="Add review..." value={comment}

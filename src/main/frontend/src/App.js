@@ -13,6 +13,7 @@ import BookingRooms from "./BookingComponent/Hotels/BookingRooms";
 import Cars from "./CarComponent/Cars";
 import Profile from "./ProfileComponent/Profile";
 import BookingSuccess from "./BookingComponent/BookingSuccess";
+import AccountVerified from "./ProfileComponent/AccountVerified";
 
 
 const App = () => {
@@ -21,6 +22,7 @@ const App = () => {
             <div className="App">
                 <Routes>
                     <Route path="/" element={<RegistrationForm/>}/>
+                    <Route path="/verify" element={<AccountVerified/>}/>
                     <Route path="/login" element={<LoginForm/>}/>
                     <Route path="/dashboard" element={<Dashboard/>}/>
                     <Route path="/flights" element={<Flights/>}/>

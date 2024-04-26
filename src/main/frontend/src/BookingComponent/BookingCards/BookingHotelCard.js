@@ -1,9 +1,24 @@
-import React from "react";
+import React, {useState} from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEuroSign} from "@fortawesome/free-solid-svg-icons";
 import {FormatDate} from "./FormatDate";
+import Review from "../../ReviewComponent/Review";
 
 const BookingHotelCard = ({booking}) => {
+
+    const [showReviewsModal, setShowReviewsModal] = useState(false);
+
+    const toggleReviewsModal = () => {
+        setShowReviewsModal(!showReviewsModal);
+        let blurIncludeDivs = document.querySelectorAll(".blur-include");
+        if (!showReviewsModal) {
+            document.body.style.overflow = 'hidden';
+            blurIncludeDivs.forEach((value) => value.classList.add('blur'));
+        } else {
+            blurIncludeDivs.forEach((value) => value.classList.remove('blur'));
+            document.body.style.overflow = 'auto';
+        }
+    };
 
     return (
         <div style={{width: '900px', margin: '0 auto', paddingBottom: '30px'}}>
@@ -40,9 +55,18 @@ const BookingHotelCard = ({booking}) => {
                     </div>
                     <div className="col-2" style={{textAlign: 'right', fontSize: '20px'}}>
                         <strong><FontAwesomeIcon icon={faEuroSign}/> {booking.totalPrice}</strong>
+                        <button className="btn btn-primary reviews-button"
+                                style={{height: '40%', marginLeft: '20%'}}
+                                type="submit" onClick={toggleReviewsModal}><span></span>Reviews
+                        </button>
+                        <div className="d-inline"
+                             style={{padding: '2px', fontSize: '17px'}}>({booking.hotel.reviews.length})
+                        </div>
                     </div>
                 </div>
             </div>
+            <Review reviews={booking.hotel.reviews} toggleReviewsModal={toggleReviewsModal}
+                    showReviewsModal={showReviewsModal}></Review>
         </div>
     )
 

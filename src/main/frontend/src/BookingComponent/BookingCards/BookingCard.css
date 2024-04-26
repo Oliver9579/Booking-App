@@ -10,10 +10,19 @@
     box-shadow: 0 0 4px gray;
 }
 
-.show-seats {
+.show-flight-to-destination-seats {
     position: absolute;
     color: white;
     transform: translateX(-40%) translateY(-100%);
+    background: #36454F;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.show-flight-return-seats {
+    position: absolute;
+    color: white;
+    transform: translateX(50%) translateY(-100%);
     background: #36454F;
     padding: 10px;
     border-radius: 10px;

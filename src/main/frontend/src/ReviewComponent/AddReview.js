@@ -43,7 +43,7 @@ const AddReview = ({bookedEntityID, reviewedEntityType, onNewReview}) => {
                            onChange={handleInputChange}></input>
                 </div>
                 <div className="col-2" style={{paddingLeft: 0, textAlign: "right"}}>
-                    <input className="btn btn-primary add-review-button" type="submit" value="Submit"
+                    <input className="btn btn-primary add-review-button" type="submit" value="Add"
                            disabled={comment.trim() === ''} onClick={handleAddNewReview}></input>
                 </div>
             </div>

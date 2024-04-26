@@ -63,7 +63,7 @@ const BookingOneWayFlightCard = ({booking}) => {
                             }
                         </div>
                         {showSeats && (
-                            <div className="show-seats">
+                            <div className="show-flight-to-destination-seats">
                                 {booking.flight.seats.map((seat, index) => (
                                     <div style={{fontWeight: "350", fontSize: '90%'}}
                                          key={index}>{`Number ${seat.seatNumber}

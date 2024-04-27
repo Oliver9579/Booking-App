@@ -54,7 +54,7 @@ const BookingOneWayFlightCard = ({booking}) => {
                             <strong>{booking.flight.airline}</strong> {booking.flight.flightNumber}
                         </div>
                         <div style={{fontWeight: "350", fontSize: '90%', paddingBottom: '5px'}}>
-                            {FormatDate(departureTime)} - {FormatDate(landingTime)}</div>
+                            {FormatDate(departureTime)}</div>
                         <div>
                             {new Date(landingTime) < new Date() ?
                                 <div style={{fontWeight: "350", fontSize: '90%', paddingBottom: '5px'}}>Completed</div>

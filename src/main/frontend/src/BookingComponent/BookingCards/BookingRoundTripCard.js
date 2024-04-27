@@ -90,7 +90,7 @@ const BookingRoundTripCard = ({booking}) => {
                             <strong>{booking.flightToDestination.airline}</strong> {booking.flightToDestination.flightNumber}
                         </div>
                         <div style={{fontWeight: "350", fontSize: '90%', paddingBottom: '5px'}}>
-                            {FormatDate(departureTimeToDestination)} - {FormatDate(landingTimeToDestination)}</div>
+                            {FormatDate(departureTimeToDestination)}</div>
                         <div>
                             {new Date(landingTimeToDestination) < new Date() ?
                                 <div style={{fontWeight: "350", fontSize: '90%', paddingBottom: '5px'}}>Completed</div>
@@ -134,7 +134,7 @@ const BookingRoundTripCard = ({booking}) => {
                             <strong>{booking.flightReturn.airline}</strong> {booking.flightReturn.flightNumber}
                         </div>
                         <div style={{fontWeight: "350", fontSize: '90%', paddingBottom: '5px'}}>
-                            {FormatDate(departureTimeToReturn)} - {FormatDate(landingTimeToReturn)}</div>
+                            {FormatDate(departureTimeToReturn)}</div>
                         <div>
                             {new Date(landingTimeToReturn) < new Date() ?
                                 <div style={{fontWeight: "350", fontSize: '90%', paddingBottom: '5px'}}>Completed</div>

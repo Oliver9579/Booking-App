@@ -321,7 +321,7 @@ const PersonalDetails = ({user}) => {
                                 <br/>
                                 <select value={form.nationality} name="nationality"
                                         style={{
-                                            width: '400px',
+                                            width: '320px',
                                             border: '1px solid #ccc',
                                             margin: '0 auto',
                                             padding: '8px',
@@ -380,7 +380,7 @@ const PersonalDetails = ({user}) => {
                                 <br/>
                                 <select value={form.gender} name="gender"
                                         style={{
-                                            width: '400px',
+                                            width: '320px',
                                             border: '1px solid #ccc',
                                             margin: '0 auto',
                                             padding: '8px',

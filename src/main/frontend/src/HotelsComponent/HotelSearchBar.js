@@ -4,7 +4,7 @@ const HotelSearchBar = ({onSearch}) => {
     const [location, setLocation] = useState('');
     const [checkInDate, setCheckInDate] = useState('');
     const [checkOutDate, setCheckOutDate] = useState('');
-    const [guests, setGuests] = useState(1);
+    const [guests, setGuests] = useState();
 
     const handleSearch = () => {
         const searchData = {
@@ -60,10 +60,12 @@ const HotelSearchBar = ({onSearch}) => {
             <div className="form-group col-2">
                 <input className="form-control"
                        type="number"
-                       placeholder="Quests"
+                       placeholder="Guests"
                        value={guests}
                        onChange={(e) => setGuests(parseInt(e.target.value))}
                        style={{width: '100%'}}
+                       min={1}
+                       max={8}
                        required
                 />
             </div>

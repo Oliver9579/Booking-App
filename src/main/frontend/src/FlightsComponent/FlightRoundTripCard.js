@@ -219,7 +219,7 @@ const FlightRoundTripCard = ({flightToDestination, flightReturn}) => {
                 </div>
                 <div className="col-2" style={{padding: '0'}}>
                     <button className="btn btn-primary book-button" onClick={handleSelect} type="submit">
-                        <span></span>Book
+                        <span></span>Select
                     </button>
                 </div>
             </div>

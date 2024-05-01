@@ -177,8 +177,7 @@ const CarSearchBar = ({onSearch, cars}) => {
                         </select>
                     </div>
 
-                    <div className="col-2">
-                        <label> Reset filters</label>
+                    <div className="col-2" style={{paddingTop: '33px'}}>
                         <button className="btn btn-primary reset" type="submit" style={{width: '100%'}}
                                 onClick={handleResetFilters}><span></span>Reset
                         </button>

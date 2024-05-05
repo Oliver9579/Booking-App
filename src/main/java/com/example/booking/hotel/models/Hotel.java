@@ -59,4 +59,11 @@ public class Hotel {
   @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL)
   private List<Review> reviews = new ArrayList<>();
 
+  public Hotel(String name, String location, String street, int stars, String img) {
+    this.name = name;
+    this.location = location;
+    this.street = street;
+    this.stars = stars;
+    this.img = img;
+  }
 }

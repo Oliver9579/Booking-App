@@ -3,12 +3,14 @@ package com.example.booking.booking.DTOs.bookingHotel;
 import com.example.booking.booking.DTOs.BookingResponseDTO;
 import com.example.booking.hotel.DTOs.HotelBookingResponseDTO;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Date;
 
 @Getter
 @Setter
+@NoArgsConstructor
 public class BookingHotelResponseDTO extends BookingResponseDTO {
 
   private Date endDate;

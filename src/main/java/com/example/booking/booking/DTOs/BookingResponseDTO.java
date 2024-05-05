@@ -1,10 +1,12 @@
 package com.example.booking.booking.DTOs;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
 @Data
+@NoArgsConstructor
 public abstract class BookingResponseDTO {
 
   private Date bookingDate;

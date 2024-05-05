@@ -39,7 +39,6 @@ import java.util.stream.Collectors;
 public class BookingServiceImpl implements BookingService {
 
   private BookingRepository bookingRepository;
-  private UserService userService;
   private HotelService hotelService;
   private FlightService flightService;
   private CarService carService;

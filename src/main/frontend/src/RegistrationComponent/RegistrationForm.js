@@ -52,7 +52,7 @@ const RegistrationForm = () => {
 
     return (
         <div className="container-fluid vh-100">
-            <div className="" style={{marginTop: '200px'}}>
+            <div className="" style={{marginTop: '50px'}}>
                 <div className="rounded d-flex justify-content-center">
                     <div className="col-md-4 col-sm-12 shadow-lg p-5 bg-light">
                         <div className="text-center">

@@ -179,4 +179,7 @@ VALUES (100, 20),
 INSERT INTO car_dates (car_id, date_id)
 VALUES (1, 14),
        (1, 15),
-       (1, 16);
+       (1, 16),
+       (2, 14),
+       (2, 15),
+       (2, 16);

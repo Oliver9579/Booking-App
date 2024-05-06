@@ -13,7 +13,7 @@ public interface CarRepository extends CrudRepository<Car, Integer> {
           "WHERE pick_up_location = :#{#pickUpLocation} " +
           "AND drop_off_location = :#{#pickUpLocation} " +
           "AND (:carType is null or :carType = '' or car_type = :carType) " +
-          "AND (:capacity is null or :capacity = '' or capacity = :capacity) " +
+          "AND (:capacity is null or capacity = :capacity) " +
           "AND (:transmissionType is null or :transmissionType = '' or transmission_type = :transmissionType)", nativeQuery = true)
   List<Car> findSameDropOffLocationCar(@Param("pickUpLocation") String pickUpLocation,
                                        @Param("carType") String carType,
@@ -24,7 +24,7 @@ public interface CarRepository extends CrudRepository<Car, Integer> {
           "WHERE pick_up_location = :#{#pickUpLocation} " +
           "AND drop_off_location = :#{#dropOffLocation} " +
           "AND (:carType is null or :carType = '' or car_type = :carType) " +
-          "AND (:capacity is null or :capacity = '' or capacity = :capacity) " +
+          "AND (:capacity is null or capacity = :capacity) " +
           "AND (:transmissionType is null or :transmissionType = '' or transmission_type = :transmissionType)", nativeQuery = true)
   List<Car> findByPickUpLocationAndDropOffLocation(@Param("pickUpLocation") String pickUpLocation,
                                                    @Param("dropOffLocation") String dropOffLocation,

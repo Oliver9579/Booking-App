@@ -36,7 +36,7 @@ VALUES (1, 'Oliver', 'Szabo-Temple', 'Oli', 'booking.2024.test@gmail.com',
         '$2a$10$/zi.piVmh7Po7QLi7bDj6.O5W./kkd4yNcI40Jx5SuqKg4LYU.5le', '12345678910', 1),
        (3, 'PlayerToBeVerified', 'PlayerToBeVerified', 'PlayerToBeVerified', 'unverified@gmail.com',
         '$2a$10$/zi.piVmh7Po7QLi7bDj6.O5W./kkd4yNcI40Jx5SuqKg4LYU.5le', '12345678911', 0),
-       (4, 'UnverifiedPlayer', 'UnverifiedPlayer', 'UnverifiedPlayer', 'email@gmail.com',
+       (4, 'UnverifiedUser', 'UnverifiedUser', 'UnverifiedUser', 'email@gmail.com',
         '$2a$10$/zi.piVmh7Po7QLi7bDj6.O5W./kkd4yNcI40Jx5SuqKg4LYU.5le', '12345678912', 0);
 
 INSERT INTO verification_tokens (id, token_value, created_at, user_id)
@@ -184,6 +184,3 @@ VALUES
     (1, 14),
     (1, 15),
     (1, 16);
-
-
-

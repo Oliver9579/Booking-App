@@ -1,3 +1,4 @@
+CREATE SEQUENCE hibernate_sequence start with 5;
 CREATE TABLE IF NOT EXISTS users (
                         id INT PRIMARY KEY AUTO_INCREMENT,
                         first_name VARCHAR(255) NOT NULL,
@@ -104,7 +105,7 @@ CREATE TABLE IF NOT EXISTS reviews (
 
 CREATE TABLE IF NOT EXISTS dates (
                         id INT PRIMARY KEY AUTO_INCREMENT,
-                        date DATE NOT NULL
+                        date TIMESTAMP NOT NULL
 );
 
 CREATE TABLE booking_seats (

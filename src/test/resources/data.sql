@@ -13,34 +13,30 @@ FROM seats;
 DELETE
 FROM rooms;
 DELETE
-FROM cars;
-DELETE
-FROM dates;
-DELETE
-FROM bookings;
-DELETE
-FROM flights;
-DELETE
-FROM hotels;
-DELETE
 FROM verification_tokens;
 DELETE
 FROM bookings;
 DELETE
 FROM users;
+DELETE
+FROM dates;
+DELETE
+FROM cars;
+DELETE
+FROM flights;
+DELETE
+FROM hotels;
 
 INSERT INTO users (id, first_name, last_name, username, email, password, phone_number, enabled)
-VALUES (1, 'Oliver', 'Szabo-Temple', 'Oli', 'booking.2024.test@gmail.com',
+VALUES (100, 'Oliver', 'Szabo-Temple', 'Oli', 'booking.2024.test@gmail.com',
         '$2a$10$/zi.piVmh7Po7QLi7bDj6.O5W./kkd4yNcI40Jx5SuqKg4LYU.5le', '123456789', 1),
-       (2, 'Oliver', 'Szabo-Temple', 'Oli2', 'szabotemple.oliver2001@gmail.com',
+       (101, 'Oliver', 'Szabo-Temple', 'Oli2', 'szabotemple.oliver2001@gmail.com',
         '$2a$10$/zi.piVmh7Po7QLi7bDj6.O5W./kkd4yNcI40Jx5SuqKg4LYU.5le', '12345678910', 1),
-       (3, 'PlayerToBeVerified', 'PlayerToBeVerified', 'PlayerToBeVerified', 'unverified@gmail.com',
+       (102, 'PlayerToBeVerified', 'PlayerToBeVerified', 'PlayerToBeVerified', 'unverified@gmail.com',
         '$2a$10$/zi.piVmh7Po7QLi7bDj6.O5W./kkd4yNcI40Jx5SuqKg4LYU.5le', '12345678911', 0),
-       (4, 'UnverifiedUser', 'UnverifiedUser', 'UnverifiedUser', 'email@gmail.com',
+       (103, 'UnverifiedUser', 'UnverifiedUser', 'UnverifiedUser', 'email@gmail.com',
         '$2a$10$/zi.piVmh7Po7QLi7bDj6.O5W./kkd4yNcI40Jx5SuqKg4LYU.5le', '12345678912', 0);
 
-INSERT INTO verification_tokens (id, token_value, created_at, user_id)
-VALUES (1001, '123456789', 1231237312, 3);
 
 INSERT INTO flights (id, airline, origin, origin_airport_code, destination, destination_airport_code, departure_date,
                      duration, flight_number, flight_type, img, created_at)
@@ -105,82 +101,79 @@ VALUES (1, 'SINGLE', 1, 100, 1),
        (7, 'TRIPLE', 3, 200, 2),
        (8, 'FAMILY', 4, 250, 2);
 
-INSERT INTO dates (date)
-VALUES ('2024-06-01'),
-       ('2024-06-02'),
-       ('2024-06-03'),
-       ('2024-06-04'),
-       ('2024-06-05'),
-       ('2024-06-06'),
-       ('2024-06-07'),
-       ('2024-06-08'),
-       ('2024-06-09'),
-       ('2024-06-10'),
-       ('2024-06-11'),
-       ('2024-06-12'),
-       ('2024-06-13'),
-       ('2024-06-14'),
-       ('2024-06-15'),
-       ('2024-06-16'),
-       ('2024-06-17'),
-       ('2024-06-18'),
-       ('2024-06-19'),
-       ('2024-06-20'),
-       ('2024-06-21'),
-       ('2024-06-22'),
-       ('2024-06-23'),
-       ('2024-06-24'),
-       ('2024-06-25'),
-       ('2024-06-26'),
-       ('2024-06-27'),
-       ('2024-06-28'),
-       ('2024-06-29');
+INSERT INTO dates (id, date)
+VALUES (1, DATE '2024-06-01'),
+       (2, DATE '2024-06-02'),
+       (3, DATE '2024-06-03'),
+       (4, DATE '2024-06-04'),
+       (5, DATE '2024-06-05'),
+       (6, DATE '2024-06-06'),
+       (7, DATE '2024-06-07'),
+       (8, DATE '2024-06-08'),
+       (9, DATE '2024-06-09'),
+       (10, DATE '2024-06-10'),
+       (11, DATE '2024-06-11'),
+       (12, DATE '2024-06-12'),
+       (13, DATE '2024-06-13'),
+       (14, DATE '2024-06-14'),
+       (15, DATE '2024-06-15'),
+       (16, DATE '2024-06-16'),
+       (17, DATE '2024-06-17'),
+       (18, DATE '2024-06-18'),
+       (19, DATE '2024-06-19'),
+       (20, DATE '2024-06-20'),
+       (21, DATE '2024-06-21'),
+       (22, DATE '2024-06-22'),
+       (23, DATE '2024-06-23'),
+       (24, DATE '2024-06-24'),
+       (25, DATE '2024-06-25'),
+       (26, DATE '2024-06-26'),
+       (27, DATE '2024-06-27'),
+       (28, DATE '2024-06-28'),
+       (29, DATE '2024-06-29');
+
 
 
 INSERT INTO reviews (id, comment, review_date, user_id, flight_id, hotel_id, car_id)
-VALUES (1, 'is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry''s standard
+VALUES (100, 'is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry''s standard
         dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type
         specimen book.',
-        '2024-05-06 14:01:51', 1, NULL, NULL, 1),
-       (2, 'is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry''s standard
+        '2024-05-06 14:01:51', 100, NULL, NULL, 1),
+       (101, 'is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry''s standard
         dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type
         specimen book.',
-        '2024-05-06 14:01:51', 1, NULL, 1, null),
-       (3, 'is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry''s standard
+        '2024-05-06 14:01:51', 100, NULL, 1, null),
+       (102, 'is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry''s standard
         dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type
         specimen book.',
-        '2024-05-06 14:01:51', 1, 1, NULL, null);
+        '2024-05-06 14:01:51', 100, 1, NULL, null);
 
 
-INSERT INTO bookings (id, booking_date, start_date, end_date, total_price, user_id, car_id, outbound_flight_id, return_flight_id, hotel_id)
-VALUES
-    (1, '2024-05-06 14:04:46', '2024-06-15 16:30:00', NULL, 420, 1, NULL, 1, NULL, 1),
-    (2, '2024-05-06 14:04:46', '2024-06-20 00:00:00', '2024-06-28 20:00:00', 426, 1, NULL, 2, 3, null),
-    (3, '2024-05-06 14:04:46', '2024-04-14 14:00:00', '2024-06-16 10:00:00', 500, 1, null, null, NULL, 1),
-    (4, '2024-05-06 14:04:46', '2024-04-14 10:00:00', '2024-06-16 10:00:00', 150, 1, 1, null, NULL, null);
+INSERT INTO bookings (id, booking_date, start_date, end_date, total_price, user_id, car_id, outbound_flight_id,
+                      return_flight_id, hotel_id)
+VALUES (100, '2024-05-06 14:04:46', '2024-06-15 16:30:00', NULL, 420, 100, NULL, 1, NULL, null),
+       (101, '2024-05-06 14:04:46', '2024-06-20 00:00:00', '2024-06-28 20:00:00', 426, 100, NULL, 2, 3, null),
+       (102, '2024-05-06 14:04:46', '2024-04-14 14:00:00', '2024-06-16 10:00:00', 500, 100, null, null, NULL, 1),
+       (103, '2024-05-06 14:04:46', '2024-04-14 10:00:00', '2024-06-16 10:00:00', 150, 100, 1, null, NULL, null);
 
 INSERT INTO booking_rooms (booking_id, room_id)
-VALUES
-    (3, 1),
-    (3, 2);
+VALUES (102, 1),
+       (102, 2);
 
 INSERT INTO room_dates (room_id, date_id)
-VALUES
-    (1, 14),
-    (1, 15),
-    (1, 16),
-    (2, 14),
-    (3, 15),
-    (3, 16);
+VALUES (1, 14),
+       (1, 15),
+       (1, 16),
+       (2, 14),
+       (3, 15),
+       (3, 16);
 
 INSERT INTO booking_seats (booking_id, seat_id)
-VALUES
-    (1, 20),
-    (2, 21),
-    (2, 22);
+VALUES (100, 20),
+       (101, 21),
+       (102, 22);
 
 INSERT INTO car_dates (car_id, date_id)
-VALUES
-    (1, 14),
-    (1, 15),
-    (1, 16);
+VALUES (1, 14),
+       (1, 15),
+       (1, 16);

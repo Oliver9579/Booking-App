@@ -26,7 +26,7 @@ public class FlightController {
   }
 
   @GetMapping("/oneWay")
-  public ResponseEntity<FlightListDTO> getFlightsBetweenToDirectionJustOneWay(@RequestParam String origin,
+  public ResponseEntity<FlightListDTO> getOneWayFlights(@RequestParam String origin,
                                                                               @RequestParam String destination,
                                                                               @RequestParam String departureDate) {
     FlightOneWayRequestDTO flightOneWay = FlightOneWayRequestDTO.convertOneWayDTO(origin, destination, departureDate);

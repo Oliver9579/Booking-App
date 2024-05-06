@@ -37,6 +37,9 @@ VALUES (100, 'Oliver', 'Szabo-Temple', 'Oli', 'booking.2024.test@gmail.com',
        (103, 'UnverifiedUser', 'UnverifiedUser', 'UnverifiedUser', 'email@gmail.com',
         '$2a$10$/zi.piVmh7Po7QLi7bDj6.O5W./kkd4yNcI40Jx5SuqKg4LYU.5le', '12345678912', 0);
 
+INSERT INTO verification_tokens (id, token_value, created_at, user_id)
+VALUES (100, '123456789',1231237312, 102);
+
 
 INSERT INTO flights (id, airline, origin, origin_airport_code, destination, destination_airport_code, departure_date,
                      duration, flight_number, flight_type, img, created_at)

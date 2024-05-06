@@ -44,8 +44,6 @@ public class RegistrationServiceImplTest {
 
   @Test(expected = AlreadyTakenException.class)
   public void testRegisterWhenUserInfosAlreadyTaken() throws MessagingException {
-    RegistrationDTO rdto2 = new RegistrationDTO();
-    doThrow(AlreadyTakenException.class).when(registrationService).validateRegistration(rdto2);
     MimeMessage message = new MimeMessage(session);
 
     registrationService.register(rdto);

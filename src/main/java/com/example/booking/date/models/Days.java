@@ -43,4 +43,8 @@ public class Days {
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     return dateFormat.format(date);
   }
+
+  public Days(Date date) {
+    this.date = date;
+  }
 }

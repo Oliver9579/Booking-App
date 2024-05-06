@@ -26,7 +26,6 @@ import com.example.booking.room.services.RoomService;
 import com.example.booking.seat.models.Seat;
 import com.example.booking.seat.services.SeatService;
 import com.example.booking.user.models.User;
-import com.example.booking.user.services.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

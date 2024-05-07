@@ -26,6 +26,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -43,8 +44,10 @@ public class BookingControllerIT {
   private ObjectMapper mapper;
   private User user1;
   private User user2;
+  private User user3;
   private Authentication userAuth1;
   private Authentication userAuth2;
+  private Authentication userAuth3;
 
   @Before
   public void setup() {
@@ -53,8 +56,11 @@ public class BookingControllerIT {
             "Oli12345", "123456789");
     user2 = new User(0, "", "", "", "",
             "", "");
+    user3 = new User(101, "", "", "Oli2", "szabotemple.oliver2001@gmail.com",
+            "Oli12345", "12345678910");
     userAuth1 = new UsernamePasswordAuthenticationToken(user1, null, null);
     userAuth2 = new UsernamePasswordAuthenticationToken(user2, null, null);
+    userAuth3 = new UsernamePasswordAuthenticationToken(user3, null, null);
   }
 
   @Test
@@ -284,5 +290,36 @@ public class BookingControllerIT {
             .andExpect(jsonPath("$.car.pickUpLocation").value("Chicago"))
             .andExpect(jsonPath("$.car.dropOffLocation").value("Miami"));
   }
+
+  @Test
+  public void getBookings_should_ReturnError_when_UserIdNotFound() throws Exception {
+    mockMvc.perform(get("/api/bookings")
+                    .principal(userAuth2))
+            .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+            .andExpect(status().isUnauthorized())
+            .andExpect(jsonPath("$.status", Matchers.is("error")))
+            .andExpect(jsonPath("$.message", Matchers.is("No such user.")));
+  }
+
+  @Test
+  public void getBookings_should_ReturnError_when_NoBookingFound() throws Exception {
+    mockMvc.perform(get("/api/bookings")
+                    .principal(userAuth3))
+            .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+            .andExpect(status().isNotFound())
+            .andExpect(jsonPath("$.status", Matchers.is("error")))
+            .andExpect(jsonPath("$.message", Matchers.is("No bookings found.")));
+  }
+
+  @Test
+  public void getBookings_should_ReturnTheBookings() throws Exception {
+    mockMvc.perform(get("/api/bookings")
+                    .principal(userAuth1))
+            .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.bookings").isArray())
+            .andExpect(jsonPath("$.bookings.length()").value(4));
+  }
+
 
 }

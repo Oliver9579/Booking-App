@@ -105,6 +105,16 @@ public class User implements UserDetails {
     this.phoneNumber = phoneNumber;
   }
 
+  public User(int id, String firstName, String lastName, String userName, String email, String password, String phoneNumber) {
+    this.id = id;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.userName = userName;
+    this.email = email;
+    this.password = password;
+    this.phoneNumber = phoneNumber;
+  }
+
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
     return null;

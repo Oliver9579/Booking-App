@@ -4,6 +4,7 @@ import com.example.booking.car.DTOs.*;
 import com.example.booking.car.models.Car;
 import com.example.booking.car.repositories.CarRepository;
 import com.example.booking.date.services.DaysService;
+import com.example.booking.exceptions.IdNotFoundException;
 import com.example.booking.exceptions.NoAvailableCarException;
 import com.example.booking.exceptions.NoCarFoundException;
 import com.example.booking.exceptions.SameDateException;
@@ -27,8 +28,8 @@ public class CarServiceImpl implements CarService {
   @Override
   public CarListDTO getCarsWithSameDropOffLocation(CarSameDropOffRequestDTO carSameDropOffRequest,
                                                    String carType, Integer capacity, String transmissionType) {
-    if (carSameDropOffRequest.getPickUpDateString().substring(0,10)
-            .equals(carSameDropOffRequest.getDropOffDateString().substring(0,10)))
+    if (carSameDropOffRequest.getPickUpDateString().substring(0, 10)
+            .equals(carSameDropOffRequest.getDropOffDateString().substring(0, 10)))
       throw new SameDateException();
     List<Car> cars = carRepository.findSameDropOffLocationCar(carSameDropOffRequest.getPickUpLocation(),
             carType, capacity, transmissionType);
@@ -83,7 +84,7 @@ public class CarServiceImpl implements CarService {
 
   @Override
   public Car getCarById(Integer id) {
-    return carRepository.findById(id).orElseThrow(NoCarFoundException::new);
+    return carRepository.findById(id).orElseThrow(IdNotFoundException::new);
   }
 
   @Override

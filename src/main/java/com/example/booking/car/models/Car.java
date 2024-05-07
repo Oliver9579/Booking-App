@@ -92,6 +92,19 @@ public class Car {
   }
 
   public Car(int id, String brand, String model, CarType carType, int capacity, TransmissionType transmissionType,
+             String pickUpLocation, String dropOffLocation, int pricePerDay) {
+    this.id = id;
+    this.brand = brand;
+    this.model = model;
+    this.carType = carType;
+    this.capacity = capacity;
+    this.transmissionType = transmissionType;
+    this.pickUpLocation = pickUpLocation;
+    this.dropOffLocation = dropOffLocation;
+    this.pricePerDay = pricePerDay;
+  }
+
+  public Car(int id, String brand, String model, CarType carType, int capacity, TransmissionType transmissionType,
              String pickUpLocation, String dropOffLocation, int pricePerDay, String img, List<Review> reviews,
              List<Days> unavailable) {
     this.id = id;

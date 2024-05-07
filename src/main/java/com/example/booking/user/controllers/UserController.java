@@ -33,7 +33,7 @@ public class UserController {
 
   @DeleteMapping()
   public ResponseEntity<UserDTO> deleteUser(UsernamePasswordAuthenticationToken auth) {
-    Integer userId = ((User) auth.getPrincipal()).getId();
+    int userId = ((User) auth.getPrincipal()).getId();
     User user = userService.getById(userId);
     return ResponseEntity.ok().body(userService.deleteUser(user));
   }

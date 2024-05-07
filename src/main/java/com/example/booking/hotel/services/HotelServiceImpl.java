@@ -31,7 +31,7 @@ public class HotelServiceImpl implements HotelService {
   public HotelListDTO getAllByLocation(HotelRequestDTO hotelRequest) {
     List<Hotel> hotels = hotelRepository.findAllByLocation(hotelRequest.getLocation());
     if (hotels.isEmpty()) throw new NoHotelFoundException();
-    if (hotelRequest.getCheckInDate().equals(hotelRequest.getCheckOutDate())) throw new SameDateException();
+    if (hotelRequest.getCheckInDate().substring(0,10).equals(hotelRequest.getCheckOutDate().substring(0,10))) throw new SameDateException();
     for (int i = 0; i < hotels.size(); i++) {
       List<Room> availableRooms = hotels.get(i).getRooms().stream()
               .filter(room -> roomService.isRoomAvailable(room, hotelRequest.getCheckInDate(), hotelRequest.getCheckOutDate()))

@@ -47,7 +47,7 @@ public class FlightControllerIT {
   }
 
   @Test
-  public void getFlightsById_should_ReturnError_whenIdNotFound() throws Exception {
+  public void getFlightsById_should_ReturnError_when_IdNotFound() throws Exception {
     mockMvc.perform(get("/api/flights/0"))
             .andExpect(status().isNotFound())
             .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))

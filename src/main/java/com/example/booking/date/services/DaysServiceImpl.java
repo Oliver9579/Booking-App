@@ -10,6 +10,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Date;
@@ -24,14 +25,18 @@ public class DaysServiceImpl implements DaysService {
   @Override
   public List<String> getFullTravelDates(String startDate, String endDate) {
     DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    LocalDate firstDate = LocalDate.parse(startDate.substring(0, 10), dateFormat);
-    LocalDate lastDate = LocalDate.parse(endDate.substring(0, 10), dateFormat);
-    long travelLength = ChronoUnit.DAYS.between(firstDate, lastDate);
-    List<String> dates = new ArrayList<>();
-    for (int i = 0; i <= travelLength; i++) {
-      dates.add(firstDate.plusDays(i).format(dateFormat));
+    try {
+      LocalDate firstDate = LocalDate.parse(startDate.substring(0, 10), dateFormat);
+      LocalDate lastDate = LocalDate.parse(endDate.substring(0, 10), dateFormat);
+      long travelLength = ChronoUnit.DAYS.between(firstDate, lastDate);
+      List<String> dates = new ArrayList<>();
+      for (int i = 0; i <= travelLength; i++) {
+        dates.add(firstDate.plusDays(i).format(dateFormat));
+      }
+      return dates;
+    }catch (DateTimeParseException e){
     }
-    return dates;
+    return new ArrayList<>();
   }
 
   @Override

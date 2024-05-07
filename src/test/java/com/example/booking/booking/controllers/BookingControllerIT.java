@@ -2,6 +2,9 @@ package com.example.booking.booking.controllers;
 
 import com.example.booking.booking.DTOs.bookingFlight.BookingOneWayFlightRequestDTO;
 import com.example.booking.booking.DTOs.bookingFlight.BookingRoundTripFlightRequestDTO;
+import com.example.booking.booking.DTOs.bookingHotel.BookingHotelRequestDTO;
+import com.example.booking.booking.DTOs.bookingHotel.BookingRoomDTO;
+import com.example.booking.room.models.RoomType;
 import com.example.booking.user.models.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hamcrest.Matchers;
@@ -182,5 +185,54 @@ public class BookingControllerIT {
             .andExpect(jsonPath("$.flightReturn.seats.length()").value(1));
   }
 
+  @Test
+  public void createHotelBooking_should_ReturnError_when_UserIdNotFound() throws Exception {
+    BookingHotelRequestDTO newHotelBookingRequest = new BookingHotelRequestDTO(
+            "2024-06-12 14:00:00", 700, "2024-06-14 10:00:00", 1, Arrays.asList(
+            new BookingRoomDTO(RoomType.SINGLE, 1), new BookingRoomDTO(RoomType.FAMILY, 1)));
+    mockMvc.perform(post("/api/bookings/hotels")
+                    .principal(userAuth2)
+                    .contentType(contentType)
+                    .content(mapper.writeValueAsString(newHotelBookingRequest)))
+            .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+            .andExpect(status().isUnauthorized())
+            .andExpect(jsonPath("$.status", Matchers.is("error")))
+            .andExpect(jsonPath("$.message", Matchers.is("No such user.")));
+  }
+
+  @Test
+  public void createHotelBooking_should_ReturnError_when_HotelIdNotFound() throws Exception {
+    BookingHotelRequestDTO newHotelBookingRequest = new BookingHotelRequestDTO(
+            "2024-06-12 14:00:00", 700, "2024-06-14 10:00:00", 0, Arrays.asList(
+            new BookingRoomDTO(RoomType.SINGLE, 1), new BookingRoomDTO(RoomType.FAMILY, 1)));
+    mockMvc.perform(post("/api/bookings/hotels")
+                    .principal(userAuth1)
+                    .contentType(contentType)
+                    .content(mapper.writeValueAsString(newHotelBookingRequest)))
+            .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+            .andExpect(status().isNotFound())
+            .andExpect(jsonPath("$.status", Matchers.is("error")))
+            .andExpect(jsonPath("$.message", Matchers.is("Id not found")));
+  }
+
+  @Test
+  public void createHotelBooking_should_ReturnTheSavedBooking() throws Exception {
+    BookingHotelRequestDTO newHotelBookingRequest = new BookingHotelRequestDTO(
+            "2024-06-12 14:00:00", 800, "2024-06-14 10:00:00", 1, Arrays.asList(
+            new BookingRoomDTO(RoomType.DOUBLE, 1), new BookingRoomDTO(RoomType.FAMILY, 1)));
+    mockMvc.perform(post("/api/bookings/hotels")
+                    .principal(userAuth1)
+                    .contentType(contentType)
+                    .content(mapper.writeValueAsString(newHotelBookingRequest)))
+            .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.totalPrice").value(800))
+            .andExpect(jsonPath("$.hotel.id").value(1))
+            .andExpect(jsonPath("$.hotel.name").value("Hilton"))
+            .andExpect(jsonPath("$.hotel.location").value("New York"))
+            .andExpect(jsonPath("$.hotel.street").value("1234 Avenue of the Americas"))
+            .andExpect(jsonPath("$.hotel.stars").value(5))
+            .andExpect(jsonPath("$.hotel.rooms.length()").value(2));
+  }
 
 }

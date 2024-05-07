@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -21,6 +22,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
+@Sql("/data.sql")
 public class FlightControllerIT {
 
   @Autowired
@@ -64,6 +66,22 @@ public class FlightControllerIT {
             .andExpect(jsonPath("$.destination").value("Los Angeles"))
             .andExpect(jsonPath("$.destinationAirportCode").value("LAX"))
             .andExpect(jsonPath("$.duration").value(360));
+  }
+
+  @Test
+  public void getOneWayFlights_should_ReturnError_when_ReturnFlights() throws Exception {
+    String origin = "New York";
+    String destination = "Los Angeles";
+    String departureDate = "2024-06-15";
+
+    mockMvc.perform(get("/api/flights/oneWay")
+                    .param("origin", origin)
+                    .param("destination", destination)
+                    .param("departureDate", departureDate))
+            .andExpect(status().isOk())
+            .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+            .andExpect(jsonPath("$.flights").isArray())
+            .andExpect(jsonPath("$.flights.length()").value(greaterThan(0)));
   }
 
   @Test

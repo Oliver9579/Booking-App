@@ -30,7 +30,6 @@ public class BookingCarRequestDTO extends BookingRequestDTO {
     try {
       date = formatter.parse(endDate);
     } catch (ParseException e) {
-      e.printStackTrace();
     }
     return date;
   }

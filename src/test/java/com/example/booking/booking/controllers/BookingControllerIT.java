@@ -1,5 +1,6 @@
 package com.example.booking.booking.controllers;
 
+import com.example.booking.booking.DTOs.bookingCar.BookingCarRequestDTO;
 import com.example.booking.booking.DTOs.bookingFlight.BookingOneWayFlightRequestDTO;
 import com.example.booking.booking.DTOs.bookingFlight.BookingRoundTripFlightRequestDTO;
 import com.example.booking.booking.DTOs.bookingHotel.BookingHotelRequestDTO;
@@ -233,6 +234,55 @@ public class BookingControllerIT {
             .andExpect(jsonPath("$.hotel.street").value("1234 Avenue of the Americas"))
             .andExpect(jsonPath("$.hotel.stars").value(5))
             .andExpect(jsonPath("$.hotel.rooms.length()").value(2));
+  }
+
+  @Test
+  public void createCarBooking_should_ReturnError_when_UserIdNotFound() throws Exception {
+    BookingCarRequestDTO newCarBookingRequest = new BookingCarRequestDTO(
+            "2024-06-06 10:00:00", 300, "2024-06-08 10:00:00", 2);
+    mockMvc.perform(post("/api/bookings/cars")
+                    .principal(userAuth2)
+                    .contentType(contentType)
+                    .content(mapper.writeValueAsString(newCarBookingRequest)))
+            .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+            .andExpect(status().isUnauthorized())
+            .andExpect(jsonPath("$.status", Matchers.is("error")))
+            .andExpect(jsonPath("$.message", Matchers.is("No such user.")));
+  }
+
+  @Test
+  public void createCarBooking_should_ReturnError_when_CarIdNotFound() throws Exception {
+    BookingCarRequestDTO newCarBookingRequest = new BookingCarRequestDTO(
+            "2024-06-06 10:00:00", 300, "2024-06-08 10:00:00", 0);
+    mockMvc.perform(post("/api/bookings/cars")
+                    .principal(userAuth1)
+                    .contentType(contentType)
+                    .content(mapper.writeValueAsString(newCarBookingRequest)))
+            .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+            .andExpect(status().isNotFound())
+            .andExpect(jsonPath("$.status", Matchers.is("error")))
+            .andExpect(jsonPath("$.message", Matchers.is("Id not found")));
+  }
+
+  @Test
+  public void createCarBooking_should_ReturnTheSavedBooking() throws Exception {
+    BookingCarRequestDTO newCarBookingRequest = new BookingCarRequestDTO(
+            "2024-06-06 10:00:00", 300, "2024-06-08 10:00:00", 2);
+    mockMvc.perform(post("/api/bookings/cars")
+                    .principal(userAuth1)
+                    .contentType(contentType)
+                    .content(mapper.writeValueAsString(newCarBookingRequest)))
+            .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.totalPrice").value(300))
+            .andExpect(jsonPath("$.car.id").value(2))
+            .andExpect(jsonPath("$.car.brand").value("Ford"))
+            .andExpect(jsonPath("$.car.model").value("Mustang"))
+            .andExpect(jsonPath("$.car.carType").value("MEDIUM"))
+            .andExpect(jsonPath("$.car.capacity").value(5))
+            .andExpect(jsonPath("$.car.transmissionType").value("MANUAL"))
+            .andExpect(jsonPath("$.car.pickUpLocation").value("Chicago"))
+            .andExpect(jsonPath("$.car.dropOffLocation").value("Miami"));
   }
 
 }

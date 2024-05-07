@@ -69,6 +69,22 @@ public class FlightControllerIT {
   }
 
   @Test
+  public void getOneWayFlights_should_ReturnError_when_ReturnError_when_NoFlightFound() throws Exception {
+    String origin = "Las Vegas";
+    String destination = "Los Angeles";
+    String departureDate = "2024-06-15";
+
+    mockMvc.perform(get("/api/flights/oneWay")
+                    .param("origin", origin)
+                    .param("destination", destination)
+                    .param("departureDate", departureDate))
+            .andExpect(status().isNotFound())
+            .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+            .andExpect(jsonPath("$.status", Matchers.is("error")))
+            .andExpect(jsonPath("$.message", Matchers.is("There is no flight at the specified time or destination!")));
+  }
+
+  @Test
   public void getOneWayFlights_should_ReturnError_when_ReturnFlights() throws Exception {
     String origin = "New York";
     String destination = "Los Angeles";
@@ -82,6 +98,28 @@ public class FlightControllerIT {
             .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.flights").isArray())
             .andExpect(jsonPath("$.flights.length()").value(greaterThan(0)));
+  }
+
+  @Test
+  public void getRoundTripFlights_should_ReturnError_when_ReturnError_when_NoFlightFound() throws Exception {
+    String origin = "Las Vegas";
+    String destination = "Miami";
+    String departureDate = "2024-06-25";
+    String returnDate = "2024-06-27";
+    String returnOrigin = "Miami";
+    String returnDestination = "Chicago";
+
+    mockMvc.perform(get("/api/flights/return")
+                    .param("origin", origin)
+                    .param("destination", destination)
+                    .param("departureDate", departureDate)
+                    .param("returnDate", returnDate)
+                    .param("returnOrigin", returnOrigin)
+                    .param("returnDestination", returnDestination))
+            .andExpect(status().isNotFound())
+            .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+            .andExpect(jsonPath("$.status", Matchers.is("error")))
+            .andExpect(jsonPath("$.message", Matchers.is("There is no flight at the specified time or destination!")));
   }
 
   @Test
@@ -105,4 +143,27 @@ public class FlightControllerIT {
             .andExpect(jsonPath("$.status", Matchers.is("error")))
             .andExpect(jsonPath("$.message", Matchers.is("The two given dates is same!")));
   }
+
+  @Test
+  public void getRoundTripFlights_should_ReturnFlights() throws Exception {
+    String origin = "Chicago";
+    String destination = "Miami";
+    String departureDate = "2024-06-20";
+    String returnDate = "2024-06-28";
+    String returnOrigin = "Miami";
+    String returnDestination = "Chicago";
+
+    mockMvc.perform(get("/api/flights/return")
+                    .param("origin", origin)
+                    .param("destination", destination)
+                    .param("departureDate", departureDate)
+                    .param("returnDate", returnDate)
+                    .param("returnOrigin", returnOrigin)
+                    .param("returnDestination", returnDestination))
+            .andExpect(status().isOk())
+            .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+            .andExpect(jsonPath("$.flights").isArray())
+            .andExpect(jsonPath("$.flights.length()").value(greaterThan(0)));
+  }
+
 }

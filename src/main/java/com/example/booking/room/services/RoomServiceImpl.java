@@ -1,6 +1,8 @@
 package com.example.booking.room.services;
 
+import com.example.booking.booking.DTOs.bookingHotel.BookedRoom;
 import com.example.booking.booking.DTOs.bookingHotel.BookingRoomDTO;
+import com.example.booking.booking.models.Booking;
 import com.example.booking.date.models.Days;
 import com.example.booking.date.services.DaysService;
 import com.example.booking.exceptions.IdNotFoundException;
@@ -9,11 +11,14 @@ import com.example.booking.room.DTOs.RoomDTO;
 import com.example.booking.room.models.Room;
 import com.example.booking.room.models.RoomType;
 import com.example.booking.room.repositories.RoomRepository;
+import com.example.booking.user.models.User;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -109,4 +114,30 @@ public class RoomServiceImpl implements RoomService {
     return roomRepository.save(room);
   }
 
+  @Override
+  public List<BookedRoom> getBookedRoomsWithUnavailableDays(User user) {
+    List<BookedRoom> bookedRooms = new ArrayList<>();
+    for (Booking booking : user.getBooking()) {
+      for (Room room : booking.getBookedRooms()) {
+        if (booking.getHotel() != null) {
+          Set<Days> days = daysService.getFullTravelDates(booking.getStartDate(), booking.getEndDate()).stream()
+                  .map(date -> daysService.getByDate(date)).collect(Collectors.toSet());
+          bookedRooms.add(new BookedRoom(room, days));
+        }
+      }
+    }
+    return bookedRooms;
+  }
+
+  @Override
+  public void updateRoomAvailability(List<BookedRoom> bookedRooms) {
+    for (BookedRoom bookedRoom : bookedRooms) {
+      Room room = bookedRoom.getRoom();
+      Set<Days> daysSet = bookedRoom.getDays();
+      for (Days day : daysSet) {
+        room.getUnavailable().remove(day);
+        save(room);
+      }
+    }
+  }
 }

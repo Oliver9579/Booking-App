@@ -1,19 +1,25 @@
 package com.example.booking.car.services;
 
+import com.example.booking.booking.DTOs.bookingCar.BookedCar;
+import com.example.booking.booking.models.Booking;
 import com.example.booking.car.DTOs.*;
 import com.example.booking.car.models.Car;
 import com.example.booking.car.repositories.CarRepository;
+import com.example.booking.date.models.Days;
 import com.example.booking.date.services.DaysService;
 import com.example.booking.exceptions.IdNotFoundException;
 import com.example.booking.exceptions.NoAvailableCarException;
 import com.example.booking.exceptions.NoCarFoundException;
 import com.example.booking.exceptions.SameDateException;
 import com.example.booking.review.services.ReviewService;
+import com.example.booking.user.models.User;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -100,6 +106,31 @@ public class CarServiceImpl implements CarService {
   @Override
   public Car save(Car car) {
     return carRepository.save(car);
+  }
+
+  @Override
+  public List<BookedCar> getBookedCarsWithUnavailableDays(User user) {
+    List<BookedCar> bookedCars = new ArrayList<>();
+    for (Booking booking : user.getBooking()) {
+      if (booking.getCar() != null) {
+        Set<Days> days = daysService.getFullTravelDates(booking.getStartDate(), booking.getEndDate()).stream()
+                .map(date -> daysService.getByDate(date)).collect(Collectors.toSet());
+        bookedCars.add(new BookedCar(booking.getCar(), days));
+      }
+    }
+    return bookedCars;
+  }
+
+  @Override
+  public void updateCarAvailability(List<BookedCar> bookedCars) {
+    for (BookedCar bookedCar : bookedCars) {
+      Car car = bookedCar.getCar();
+      Set<Days> daysSet = bookedCar.getDays();
+      for (Days day : daysSet) {
+        car.getUnavailable().remove(day);
+        save(car);
+      }
+    }
   }
 
   private List<Car> getCarsByDates(CarRequestDTO carRequest, List<Car> cars) {

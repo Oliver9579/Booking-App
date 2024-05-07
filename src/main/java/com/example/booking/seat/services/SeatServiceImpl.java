@@ -1,8 +1,10 @@
 package com.example.booking.seat.services;
 
+import com.example.booking.booking.models.Booking;
 import com.example.booking.exceptions.IdNotFoundException;
 import com.example.booking.seat.models.Seat;
 import com.example.booking.seat.repositories.SeatRepository;
+import com.example.booking.user.models.User;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -45,6 +47,19 @@ public class SeatServiceImpl implements SeatService {
               seatRepository.save(seat);
               return seat;
             }).collect(Collectors.toList());
+  }
+
+  @Override
+  public void updateSeatsAvailability(User user) {
+    for (Booking booking : user.getBooking()) {
+      if (booking.getOutboundFlight() != null) {
+        List<Seat> seats = booking.getBookedSeats();
+        for (Seat seat : seats) {
+          seat.setAvailability(true);
+          save(seat);
+        }
+      }
+    }
   }
 
 }

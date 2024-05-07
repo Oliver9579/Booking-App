@@ -1,6 +1,5 @@
 package com.example.booking.review.controllers;
 
-import com.example.booking.car.models.Car;
 import com.example.booking.review.DTOs.ReviewRequestDTO;
 import com.example.booking.user.models.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -40,7 +39,6 @@ public class ReviewControllerIT {
   private User user2;
   private Authentication userAuth1;
   private Authentication userAuth2;
-  private Car car;
 
   @Before
   public void setup() {
@@ -49,8 +47,6 @@ public class ReviewControllerIT {
             "Oli12345", "123456789");
     user2 = new User(0, "", "", "", "",
             "", "");
-    car = new Car(3, "", "", null, 0, null, "",
-            "", 0);
     userAuth1 = new UsernamePasswordAuthenticationToken(user1, null, null);
     userAuth2 = new UsernamePasswordAuthenticationToken(user2, null, null);
   }

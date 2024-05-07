@@ -37,7 +37,7 @@ public class BookingController {
   }
 
   @PostMapping("/flights/roundTrip")
-  public ResponseEntity<BookingRoundTripFlightResponseDTO> createOneWayNewFlightBooking(
+  public ResponseEntity<BookingRoundTripFlightResponseDTO> createRoundTripNewFlightBooking(
           UsernamePasswordAuthenticationToken auth, @Valid @RequestBody BookingRoundTripFlightRequestDTO bookingFlight) {
     int userId = ((User) auth.getPrincipal()).getId();
     User user = userService.getById(userId);

@@ -28,7 +28,6 @@ public abstract class BookingRequestDTO {
     try {
       date = formatter.parse(startDate);
     } catch (ParseException e) {
-      e.printStackTrace();
     }
     return date;
   }

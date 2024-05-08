@@ -66,12 +66,12 @@ public class EmailServiceImplTest {
   }
 
   @Test
-  public void sendMail_should_returnNull_when_NullIsGiven() {
+  public void testSendMailWithNullIsGiven() {
     assertNull(emailService.sendMail(null));
   }
 
   @Test
-  public void sendMail_should_returnCorrectMessage() throws MessagingException, IOException {
+  public void testSendMail() throws MessagingException, IOException {
     message.setText("Hello");
     String expected = "Hello";
     doNothing().when(mailSender).send(message);
@@ -83,12 +83,12 @@ public class EmailServiceImplTest {
   }
 
   @Test
-  public void createVerificationMail_should_returnNull_when_nullIsGiven() throws MessagingException {
+  public void testCreateVerificationMailWithNullIsGiven() throws MessagingException {
     assertNull(emailService.createVerificationMail(null));
   }
 
   @Test
-  public void createVerificationMail_should_returnCorrectMessage() throws MessagingException, IOException {
+  public void testCreateVerificationMail() throws MessagingException, IOException {
     emailService = Mockito.spy(emailService);
     helper = new MimeMessageHelper(message, helperMode, charSet);
     when(mailSender.createMimeMessage()).thenReturn(message);
@@ -109,28 +109,28 @@ public class EmailServiceImplTest {
   }
 
   @Test
-  public void createVerificationPlainTextPart_should_returnNull_when_nullIsGiven() throws MessagingException {
+  public void testCreateVerificationPlainTextPartWithNullIsGiven() throws MessagingException {
     assertNull(emailService.createVerificationPlainTextPart(null));
   }
 
   @Test
-  public void createVerificationPlainTextPart_should_returnCorrectContent() throws MessagingException, IOException {
+  public void testCreateVerificationPlainTextPart() throws MessagingException, IOException {
     MimeBodyPart bodyPart = emailService.createVerificationPlainTextPart(user);
     assertEquals(expectedText, bodyPart.getContent().toString());
   }
 
   @Test
-  public void createVerificationHtmlPart_should_returnNull_when_nullIsGiven() throws MessagingException {
+  public void testCreateVerificationHtmlPartWithNullIsGiven() throws MessagingException {
     assertNull(emailService.createVerificationHtmlPart(null));
   }
 
   @Test
-  public void createVerificationHtmlPart_should_returnNull_when_emptyMapIsGiven() throws MessagingException {
+  public void testCreateVerificationHtmlPartWithEmptyMapIsGiven() throws MessagingException {
     assertNull(emailService.createVerificationHtmlPart(new HashMap<>()));
   }
 
   @Test
-  public void createVerificationHtmlPart_should_returnCorrectContent() throws MessagingException, IOException {
+  public void testCreateVerificationHtmlPart() throws MessagingException, IOException {
     verificationProperties.put("name", user.getUsername());
     verificationProperties.put("token", verificationToken.getTokenValue());
     verificationProperties.put("port", port);
@@ -145,24 +145,24 @@ public class EmailServiceImplTest {
   }
 
   @Test
-  public void generateHelper_should_returnNull_when_nullIsGiven() throws MessagingException {
+  public void testGenerateHelperWithNullIsGiven() throws MessagingException {
     assertNull(emailService.generateHelper(null));
   }
 
   @Test
-  public void generateHelper_should_returnHelperWithCorrectMessage() throws MessagingException {
+  public void testGenerateHelper() throws MessagingException {
     MimeMessageHelper expected = new MimeMessageHelper(message, helperMode, charSet);
     MimeMessageHelper actual = emailService.generateHelper(message);
     assertEquals(expected.getMimeMessage(), actual.getMimeMessage());
   }
 
   @Test
-  public void generateVerificationPropertiesMap_should_returnNull_when_nullIsGiven() {
+  public void testGenerateVerificationPropertiesMapWithNullIsGiven() {
     assertNull(emailService.generateVerificationPropertiesMap(null));
   }
 
   @Test
-  public void generateVerificationPropertiesMap_should_returnMapWithCorrectValues() {
+  public void testGenerateVerificationPropertiesMap() {
     Map<String, Object> expected = new HashMap<>();
     expected.put("name", user.getUsername());
     expected.put("token", verificationToken.getTokenValue());

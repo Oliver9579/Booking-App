@@ -240,7 +240,7 @@ public class BookingServiceImplTest {
   }
 
   @Test
-  public void testHotelBooking() {
+  public void testCreateHotelBooking() {
     rooms = new ArrayList<>(Arrays.asList(new Room(RoomType.SINGLE, 1, 50),
             new Room(RoomType.DOUBLE, 2, 100)));
     List<BookingRoomDTO> bookedRooms = new ArrayList<>(Arrays.asList(
@@ -285,7 +285,7 @@ public class BookingServiceImplTest {
   }
 
   @Test
-  public void testCarBooking() {
+  public void testCreateCarBooking() {
     savedBooking = new Booking(new Date(), new Date(), 50, user, car);
     CarDTO carDTO = new CarDTO(1, "Toyota", "Camry", CarType.MEDIUM, 5,
             TransmissionType.AUTOMATIC, "New York", "New York", new Date(), new Date(),

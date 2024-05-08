@@ -71,21 +71,6 @@ public class RestControllerExceptionHandler {
     return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorMessage(NoHotelFoundException.MESSAGE));
   }
 
-  @ExceptionHandler(NoRoomAvailableException.class)
-  public ResponseEntity<ErrorMessage> handleWhenZeroRoomIsAvailable() {
-    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorMessage(NoRoomAvailableException.MESSAGE));
-  }
-
-  @ExceptionHandler(NotEnoughRoomAvailableException.class)
-  public ResponseEntity<ErrorMessage> handleNotEnoughRoomAvailable() {
-    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorMessage(NotEnoughRoomAvailableException.MESSAGE));
-  }
-
-  @ExceptionHandler(TooManyGuestsException.class)
-  public ResponseEntity<ErrorMessage> handleWhenTheGivenGuestNumberToMuch() {
-    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorMessage(TooManyGuestsException.MESSAGE));
-  }
-
   @ExceptionHandler(SameDateException.class)
   public ResponseEntity<ErrorMessage> handleWhenTheCheckInDateIsSameAsTheCheckOutDate(SameDateException e) {
     return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorMessage(e.getMessage()));

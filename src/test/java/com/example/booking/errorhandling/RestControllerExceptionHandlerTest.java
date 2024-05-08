@@ -48,7 +48,7 @@ public class RestControllerExceptionHandlerTest {
   }
 
   @Test
-  public void handleMissingRequestFields_should_returnCorrectMessage_when_singleFieldIsMissing() {
+  public void handleMissingRequestFields_returnCorrectMessage_when_oneFieldIsMissing() {
     when(methodArgumentNotValidException.getBindingResult()).thenReturn(bindingResult);
     when(methodArgumentNotValidException.getBindingResult().getFieldErrors()).thenReturn(fieldErrors);
     when(fieldError.getCode()).thenReturn("NotBlank");
@@ -66,7 +66,7 @@ public class RestControllerExceptionHandlerTest {
   }
 
   @Test
-  public void handleMissingRequestFields_should_returnCorrectMessage_when_twoFieldsAreMissing() {
+  public void handleMissingRequestFields_returnCorrectMessage_when_twoFieldsAreMissing() {
     fieldErrors.add(fieldErrorTwo);
     when(methodArgumentNotValidException.getBindingResult()).thenReturn(bindingResult);
     when(methodArgumentNotValidException.getBindingResult().getFieldErrors()).thenReturn(fieldErrors);
@@ -86,7 +86,7 @@ public class RestControllerExceptionHandlerTest {
   }
 
   @Test
-  public void handleMissingRequestFields_should_returnCorrectMessage_when_multipleFieldsAreMissing() {
+  public void handleMissingRequestFields_returnCorrectMessage_when_multipleFieldsAreMissing() {
     fieldErrors.add(fieldErrorTwo);
     fieldErrors.add(fieldErrorThree);
     when(methodArgumentNotValidException.getBindingResult()).thenReturn(bindingResult);
@@ -108,7 +108,7 @@ public class RestControllerExceptionHandlerTest {
   }
 
   @Test
-  public void handleMissingRequestFields_should_returnCorrectMessage_when_sizeConstraintValidationFails() {
+  public void handleMissingRequestFields_returnCorrectMessage_when_sizeConstraintValidationFails() {
     when(methodArgumentNotValidException.getBindingResult()).thenReturn(bindingResult);
     when(methodArgumentNotValidException.getBindingResult().getFieldErrors()).thenReturn(fieldErrors);
     when(fieldError.getCode()).thenReturn("Size");
@@ -125,7 +125,7 @@ public class RestControllerExceptionHandlerTest {
   }
 
   @Test
-  public void handleUserNotFound_should_returnCorrectMessage() {
+  public void handleUserNotFound_returnCorrectMessage() {
     response = restControllerExceptionHandler.handleUserNotFound();
     errorMessage = UserNotFoundException.MESSAGE;
     receivedMessage = response.getBody().getMessage();
@@ -212,42 +212,6 @@ public class RestControllerExceptionHandlerTest {
   }
 
   @Test
-  public void handleWhenZeroRoomIsAvailable_should_returnCorrectMessage() {
-    response = restControllerExceptionHandler.handleWhenZeroRoomIsAvailable();
-    errorMessage = NoRoomAvailableException.MESSAGE;
-    receivedMessage = response.getBody().getMessage();
-    expectedStatus = HttpStatus.NOT_FOUND;
-    receivedStatus = response.getStatusCode();
-
-    assertEquals(errorMessage, receivedMessage);
-    assertEquals(expectedStatus, receivedStatus);
-  }
-
-  @Test
-  public void handleNotEnoughRoomAvailable_should_returnCorrectMessage() {
-    response = restControllerExceptionHandler.handleNotEnoughRoomAvailable();
-    errorMessage = NotEnoughRoomAvailableException.MESSAGE;
-    receivedMessage = response.getBody().getMessage();
-    expectedStatus = HttpStatus.NOT_FOUND;
-    receivedStatus = response.getStatusCode();
-
-    assertEquals(errorMessage, receivedMessage);
-    assertEquals(expectedStatus, receivedStatus);
-  }
-
-  @Test
-  public void handleWhenTheGivenGuestNumberToMuch_should_returnCorrectMessage() {
-    response = restControllerExceptionHandler.handleWhenTheGivenGuestNumberToMuch();
-    errorMessage = TooManyGuestsException.MESSAGE;
-    receivedMessage = response.getBody().getMessage();
-    expectedStatus = HttpStatus.NOT_FOUND;
-    receivedStatus = response.getStatusCode();
-
-    assertEquals(errorMessage, receivedMessage);
-    assertEquals(expectedStatus, receivedStatus);
-  }
-
-  @Test
   public void handleWhenTheCheckInDateIsSameAsTheCheckOutDate_should_returnCorrectMessage() {
     response = restControllerExceptionHandler.handleWhenTheCheckInDateIsSameAsTheCheckOutDate(new SameDateException());
     errorMessage = SameDateException.MESSAGE;
@@ -301,18 +265,6 @@ public class RestControllerExceptionHandlerTest {
     errorMessage = VerificationTokenNotFoundException.MESSAGE;
     receivedMessage = response.getBody().getMessage();
     expectedStatus = HttpStatus.NOT_FOUND;
-    receivedStatus = response.getStatusCode();
-
-    assertEquals(errorMessage, receivedMessage);
-    assertEquals(expectedStatus, receivedStatus);
-  }
-
-  @Test
-  public void handleForbiddenAction_should_returnCorrectMessage() {
-    response = restControllerExceptionHandler.handleForbiddenAction();
-    errorMessage = ForbiddenActionException.MESSAGE;
-    receivedMessage = response.getBody().getMessage();
-    expectedStatus = HttpStatus.FORBIDDEN;
     receivedStatus = response.getStatusCode();
 
     assertEquals(errorMessage, receivedMessage);

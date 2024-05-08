@@ -12,7 +12,7 @@ import java.util.Optional;
 
 public interface FlightRepository extends CrudRepository<Flight, Integer> {
 
-  @Query(value = "SELECT * FROM flights LIMIT 20", nativeQuery = true)
+  @Query(value = "SELECT * FROM flights WHERE departure_date >= CURRENT_DATE() LIMIT 20", nativeQuery = true)
   List<Flight> findAll();
 
   Optional<Flight> findById(Integer id);

@@ -69,7 +69,7 @@ public class FlightControllerIT {
   }
 
   @Test
-  public void getOneWayFlights_should_ReturnError_when_ReturnError_when_NoFlightFound() throws Exception {
+  public void getOneWayFlights_should_ReturnError_when_NoFlightFound() throws Exception {
     String origin = "Las Vegas";
     String destination = "Los Angeles";
     String departureDate = "2024-06-15";
@@ -85,7 +85,7 @@ public class FlightControllerIT {
   }
 
   @Test
-  public void getOneWayFlights_should_ReturnError_when_ReturnFlights() throws Exception {
+  public void getOneWayFlights_should_ReturnAFlights() throws Exception {
     String origin = "New York";
     String destination = "Los Angeles";
     String departureDate = "2024-06-15";

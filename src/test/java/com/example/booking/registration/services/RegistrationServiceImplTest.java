@@ -43,7 +43,7 @@ public class RegistrationServiceImplTest {
   }
 
   @Test(expected = AlreadyTakenException.class)
-  public void testRegisterWhenUserInfosAlreadyTaken() throws MessagingException {
+  public void register_should_returnAlreadyTakenException_when_registrationDataIsAlreadyTaken() throws MessagingException {
     MimeMessage message = new MimeMessage(session);
 
     registrationService.register(rdto);
@@ -54,7 +54,7 @@ public class RegistrationServiceImplTest {
   }
 
   @Test
-  public void testRegister() throws MessagingException {
+  public void register_should_returnCorrectResponseEntity() throws MessagingException {
     doNothing().when(registrationService).validateRegistration(rdto);
     when(mockUserService.convertRegisterDTOToUser(rdto)).thenReturn(user);
     MimeMessage message = new MimeMessage(session);

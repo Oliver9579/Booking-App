@@ -21,24 +21,24 @@ public class ExceptionHandlerUtilityTest {
   }
 
   @Test
-  public void createErrorMessageForSingleMissingField_should_returnEmptyString_when_nullIsGiven() {
+  public void testCreateErrorMessageForSingleMissingFieldWithNullIsGiven() {
     assertEquals("", exceptionHandlerUtility.createErrorMessageForMissingFields(null));
   }
 
   @Test
-  public void createErrorMessageForSingleMissingField_should_returnEmptyString_when_emptyListIsGiven() {
+  public void testCreateErrorMessageForSingleMissingFieldWithEmptyListIsGiven() {
     assertEquals("", exceptionHandlerUtility.createErrorMessageForMissingFields(fieldErrors));
   }
 
   @Test
-  public void createErrorMessageForMissingFields_should_returnCorrectMessage_when_listContainsOneFieldError() {
+  public void testCreateErrorMessageForMissingFieldWithListContainsOneFieldError() {
     fieldErrors.add(new FieldError("objectName", "username", "defaultMessage"));
     assertEquals("Username is required.",
             exceptionHandlerUtility.createErrorMessageForMissingFields(fieldErrors));
   }
 
   @Test
-  public void createErrorMessageForMissingFields_should_returnCorrectMessage_when_listContainsMultipleFields() {
+  public void testCreateErrorMessageForMissingFieldsWithListContainsMultipleFields() {
     fieldErrors.add(new FieldError("objectName", "username", "defaultMessage"));
     fieldErrors.add(new FieldError("objectName", "password", "defaultMessage"));
     fieldErrors.add(new FieldError("objectName", "email", "defaultMessage"));

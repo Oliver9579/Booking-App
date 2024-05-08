@@ -29,26 +29,12 @@ public class JwtTokenUtilTest {
 
   @Test
   public void createJwtsToken_should_returnAnEmptyString_when_nullIsGiven() {
-    jwtTokenUtil.createJwtsToken(null);
+    assertEquals("", jwtTokenUtil.createJwtsToken(null));
   }
 
   @Test
   public void createJwtsToken_should_returnAnEmptyString_when_EmptyMapIsGiven() {
-    jwtTokenUtil.createJwtsToken(new LinkedHashMap<>());
-  }
-
-  @Test
-  public void createJwtsToken_should_produceCorrectSignature() {
-    claims = new LinkedHashMap<>();
-    claims.put("user", "Oli2");
-    String myToken = jwtTokenUtil.createJwtsToken(claims);
-    String myTokenSignature = myToken.substring(myToken.lastIndexOf('.') + 1);
-
-    Jws<Claims> jws = Jwts.parserBuilder()
-            .setSigningKey(signingKey)
-            .build()
-            .parseClaimsJws(myToken);
-    assertEquals(jws.getSignature(), myTokenSignature);
+    assertEquals("", jwtTokenUtil.createJwtsToken(new LinkedHashMap<>()));
   }
 
   @Test

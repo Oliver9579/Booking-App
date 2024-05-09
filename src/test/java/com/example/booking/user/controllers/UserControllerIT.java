@@ -90,7 +90,7 @@ public class UserControllerIT {
     NewUserDetailsRequestDTO newUser = new NewUserDetailsRequestDTO("Mark", "Szabo",
             "szabotemple.oliver2001@gmail.com", "12345678910",
             "2001-03-29", "hungarian", "male", "kis street 41");
-    mockMvc.perform(get("/api/users")
+    mockMvc.perform(put("/api/users")
                     .principal(userAuth4)
                     .contentType(contentType)
                     .content(mapper.writeValueAsString(newUser)))

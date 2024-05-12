@@ -4,7 +4,7 @@ import BookingCarCard from "./BookingCards/BookingCarCard";
 import BookingOneWayFlightCard from "./BookingCards/BookingOneWayFlightCard";
 import BookingRoundTripCard from "./BookingCards/BookingRoundTripCard";
 
-class BookingList extends Component {
+class BookingsList extends Component {
 
     render() {
         const {bookings} = this.props;
@@ -27,4 +27,4 @@ class BookingList extends Component {
     }
 }
 
-export default BookingList
+export default BookingsList

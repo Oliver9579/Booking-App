@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
-import BookingList from "./BookingList";
+import BookingsList from "./BookingsList";
 
 const Bookings = () => {
 
@@ -37,7 +37,7 @@ const Bookings = () => {
             {errorMessage === '' ? (
                 <div>
                     <h1 className="blur-include" style={{paddingBottom: '30px'}}>Bookings & Trips</h1>
-                    <BookingList bookings={bookings}/>
+                    <BookingsList bookings={bookings}/>
                 </div>
             ) : (
                 <div className="alert alert-danger">

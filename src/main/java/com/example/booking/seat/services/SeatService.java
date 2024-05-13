@@ -9,8 +9,6 @@ public interface SeatService {
 
   List<Seat> getSeatsById(List<Integer> seatsId);
 
-  Seat setAvailabilityFalse(Seat seat);
-
   Seat save(Seat seat);
 
   List<Seat> setSeatsAvailabilityFalse(List<Seat> seats);

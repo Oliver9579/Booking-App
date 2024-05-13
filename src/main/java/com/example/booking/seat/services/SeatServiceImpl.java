@@ -28,13 +28,6 @@ public class SeatServiceImpl implements SeatService {
   }
 
   @Override
-  public Seat setAvailabilityFalse(Seat seat) {
-    seat.setAvailability(false);
-    seatRepository.save(seat);
-    return seat;
-  }
-
-  @Override
   public Seat save(Seat seat) {
     return seatRepository.save(seat);
   }

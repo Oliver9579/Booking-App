@@ -12,8 +12,6 @@ public interface ReviewService {
 
   Review save(Review review);
 
-  Review getReviewById(Integer id);
-
   List<ReviewResponseDTO> getCarReviews(Car car);
 
   List<ReviewResponseDTO> getHotelReviews(Hotel hotel);

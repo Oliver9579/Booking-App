@@ -29,11 +29,6 @@ public class ReviewServiceImpl implements ReviewService {
   }
 
   @Override
-  public Review getReviewById(Integer id) {
-    return reviewRepository.findById(id).orElseThrow(IdNotFoundException::new);
-  }
-
-  @Override
   public List<ReviewResponseDTO> getCarReviews(Car car) {
     return car.getReviews().stream()
             .map(this::convertToResponse).collect(Collectors.toList());

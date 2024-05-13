@@ -21,8 +21,6 @@ public interface RoomService {
 
   List<Long> getRoomsCountByType(List<Room> rooms);
 
-  List<Room> getRoomsById(List<Integer> roomIds);
-
   List<Room> setUnavailableDates(List<Room> rooms, List<Days> days);
 
   List<Room> getOneRoomForEachGivenType(List<Room> availableRooms, List<BookingRoomDTO> roomTypesWithNumber);

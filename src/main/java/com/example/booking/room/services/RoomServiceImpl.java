@@ -75,15 +75,6 @@ public class RoomServiceImpl implements RoomService {
   }
 
   @Override
-  public List<Room> getRoomsById(List<Integer> roomIds) {
-    List<Room> rooms = new ArrayList<>();
-    for (Integer id : roomIds) {
-      rooms.add(roomRepository.findById(id).orElseThrow(IdNotFoundException::new));
-    }
-    return rooms;
-  }
-
-  @Override
   public List<Room> setUnavailableDates(List<Room> rooms, List<Days> days) {
     for (Room room : rooms) {
       List<Days> unavailableDates = room.getUnavailable();

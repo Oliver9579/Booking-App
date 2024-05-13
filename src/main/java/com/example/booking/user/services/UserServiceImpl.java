@@ -87,11 +87,6 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public List<UserDTO> getUsers() {
-    return userRepository.findAll().stream().map(this::convertUserToDTO).collect(Collectors.toList());
-  }
-
-  @Override
   public UserDTO setNewUserDetails(User user, NewUserDetailsRequestDTO newUserDetails) {
     emailAndPhoneNumberAlreadyExist(newUserDetails, user);
 

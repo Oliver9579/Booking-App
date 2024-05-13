@@ -30,8 +30,6 @@ public interface UserService {
 
   Boolean isUserIdMatching(Integer userId, Booking booking);
 
-  List<UserDTO> getUsers();
-
   UserDTO setNewUserDetails(User user, NewUserDetailsRequestDTO newUserDetails);
 
   UserDTO deleteUser(User user);

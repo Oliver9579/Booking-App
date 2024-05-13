@@ -33,7 +33,7 @@ public class CarController {
   }
 
   @GetMapping("/dropOff/different")
-  private ResponseEntity<CarListDTO> getCarsWithSameDropOffLocation(
+  private ResponseEntity<CarListDTO> getCarsWithDifferentDropOffLocation(
           @RequestParam String pickUpLocation, @RequestParam String dropOffLocation,
           @RequestParam String pickUpDate, @RequestParam String dropOffDate,
           @RequestParam(required = false) String carType,

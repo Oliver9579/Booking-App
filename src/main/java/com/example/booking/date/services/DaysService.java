@@ -13,5 +13,4 @@ public interface DaysService {
 
   Days getByDate(String date);
 
-  Days save(Days days);
 }

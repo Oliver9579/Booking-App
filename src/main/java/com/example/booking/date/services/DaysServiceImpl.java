@@ -57,9 +57,4 @@ public class DaysServiceImpl implements DaysService {
     return daysRepository.findByDate(date);
   }
 
-  @Override
-  public Days save(Days days) {
-    return daysRepository.save(days);
-  }
-
 }

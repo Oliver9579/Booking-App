@@ -77,7 +77,7 @@ const BookingHotelCard = ({booking}) => {
                     <div className="col-2" style={{textAlign: 'right', fontSize: '20px'}}>
                         <strong><FontAwesomeIcon icon={faEuroSign}/> {booking.totalPrice}</strong>
                         <button className="btn btn-primary reviews-button"
-                                style={{height: '40%', marginLeft: '10%'}}
+                                style={{height: '30px', marginLeft: '10%'}}
                                 type="submit" onClick={toggleReviewsModal}><span></span>Reviews
                         </button>
                         <div className="d-inline"
